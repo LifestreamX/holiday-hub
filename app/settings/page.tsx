@@ -162,7 +162,7 @@ export default function SettingsPage() {
                   id='timezone'
                   value={timezone}
                   onChange={(e) => setTimezone(e.target.value)}
-                  className='w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary appearance-none text-foreground'
+                  className='w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary appearance-none text-foreground hover:text-primary'
                 >
                   {timezones.map((tz) => (
                     <option key={tz} value={tz}>

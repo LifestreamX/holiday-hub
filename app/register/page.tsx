@@ -68,7 +68,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center p-4'>
+    <div className='min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-700 flex items-center justify-center p-4'>
       <div className='w-full max-w-md'>
         <div className='text-center mb-8'>
           <Link href='/' className='inline-flex items-center gap-2 mb-4'>
@@ -106,7 +106,7 @@ export default function RegisterPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className='w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500'
+                  className='w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
                   placeholder='you@example.com'
                 />
               </div>
@@ -125,7 +125,7 @@ export default function RegisterPage() {
                   id='timezone'
                   value={timezone}
                   onChange={(e) => setTimezone(e.target.value)}
-                  className='w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 appearance-none bg-white'
+                  className='w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none bg-white text-gray-900 hover:text-blue-700'
                 >
                   {timezones.map((tz) => (
                     <option key={tz} value={tz}>
@@ -151,7 +151,7 @@ export default function RegisterPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className='w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500'
+                  className='w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
                   placeholder='At least 6 characters'
                 />
               </div>
@@ -172,7 +172,7 @@ export default function RegisterPage() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
-                  className='w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500'
+                  className='w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
                   placeholder='••••••••'
                 />
               </div>
@@ -181,7 +181,7 @@ export default function RegisterPage() {
             <button
               type='submit'
               disabled={isLoading}
-              className='w-full py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+              className='w-full py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
             >
               {isLoading ? 'Creating account...' : 'Create Account'}
             </button>
@@ -191,7 +191,7 @@ export default function RegisterPage() {
             <span className='text-gray-600'>Already have an account? </span>
             <Link
               href='/login'
-              className='text-purple-600 font-medium hover:text-purple-700'
+              className='text-blue-600 font-medium hover:text-blue-700'
             >
               Sign in
             </Link>

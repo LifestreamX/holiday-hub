@@ -3,7 +3,7 @@ import { Calendar, Bell, Users, Sparkles } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className='min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900'>
+    <div className='min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-700'>
       <nav className='container mx-auto px-4 py-6'>
         <div className='flex items-center justify-between'>
           <div className='flex items-center gap-2'>
@@ -19,7 +19,7 @@ export default function Home() {
             </Link>
             <Link
               href='/register'
-              className='px-6 py-2 bg-white text-purple-900 rounded-lg font-medium hover:bg-gray-100 transition-colors'
+              className='px-6 py-2 bg-white text-blue-900 rounded-lg font-medium hover:bg-gray-100 transition-colors'
             >
               Sign Up
             </Link>
@@ -40,7 +40,7 @@ export default function Home() {
           <div className='flex flex-wrap items-center justify-center gap-4 mb-20'>
             <Link
               href='/register'
-              className='px-8 py-4 bg-white text-purple-900 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg'
+              className='px-8 py-4 bg-white text-blue-900 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg'
             >
               Get Started Free
             </Link>

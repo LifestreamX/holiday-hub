@@ -1,0 +1,19 @@
+# External Setup Checklist for Holiday Hub
+
+
+
+
+
+
+5. **(Optional) GitHub OAuth for NextAuth**
+   - Register OAuth app on GitHub (if using GitHub login)
+   - Add `GITHUB_ID` and `GITHUB_SECRET` to `.env`
+   
+
+6. **(Optional) Hosting Platform**
+   - Deploy to Vercel, Netlify, or your preferred platform
+   - Set environment variables in hosting dashboard
+
+---
+
+Refer to SETUP.md and API-KEYS-SETUP.md for detailed instructions.
