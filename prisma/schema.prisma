@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                     String                   @id @default(cuid())
+  email                  String                   @unique
+  password               String
+  timezone               String                   @default("America/New_York")
+  countryCode            String                   @default("US")
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
+  holidayPreferences     UserHolidayPreference[]
+  notifications          Notification[]
+  pushSubscriptions      PushSubscription[]
+
+  @@map("users")
+}
+
+model Holiday {
+  id                String                   @id @default(cuid())
+  name              String
+  description       String
+  category          String // "federal", "cultural", "religious", etc.
+  ruleType          String // "fixed", "nth_weekday", "calculated"
+  month             Int? // 1-12, null for calculated holidays like Easter
+  day               Int? // 1-31, for fixed dates
+  weekday           Int? // 0-6 (0=Sunday), for nth_weekday
+  nth               Int? // 1-5, for nth_weekday (e.g., 3rd Monday)
+  countryCode       String                   @default("US")
+  createdAt         DateTime                 @default(now())
+  updatedAt         DateTime                 @updatedAt
+  userPreferences   UserHolidayPreference[]
+  notifications     Notification[]
+
+  @@map("holidays")
+}
+
+model UserHolidayPreference {
+  id                String   @id @default(cuid())
+  userId            String
+  holidayId         String
+  enabled           Boolean  @default(true)
+  reminderOffsets   Json     @default("[]") // Array of numbers: [30, 7, 1, 0]
+  reminderTime      String   @default("08:00") // HH:MM format
+  deliveryMethod    String   @default("email") // "email", "push", "both"
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  holiday           Holiday  @relation(fields: [holidayId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, holidayId])
+  @@map("user_holiday_preferences")
+}
+
+model Notification {
+  id            String    @id @default(cuid())
+  userId        String
+  holidayId     String
+  scheduledFor  DateTime
+  sent          Boolean   @default(false)
+  sentAt        DateTime?
+  deliveryType  String // "email" or "push"
+  createdAt     DateTime  @default(now())
+  
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  holiday       Holiday   @relation(fields: [holidayId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+model PushSubscription {
+  id         String   @id @default(cuid())
+  userId     String
+  endpoint   String
+  p256dh     String
+  auth       String
+  createdAt  DateTime @default(now())
+  
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("push_subscriptions")
+}
