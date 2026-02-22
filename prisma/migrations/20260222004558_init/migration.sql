@@ -1,10 +1,10 @@
 -- CreateTable
 CREATE TABLE "users" (
-    "id" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
-    "password" TEXT NOT NULL,
-    "timezone" TEXT NOT NULL DEFAULT 'America/New_York',
-    "countryCode" TEXT NOT NULL DEFAULT 'US',
+    "id" STRING NOT NULL,
+    "email" STRING NOT NULL,
+    "password" STRING NOT NULL,
+    "timezone" STRING NOT NULL DEFAULT 'America/New_York',
+    "countryCode" STRING NOT NULL DEFAULT 'US',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -13,16 +13,16 @@ CREATE TABLE "users" (
 
 -- CreateTable
 CREATE TABLE "holidays" (
-    "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "description" TEXT NOT NULL,
-    "category" TEXT NOT NULL,
-    "ruleType" TEXT NOT NULL,
-    "month" INTEGER,
-    "day" INTEGER,
-    "weekday" INTEGER,
-    "nth" INTEGER,
-    "countryCode" TEXT NOT NULL DEFAULT 'US',
+    "id" STRING NOT NULL,
+    "name" STRING NOT NULL,
+    "description" STRING NOT NULL,
+    "category" STRING NOT NULL,
+    "ruleType" STRING NOT NULL,
+    "month" INT4,
+    "day" INT4,
+    "weekday" INT4,
+    "nth" INT4,
+    "countryCode" STRING NOT NULL DEFAULT 'US',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -31,13 +31,13 @@ CREATE TABLE "holidays" (
 
 -- CreateTable
 CREATE TABLE "user_holiday_preferences" (
-    "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
-    "holidayId" TEXT NOT NULL,
-    "enabled" BOOLEAN NOT NULL DEFAULT true,
+    "id" STRING NOT NULL,
+    "userId" STRING NOT NULL,
+    "holidayId" STRING NOT NULL,
+    "enabled" BOOL NOT NULL DEFAULT true,
     "reminderOffsets" JSONB NOT NULL DEFAULT '[]',
-    "reminderTime" TEXT NOT NULL DEFAULT '08:00',
-    "deliveryMethod" TEXT NOT NULL DEFAULT 'email',
+    "reminderTime" STRING NOT NULL DEFAULT '08:00',
+    "deliveryMethod" STRING NOT NULL DEFAULT 'email',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -46,13 +46,13 @@ CREATE TABLE "user_holiday_preferences" (
 
 -- CreateTable
 CREATE TABLE "notifications" (
-    "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
-    "holidayId" TEXT NOT NULL,
+    "id" STRING NOT NULL,
+    "userId" STRING NOT NULL,
+    "holidayId" STRING NOT NULL,
     "scheduledFor" TIMESTAMP(3) NOT NULL,
-    "sent" BOOLEAN NOT NULL DEFAULT false,
+    "sent" BOOL NOT NULL DEFAULT false,
     "sentAt" TIMESTAMP(3),
-    "deliveryType" TEXT NOT NULL,
+    "deliveryType" STRING NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "notifications_pkey" PRIMARY KEY ("id")
@@ -60,11 +60,11 @@ CREATE TABLE "notifications" (
 
 -- CreateTable
 CREATE TABLE "push_subscriptions" (
-    "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
-    "endpoint" TEXT NOT NULL,
-    "p256dh" TEXT NOT NULL,
-    "auth" TEXT NOT NULL,
+    "id" STRING NOT NULL,
+    "userId" STRING NOT NULL,
+    "endpoint" STRING NOT NULL,
+    "p256dh" STRING NOT NULL,
+    "auth" STRING NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "push_subscriptions_pkey" PRIMARY KEY ("id")
