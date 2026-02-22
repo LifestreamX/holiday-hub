@@ -1,6 +1,6 @@
 # Holiday Hub 🎉
 
-A full-stack Holiday Notification Dashboard built with Next.js, TypeScript, Prisma, and PostgreSQL.
+A full-stack Holiday Notification Dashboard built with Next.js, TypeScript, Prisma, and CockroachDB.
 
 ## Features
 
@@ -17,7 +17,7 @@ A full-stack Holiday Notification Dashboard built with Next.js, TypeScript, Pris
 
 - **Frontend**: Next.js 14 (App Router), TypeScript, Tailwind CSS
 - **Backend**: Next.js API Routes, Prisma ORM
-- **Database**: PostgreSQL
+- **Database**: CockroachDB (Cloud or local)
 - **Authentication**: NextAuth.js
 - **Email**: Resend API
 - **Push Notifications**: Web Push API
@@ -56,8 +56,8 @@ cp .env.example .env
 Then edit `.env` with your actual values:
 
 ```env
-# Database - Replace with your PostgreSQL connection string
-DATABASE_URL="postgresql://username:password@localhost:5432/holiday_hub?schema=public"
+# Database - Replace with your CockroachDB connection string
+DATABASE_URL="postgresql://username:password@host:26257/holidayhub?sslmode=verify-full"
 
 # NextAuth
 NEXTAUTH_URL="http://localhost:3000"
@@ -100,36 +100,10 @@ Visit [http://localhost:3000](http://localhost:3000) to see your app!
 
 ## Database Setup
 
-### Local PostgreSQL Setup
+### CockroachDB Setup
 
-If you don't have PostgreSQL running locally:
-
-**Windows:**
-
-1. Download PostgreSQL from [postgresql.org](https://www.postgresql.org/download/windows/)
-2. Install and set a password
-3. Create a database: `createdb holiday_hub`
-4. Update `DATABASE_URL` in `.env`
-
-**Using Docker:**
-
-```bash
-docker run --name holiday-hub-db -e POSTGRES_PASSWORD=password -e POSTGRES_DB=holiday_hub -p 5432:5432 -d postgres
-```
-
-Then set:
-
-```env
-DATABASE_URL="postgresql://postgres:password@localhost:5432/holiday_hub?schema=public"
-```
-
-### Cloud Database (Recommended for Production)
-
-You can use services like:
-
-- [Neon](https://neon.tech) - Free PostgreSQL with generous limits
-- [Supabase](https://supabase.com) - Free PostgreSQL with additional features
-- [Railway](https://railway.app) - Simple PostgreSQL hosting
+You can use [CockroachDB Cloud](https://cockroachlabs.cloud/) or run CockroachDB locally.
+Update your `DATABASE_URL` in `.env` with the connection string provided by CockroachDB Cloud or your local instance.
 
 ## External Services Setup
 
@@ -228,7 +202,7 @@ holiday-hub/
 
 ## Usage
 
-1. **Register** an account with your email and timezone
+1. **Register** an account with your email, password, and timezone
 2. **Login** to access your dashboard
 3. **Browse holidays** and enable the ones you want notifications for
 4. **Configure reminders** - Click settings on any holiday to:
@@ -236,6 +210,12 @@ holiday-hub/
    - Set the time of day for notifications
    - Select delivery method (email, push, or both)
 5. **Sit back** and receive timely holiday reminders!
+
+### Registration & Security
+
+- The registration form includes robust client- and server-side validation.
+- Passwords are hashed with bcrypt (12 rounds) before being saved to the database.
+- All user input is validated with Zod on the server.
 
 ## API Keys & Secrets Required
 
@@ -296,18 +276,6 @@ Compatible with any Node.js hosting:
 - Run `npx prisma generate` to regenerate Prisma Client
 - Restart your TypeScript server in VS Code
 
-## Contributing
-
-Contributions are welcome! Feel free to submit issues or pull requests.
-
-## License
-
-MIT
-
-## Support
-
-For issues or questions, please open an issue on GitHub.
-
 ---
 
-Built with ❤️ using Next.js, Prisma, and TypeScript
+Built with ❤️ using Next.js, Prisma, CockroachDB, and TypeScript.
