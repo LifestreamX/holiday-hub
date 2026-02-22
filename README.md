@@ -1,4 +1,3 @@
-
 # Holiday Hub
 
 A full-stack Holiday Notification Dashboard built with Next.js, TypeScript, Prisma, and CockroachDB.
@@ -278,5 +277,3 @@ Compatible with any Node.js hosting:
 - Restart your TypeScript server in VS Code
 
 ---
-
-
