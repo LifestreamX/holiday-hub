@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Calendar, Mail, Lock, Globe } from 'lucide-react';
 
 export default function RegisterPage() {
+  console.log('🎨 RegisterPage component mounted');
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,6 +14,7 @@ export default function RegisterPage() {
   const [timezone, setTimezone] = useState('America/New_York');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const confirmRef = useRef<HTMLInputElement | null>(null);
 
   const timezones = [
     'America/New_York',
@@ -24,45 +26,117 @@ export default function RegisterPage() {
     'Pacific/Honolulu',
   ];
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const [passwordMismatch, setPasswordMismatch] = useState(false);
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSubmit = async (e?: React.FormEvent) => {
+    console.log('🚀 handleSubmit called', {
+      hasEvent: !!e,
+      email,
+      password: password ? '***' : '',
+      confirmPassword: confirmPassword ? '***' : '',
+    });
+    if (e) {
+      console.log('⛔ Preventing default form submission');
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    console.log('🧹 Clearing errors');
     setError('');
 
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
+    // Trim whitespace
+    const trimmedEmail = email.trim();
+    console.log('📧 Email:', trimmedEmail);
+
+    // Validate email format
+    if (!trimmedEmail) {
+      console.log('❌ Validation failed: Email is required');
+      setError('Email is required');
       return;
     }
 
+    if (!validateEmail(trimmedEmail)) {
+      console.log('❌ Validation failed: Invalid email format');
+      setError('Please enter a valid email address');
+      return;
+    }
+    console.log('✅ Email validation passed');
+
+    // Validate password
+    if (!password) {
+      console.log('❌ Validation failed: Password is required');
+      setError('Password is required');
+      return;
+    }
+    console.log('🔑 Password length:', password.length);
+
     if (password.length < 6) {
+      console.log('❌ Validation failed: Password too short');
       setError('Password must be at least 6 characters');
       return;
     }
+    console.log('✅ Password length validation passed');
+
+    // Validate password match
+    if (!confirmPassword) {
+      console.log('❌ Validation failed: Confirm password is required');
+      setError('Please confirm your password');
+      setPasswordMismatch(true);
+      confirmRef.current?.focus();
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      console.log('❌ Validation failed: Passwords do not match');
+      setError('Passwords do not match');
+      setPasswordMismatch(true);
+      confirmRef.current?.focus();
+      return;
+    }
+    console.log('✅ Password match validation passed');
+    console.log('✨ All validations passed! Starting API call...');
 
     setIsLoading(true);
 
     try {
+      console.log('📡 Sending registration request...');
       const response = await fetch('/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          email,
+          email: trimmedEmail,
           password,
           timezone,
           countryCode: 'US',
         }),
       });
+      console.log('📡 Response status:', response.status);
 
       const data = await response.json();
+      console.log('📡 Response data:', data);
 
       if (!response.ok) {
+        console.log('❌ Registration failed:', data.error);
         setError(data.error || 'Failed to create account');
         return;
       }
 
+      // Success - reset fields and redirect to login
+      console.log('✅ Registration successful! Redirecting...');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+      setTimezone('America/New_York');
       router.push('/login?registered=true');
     } catch (err) {
+      console.error('💥 Registration error:', err);
       setError('An error occurred. Please try again.');
     } finally {
+      console.log('🏁 Setting isLoading to false');
       setIsLoading(false);
     }
   };
@@ -84,7 +158,7 @@ export default function RegisterPage() {
         </div>
 
         <div className='bg-white rounded-lg shadow-xl p-8'>
-          <form onSubmit={handleSubmit} className='space-y-6'>
+          <form onSubmit={handleSubmit} className='space-y-6' noValidate>
             {error && (
               <div className='bg-red-50 border border-red-200 text-red-800 rounded-lg p-4 text-sm'>
                 {error}
@@ -105,9 +179,9 @@ export default function RegisterPage() {
                   type='email'
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  required
                   className='w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900'
                   placeholder='you@example.com'
+                  autoComplete='email'
                 />
               </div>
             </div>
@@ -149,10 +223,22 @@ export default function RegisterPage() {
                   id='password'
                   type='password'
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    // Clear mismatch flag if passwords now match
+                    if (confirmPassword && e.target.value === confirmPassword) {
+                      setPasswordMismatch(false);
+                      setError('');
+                    } else if (
+                      confirmPassword &&
+                      e.target.value !== confirmPassword
+                    ) {
+                      setPasswordMismatch(true);
+                    }
+                  }}
                   className='w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900'
                   placeholder='At least 6 characters'
+                  autoComplete='new-password'
                 />
               </div>
             </div>
@@ -168,14 +254,37 @@ export default function RegisterPage() {
                 <Lock className='absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400' />
                 <input
                   id='confirmPassword'
+                  ref={confirmRef}
                   type='password'
                   value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
-                  className='w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900'
+                  onChange={(e) => {
+                    setConfirmPassword(e.target.value);
+                    // Clear mismatch flag if passwords now match
+                    if (e.target.value === password) {
+                      setPasswordMismatch(false);
+                      setError('');
+                    } else if (e.target.value && e.target.value !== password) {
+                      setPasswordMismatch(true);
+                    } else if (!e.target.value) {
+                      setPasswordMismatch(false);
+                    }
+                  }}
+                  aria-invalid={Boolean(passwordMismatch)}
+                  className={`w-full pl-10 pr-4 py-3 rounded-lg focus:outline-none text-gray-900 ${
+                    passwordMismatch
+                      ? 'border border-red-500 focus:ring-2 focus:ring-red-500'
+                      : 'border border-gray-300 focus:ring-2 focus:ring-blue-500'
+                  }`}
                   placeholder='••••••••'
+                  autoComplete='new-password'
                 />
               </div>
+              {(passwordMismatch ||
+                (confirmPassword && password !== confirmPassword)) && (
+                <p className='text-red-600 text-sm mt-1'>
+                  Passwords do not match
+                </p>
+              )}
             </div>
 
             <button

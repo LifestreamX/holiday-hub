@@ -12,7 +12,29 @@ HOLIDAY HUB - TODO LIST (IN ORDER)
    - Create a test account
    - Verify you can log in
 
-   
+
+
+
+
+
+   9. [ ] Set Up Google OAuth (Optional)
+   - Go to Google Cloud Console
+   - Create OAuth 2.0 credentials
+   - Add GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET to .env
+   - Restart server and test Google sign-in
+
+10. [ ] Set Up GitHub OAuth (Optional)
+    - Go to GitHub Settings > Developer Settings
+    - Create OAuth App
+    - Add GITHUB_ID and GITHUB_SECRET to .env
+    - Restart server and test GitHub sign-in
+
+
+
+
+
+
+
 
 7. [ ] Test Dashboard Features
    - View holidays on dashboard
@@ -27,19 +49,13 @@ HOLIDAY HUB - TODO LIST (IN ORDER)
    - Save changes
    - Verify they persist after logout/login
 
+
+
+
+
 ## OPTIONAL STEPS (Can do later):
 
-9. [ ] Set Up Google OAuth (Optional)
-   - Go to Google Cloud Console
-   - Create OAuth 2.0 credentials
-   - Add GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET to .env
-   - Restart server and test Google sign-in
 
-10. [ ] Set Up GitHub OAuth (Optional)
-    - Go to GitHub Settings > Developer Settings
-    - Create OAuth App
-    - Add GITHUB_ID and GITHUB_SECRET to .env
-    - Restart server and test GitHub sign-in
 
 11. [ ] Update Email Domain
     - Update EMAIL_FROM in .env with your actual domain
