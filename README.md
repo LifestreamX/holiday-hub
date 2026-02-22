@@ -76,20 +76,17 @@ A full-stack holiday notification dashboard.
 2. Run `npm install`
 3. Copy `.env.example` to `.env` and fill in your secrets (see below)
 4. Run `npx prisma generate && npx prisma db push && npm run prisma:seed`
+# Holiday Hub
+
+Minimal holiday notification dashboard.
+
+## Quick Start
+
+1. Clone the repository
+2. Run `npm install`
+3. Copy `.env.example` to `.env` and fill in your secrets
+4. Run `npx prisma generate && npx prisma db push && npm run prisma:seed`
 5. Start the app: `npm run dev`
-
-## .env Example
-
-```
-DATABASE_URL="postgresql://username:password@host:26257/holidayhub?sslmode=verify-full"
-NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="your-super-secret-key"
-RESEND_API_KEY="re_xxxxxxxxxxxxx"
-EMAIL_FROM="Holiday Hub <notifications@yourdomain.com>"
-NEXT_PUBLIC_VAPID_PUBLIC_KEY=""
-VAPID_PRIVATE_KEY=""
-VAPID_EMAIL="mailto:your-email@example.com"
-```
 
 ## Usage
 
@@ -99,15 +96,8 @@ VAPID_EMAIL="mailto:your-email@example.com"
 
 ## Security
 
-- Passwords are hashed with bcrypt before saving
-- All user input is validated on the server
-
-## Security Notes
-
+- Passwords are hashed
+- User input is validated
 - Never commit your `.env` file
-- Always use strong passwords
-- Use environment-specific secrets
-- In production, use a secure `NEXTAUTH_SECRET`
-- Validate all user inputs (already implemented with Zod)
+- Use strong, environment-specific secrets
 
----
