@@ -56,173 +56,51 @@ cp .env.example .env
 Then edit `.env` with your actual values:
 
 ```env
-# Database - Replace with your CockroachDB connection string
+npm run scheduler
+**Production:**
+Set up a cron job or use a service like:
+
+## Prisma Commands
+# Open Prisma Studio to view/edit data
+npm run prisma:studio
+
+# Create a new migration
+
+# Holiday Hub
+
+A full-stack holiday notification dashboard.
+
+## Quick Start
+
+1. Clone the repository
+2. Run `npm install`
+3. Copy `.env.example` to `.env` and fill in your secrets (see below)
+4. Run `npx prisma generate && npx prisma db push && npm run prisma:seed`
+5. Start the app: `npm run dev`
+
+## .env Example
+
+```
 DATABASE_URL="postgresql://username:password@host:26257/holidayhub?sslmode=verify-full"
-
-# NextAuth
 NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="your-super-secret-key-change-this-in-production"
-
-# Resend API (for email notifications)
-# Sign up at https://resend.com and get your API key
+NEXTAUTH_SECRET="your-super-secret-key"
 RESEND_API_KEY="re_xxxxxxxxxxxxx"
-
-# Email sender - Use your domain after configuring it in Resend
 EMAIL_FROM="Holiday Hub <notifications@yourdomain.com>"
-
-# Web Push (Optional - for browser notifications)
-# Generate VAPID keys: npx web-push generate-vapid-keys
 NEXT_PUBLIC_VAPID_PUBLIC_KEY=""
 VAPID_PRIVATE_KEY=""
 VAPID_EMAIL="mailto:your-email@example.com"
 ```
 
-### 4. Set up the database
-
-```bash
-# Generate Prisma Client
-npx prisma generate
-
-# Run database migrations
-npx prisma db push
-
-# Seed the database with holidays
-npm run prisma:seed
-```
-
-### 5. Run the development server
-
-```bash
-npm run dev
-```
-
-Visit [http://localhost:3000](http://localhost:3000) to see your app!
-
-## Database Setup
-
-### CockroachDB Setup
-
-You can use [CockroachDB Cloud](https://cockroachlabs.cloud/) or run CockroachDB locally.
-Update your `DATABASE_URL` in `.env` with the connection string provided by CockroachDB Cloud or your local instance.
-
-## External Services Setup
-
-### Resend (Email Notifications)
-
-1. Sign up at [resend.com](https://resend.com)
-2. Verify your domain (or use their testing domain for development)
-3. Get your API key from the dashboard
-4. Add to `.env`:
-   ```env
-   RESEND_API_KEY="re_your_api_key"
-   EMAIL_FROM="Holiday Hub <notifications@yourdomain.com>"
-   ```
-
-### Web Push Notifications (Optional)
-
-1. Generate VAPID keys:
-
-   ```bash
-   npx web-push generate-vapid-keys
-   ```
-
-2. Add to `.env`:
-   ```env
-   NEXT_PUBLIC_VAPID_PUBLIC_KEY="your_public_key"
-   VAPID_PRIVATE_KEY="your_private_key"
-   VAPID_EMAIL="mailto:your-email@example.com"
-   ```
-
-## Running the Scheduler
-
-The notification scheduler runs daily to send holiday reminders. You can run it:
-
-**Development (manually):**
-
-```bash
-npm run scheduler
-```
-
-**Production:**
-Set up a cron job or use a service like:
-
-- **Vercel Cron** (if deployed on Vercel)
-- **GitHub Actions** with scheduled workflows
-- **Upstash Qstash** for serverless cron jobs
-- A separate server running `npm run scheduler`
-
-## Prisma Commands
-
-```bash
-# Open Prisma Studio to view/edit data
-npm run prisma:studio
-
-# Create a new migration
-npx prisma migrate dev --name your_migration_name
-
-# Reset database (⚠️ deletes all data)
-npx prisma migrate reset
-
-# Re-seed database
-npm run prisma:seed
-```
-
-## Project Structure
-
-```
-holiday-hub/
-├── app/                      # Next.js App Router
-│   ├── api/                  # API routes
-│   │   ├── auth/            # NextAuth endpoints
-│   │   ├── holidays/        # Holiday data
-│   │   ├── preferences/     # User preferences
-│   │   ├── register/        # User registration
-│   │   └── user/            # User settings
-│   ├── dashboard/           # Dashboard page
-│   ├── login/               # Login page
-│   ├── register/            # Registration page
-│   ├── settings/            # Settings page
-│   └── layout.tsx           # Root layout
-├── components/              # React components
-│   ├── HolidayCard.tsx
-│   └── HolidaySettingsModal.tsx
-├── lib/                     # Utility functions
-│   ├── auth.ts             # NextAuth configuration
-│   ├── prisma.ts           # Prisma client
-│   ├── holidayEngine.ts    # Holiday calculations
-│   ├── dateUtils.ts        # Date utilities
-│   ├── emailService.ts     # Email sending
-│   ├── pushService.ts      # Push notifications
-│   └── scheduler.ts        # Cron job scheduler
-├── prisma/
-│   ├── schema.prisma       # Database schema
-│   └── seed.ts             # Database seeding
-└── types/                  # TypeScript definitions
-```
-
 ## Usage
 
-1. **Register** an account with your email, password, and timezone
-2. **Login** to access your dashboard
-3. **Browse holidays** and enable the ones you want notifications for
-4. **Configure reminders** - Click settings on any holiday to:
-   - Choose when to be reminded (1 day, 7 days, 30 days before, etc.)
-   - Set the time of day for notifications
-   - Select delivery method (email, push, or both)
-5. **Sit back** and receive timely holiday reminders!
+- Register an account
+- Login to your dashboard
+- Enable holidays and set reminders
 
-### Registration & Security
+## Security
 
-- The registration form includes robust client- and server-side validation.
-- Passwords are hashed with bcrypt (12 rounds) before being saved to the database.
-- All user input is validated with Zod on the server.
-
-## API Keys & Secrets Required
-
-- `DATABASE_URL` - PostgreSQL connection string
-- `NEXTAUTH_SECRET` - Random secret for NextAuth (generate with `openssl rand -base64 32`)
-- `RESEND_API_KEY` - From resend.com (required for email)
-- `VAPID_PUBLIC_KEY` & `VAPID_PRIVATE_KEY` - For push notifications (optional)
+- Passwords are hashed with bcrypt before saving
+- All user input is validated on the server
 
 ## Security Notes
 
@@ -231,6 +109,5 @@ holiday-hub/
 - Use environment-specific secrets
 - In production, use a secure `NEXTAUTH_SECRET`
 - Validate all user inputs (already implemented with Zod)
-
 
 ---
