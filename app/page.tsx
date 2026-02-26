@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Calendar, Bell, Users, Sparkles } from 'lucide-react';
+import { Bell, Users, Sparkles } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -7,7 +7,9 @@ export default function Home() {
       <nav className='container mx-auto px-4 py-6'>
         <div className='flex items-center justify-between'>
           <div className='flex items-center gap-2'>
-            <Calendar className='w-8 h-8 text-white' />
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' className='w-8 h-8 text-white' aria-hidden>
+              <path fill='currentColor' d='M3 6a1 1 0 011-1h3a1 1 0 011 1v1h8V6a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1v8h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1H8v1a1 1 0 01-1 1H4a1 1 0 01-1-1v-3a1 1 0 011-1h1V11H4a1 1 0 01-1-1V6z' />
+            </svg>
             <span className='text-2xl font-bold text-white'>Holiday Hub</span>
           </div>
           <div className='flex items-center gap-4'>
