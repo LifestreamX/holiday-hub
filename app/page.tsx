@@ -34,7 +34,7 @@ export default function Home() {
           </h1>
           <p className='text-xl text-gray-200 mb-12'>
             Get customizable reminders for all your favorite holidays. Choose
-            when and how you want to be notified.
+            when and how you want to be notified. Sign up with Google or GitHub in seconds.
           </p>
 
           <div className='flex flex-wrap items-center justify-center gap-4 mb-20'>
