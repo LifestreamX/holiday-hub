@@ -15,8 +15,10 @@ export default function LoginPage() {
             <Calendar className='w-10 h-10 text-white' />
             <span className='text-3xl font-bold text-white'>Holiday Hub</span>
           </Link>
-          <h1 className='text-2xl font-semibold text-white'>Welcome back</h1>
-          <p className='text-gray-200 mt-2'>Sign in with GitHub or Google</p>
+          <h1 className='text-2xl font-semibold text-white'>
+            Sign In / Sign Up
+          </h1>
+          <p className='text-gray-200 mt-2'>Continue with GitHub or Google</p>
         </div>
 
         <div className='bg-white rounded-lg shadow-xl p-8'>
@@ -61,16 +63,6 @@ export default function LoginPage() {
               </svg>
               Continue with GitHub
             </button>
-
-            <div className='text-center text-sm text-gray-500 pt-4'>
-              <span>Don&apos;t have an account? </span>
-              <Link
-                href='/register'
-                className='text-blue-600 hover:underline font-medium'
-              >
-                Sign up
-              </Link>
-            </div>
           </div>
         </div>
       </div>

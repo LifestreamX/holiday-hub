@@ -13,15 +13,9 @@ export default function Home() {
           <div className='flex items-center gap-4'>
             <Link
               href='/login'
-              className='px-4 py-2 text-white hover:text-gray-200 transition-colors'
-            >
-              Login
-            </Link>
-            <Link
-              href='/register'
               className='px-6 py-2 bg-white text-blue-900 rounded-lg font-medium hover:bg-gray-100 transition-colors'
             >
-              Sign Up
+              Sign In / Sign Up
             </Link>
           </div>
         </div>
@@ -34,21 +28,16 @@ export default function Home() {
           </h1>
           <p className='text-xl text-gray-200 mb-12'>
             Get customizable reminders for all your favorite holidays. Choose
-            when and how you want to be notified. Sign up with Google or GitHub in seconds.
+            when and how you want to be notified. Sign up with Google or GitHub
+            in seconds.
           </p>
 
           <div className='flex flex-wrap items-center justify-center gap-4 mb-20'>
             <Link
-              href='/register'
+              href='/login'
               className='px-8 py-4 bg-white text-blue-900 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg'
             >
               Get Started Free
-            </Link>
-            <Link
-              href='/login'
-              className='px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-semibold text-lg hover:bg-white/10 transition-colors'
-            >
-              Sign In
             </Link>
           </div>
 
