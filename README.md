@@ -101,3 +101,4 @@ Minimal holiday notification dashboard.
 - Never commit your `.env` file
 - Use strong, environment-specific secrets
 
+```

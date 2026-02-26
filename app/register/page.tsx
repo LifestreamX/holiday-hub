@@ -1,117 +1,11 @@
 'use client';
 
-import { useState, useRef } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Calendar, Mail, Lock, Globe } from 'lucide-react';
+import { signIn } from 'next-auth/react';
+import { Calendar, GitHub } from 'lucide-react';
 
 export default function RegisterPage() {
-  const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [timezone, setTimezone] = useState('America/New_York');
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [passwordMismatch, setPasswordMismatch] = useState(false);
-  const confirmRef = useRef<HTMLInputElement | null>(null);
-
-  const timezones = [
-    'America/New_York',
-    'America/Chicago',
-    'America/Denver',
-    'America/Los_Angeles',
-    'America/Phoenix',
-    'America/Anchorage',
-    'Pacific/Honolulu',
-  ];
-
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const handleCreateAccount = async () => {
-    console.log('handleCreateAccount called', { email, passwordLength: password.length, confirmLength: confirmPassword.length });
-    // Trim whitespace
-    const trimmedEmail = email.trim();
-
-    // Validate email format
-    if (!trimmedEmail) {
-      setError('Email is required');
-      setPasswordMismatch(false);
-      return;
-    }
-
-    if (!validateEmail(trimmedEmail)) {
-      setError('Please enter a valid email address');
-      setPasswordMismatch(false);
-      return;
-    }
-
-    // Validate password
-    if (!password) {
-      setError('Password is required');
-      setPasswordMismatch(false);
-      return;
-    }
-
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters');
-      setPasswordMismatch(false);
-      return;
-    }
-
-    // Validate password match
-    if (!confirmPassword) {
-      console.log('validation: confirmPassword empty');
-      setError('Please confirm your password');
-      setPasswordMismatch(true);
-      confirmRef.current?.focus();
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      console.log('validation: passwords do not match', { password, confirmPassword });
-      try { window?.alert?.('Passwords do not match'); } catch {};
-      setError('Passwords do not match');
-      setPasswordMismatch(true);
-      confirmRef.current?.focus();
-      return;
-    }
-
-    // All validations passed - clear errors and proceed
-    setError('');
-    setPasswordMismatch(false);
-    setIsLoading(true);
-
-    try {
-      const response = await fetch('/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: trimmedEmail,
-          password,
-          timezone,
-          countryCode: 'US',
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(data.error || 'Failed to create account');
-        setIsLoading(false);
-        return;
-      }
-
-      // Success - redirect to login
-      router.push('/login?registered=true');
-    } catch (err) {
-      setError('An error occurred. Please try again.');
-      setIsLoading(false);
-    }
-  };
+  const callbackUrl = '/dashboard';
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-700 flex items-center justify-center p-4'>
@@ -121,153 +15,59 @@ export default function RegisterPage() {
             <Calendar className='w-10 h-10 text-white' />
             <span className='text-3xl font-bold text-white'>Holiday Hub</span>
           </Link>
-          <h1 className='text-2xl font-semibold text-white'>
-            Create your account
-          </h1>
+          <h1 className='text-2xl font-semibold text-white'>Create Account</h1>
           <p className='text-gray-200 mt-2'>
-            Start receiving holiday notifications today
+            Sign up with GitHub or Google to get started
           </p>
         </div>
 
         <div className='bg-white rounded-lg shadow-xl p-8'>
-          <div className='space-y-6'>
-            {error && (
-              <div className='bg-red-50 border border-red-200 text-red-800 rounded-lg p-4 text-sm'>
-                {error}
-              </div>
-            )}
-
-            <div>
-              <label
-                htmlFor='email'
-                className='block text-sm font-medium text-gray-700 mb-2'
+          <div className='space-y-4'>
+            <button
+              type='button'
+              onClick={() => signIn('google', { callbackUrl })}
+              className='w-full flex items-center justify-center gap-3 py-3 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition font-medium text-gray-700'
+            >
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                viewBox='0 0 48 48'
+                className='w-5 h-5'
               >
-                Email Address
-              </label>
-              <div className='relative'>
-                <Mail className='absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400' />
-                <input
-                  id='email'
-                  type='email'
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className='w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900'
-                  placeholder='you@example.com'
-                  autoComplete='email'
+                <path
+                  fill='#EA4335'
+                  d='M24 9.5c3.6 0 6.8 1.3 9.3 3.6l6.9-6.9C36.7 2.2 30.7 0 24 0 14.7 0 6.9 5.6 3 13.7l7.9 6.1C12.8 14.1 17.9 9.5 24 9.5z'
                 />
-              </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor='timezone'
-                className='block text-sm font-medium text-gray-700 mb-2'
-              >
-                Your Timezone
-              </label>
-              <div className='relative'>
-                <Globe className='absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400' />
-                <select
-                  id='timezone'
-                  value={timezone}
-                  onChange={(e) => setTimezone(e.target.value)}
-                  className='w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none bg-white text-gray-900 hover:text-blue-700'
-                >
-                  {timezones.map((tz) => (
-                    <option key={tz} value={tz}>
-                      {tz.replace('/_/g', ' ')}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor='password'
-                className='block text-sm font-medium text-gray-700 mb-2'
-              >
-                Password
-              </label>
-              <div className='relative'>
-                <Lock className='absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400' />
-                <input
-                  id='password'
-                  type='password'
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                    // Clear mismatch flag and error if passwords now match
-                    if (confirmPassword && e.target.value === confirmPassword) {
-                      setPasswordMismatch(false);
-                      setError('');
-                    }
-                  }}
-                  className='w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900'
-                  placeholder='At least 6 characters'
-                  autoComplete='new-password'
+                <path
+                  fill='#34A853'
+                  d='M46.5 24c0-1.6-.1-3.1-.4-4.6H24v9.1h12.7c-.5 2.9-2 5.3-4.3 6.9l6.9 5.3C43.8 37.2 46.5 31.2 46.5 24z'
                 />
-              </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor='confirmPassword'
-                className='block text-sm font-medium text-gray-700 mb-2'
-              >
-                Confirm Password
-              </label>
-              <div className='relative'>
-                <Lock className='absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400' />
-                <input
-                  id='confirmPassword'
-                  ref={confirmRef}
-                  type='password'
-                  value={confirmPassword}
-                  onChange={(e) => {
-                    setConfirmPassword(e.target.value);
-                    // Clear mismatch flag and error if passwords now match
-                    if (e.target.value === password) {
-                      setPasswordMismatch(false);
-                      setError('');
-                    }
-                  }}
-                  aria-invalid={Boolean(passwordMismatch)}
-                  className={`w-full pl-10 pr-4 py-3 rounded-lg focus:outline-none text-gray-900 ${
-                    passwordMismatch
-                      ? 'border border-red-500 focus:ring-2 focus:ring-red-500'
-                      : 'border border-gray-300 focus:ring-2 focus:ring-blue-500'
-                  }`}
-                  placeholder='••••••••'
-                  autoComplete='new-password'
+                <path
+                  fill='#4A90E2'
+                  d='M10.9 28.5A14.9 14.9 0 0 1 9.5 24c0-1.3.2-2.6.6-3.8L3 13.7C1.1 16.9 0 20.4 0 24c0 3.6 1 7.1 2.9 10.3l7.9-6.1z'
                 />
-              </div>
-              {(passwordMismatch ||
-                (confirmPassword && password !== confirmPassword)) && (
-                <p className='text-red-600 text-sm mt-1'>
-                  Passwords do not match
-                </p>
-              )}
-            </div>
+                <path
+                  fill='#FBBC05'
+                  d='M24 48c6.7 0 12.7-2.2 17.4-5.9l-8.5-6.6C30.8 35.8 27.6 37 24 37c-6.1 0-11.2-4.6-12.1-10.5l-7.9 6.1C6.9 42.4 14.7 48 24 48z'
+                />
+              </svg>
+              Continue with Google
+            </button>
 
             <button
               type='button'
-              onClick={handleCreateAccount}
-              disabled={isLoading}
-              className='w-full py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+              onClick={() => signIn('github', { callbackUrl })}
+              className='w-full flex items-center justify-center gap-3 py-3 bg-[#24292F] text-white rounded-lg hover:bg-[#1b1f23] transition font-medium'
             >
-              {isLoading ? 'Creating account...' : 'Create Account'}
+              <GitHub className='w-5 h-5' />
+              Continue with GitHub
             </button>
-          </div>
 
-          <div className='mt-6 text-center'>
-            <span className='text-gray-600'>Already have an account? </span>
-            <Link
-              href='/login'
-              className='text-blue-600 font-medium hover:text-blue-700'
-            >
-              Sign in
-            </Link>
+            <div className='text-center text-sm text-gray-500 pt-4'>
+              <span>Already have an account? </span>
+              <Link href='/login' className='text-blue-600 hover:underline font-medium'>
+                Sign in
+              </Link>
+            </div>
           </div>
         </div>
       </div>
