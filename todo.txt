@@ -16,7 +16,6 @@ HOLIDAY HUB - TODO LIST (IN ORDER)
 
 
 
-
    9. [ ] Set Up Google OAuth (Optional)
    - Go to Google Cloud Console
    - Create OAuth 2.0 credentials
@@ -28,8 +27,6 @@ HOLIDAY HUB - TODO LIST (IN ORDER)
     - Create OAuth App
     - Add GITHUB_ID and GITHUB_SECRET to .env
     - Restart server and test GitHub sign-in
-
-
 
 
 

@@ -16,9 +16,12 @@ export async function POST(request: NextRequest) {
     const { email, password, timezone, countryCode } =
       registerSchema.parse(body);
 
+    // Trim email to avoid whitespace issues
+    const trimmedEmail = email.trim();
+
     // Check if user already exists
     const existingUser = await prisma.user.findUnique({
-      where: { email },
+      where: { email: trimmedEmail },
     });
 
     if (existingUser) {
@@ -34,7 +37,7 @@ export async function POST(request: NextRequest) {
     // Create user
     const user = await prisma.user.create({
       data: {
-        email,
+        email: trimmedEmail,
         password: hashedPassword,
         timezone,
         countryCode,
