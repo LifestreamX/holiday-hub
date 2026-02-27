@@ -77,6 +77,13 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+      authorization: {
+        params: {
+          prompt: 'consent',
+          access_type: 'offline',
+          response_type: 'code',
+        },
+      },
     }),
     GitHubProvider({
       clientId: process.env.GITHUB_ID || '',
@@ -96,6 +103,10 @@ export const authOptions: NextAuthOptions = {
   logger: {
     error(code: any, metadata?: any) {
       console.error('NextAuth logger error:', code, metadata || '');
+      console.error(
+        'Full error details:',
+        JSON.stringify({ code, metadata }, null, 2),
+      );
     },
     warn(code: any) {
       console.warn('NextAuth logger warn:', code);

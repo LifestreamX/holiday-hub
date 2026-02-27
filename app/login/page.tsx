@@ -70,20 +70,14 @@ export default function LoginPage() {
       setLoading(provider);
       console.log(`Attempting sign in with ${provider}`);
 
-      const result = await signIn(provider, {
+      // For OAuth providers, use redirect: true to let NextAuth handle the redirect
+      await signIn(provider, {
         callbackUrl: '/dashboard',
-        redirect: false,
+        redirect: true,
       });
-
-      console.log('Sign in result:', result);
-
-      const callback = encodeURIComponent('/dashboard');
-      const fallbackUrl = `/api/auth/signin/${provider}?callbackUrl=${callback}`;
-
-      const target = (result && (result as any).url) || fallbackUrl;
-      window.location.assign(target);
     } catch (error) {
       console.error('Sign in error:', error);
+      setError(`${provider} sign-in failed. Please try again.`);
       setLoading(null);
     }
   };
@@ -98,8 +92,14 @@ export default function LoginPage() {
       const params = new URLSearchParams(window.location.search);
       const error = params.get('error');
       const reg = params.get('registered');
+      const reset = params.get('reset');
       if (reg) {
         setRegisteredMessage('Account created — please sign in.');
+      }
+      if (reset === 'success') {
+        setRegisteredMessage(
+          'Password reset successful! You can now sign in with your new password.',
+        );
       }
       if (error) {
         if (error === 'google') {
@@ -204,6 +204,14 @@ export default function LoginPage() {
                 placeholder='••••••••'
                 disabled={loading !== null}
               />
+              <div className='text-right mt-1'>
+                <Link
+                  href='/forgot-password'
+                  className='text-sm text-blue-600 hover:underline'
+                >
+                  Forgot password?
+                </Link>
+              </div>
             </div>
             {registeredMessage && (
               <div
