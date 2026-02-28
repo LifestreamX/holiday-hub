@@ -13,6 +13,7 @@ Successfully integrated the [Nager.Date API](https://date.nager.at/) to fetch re
 ## Files Created/Modified
 
 ### New Files
+
 - `lib/nagerDateService.ts` - Service to interact with Nager.Date API
 - `app/api/holidays/sync/route.ts` - API endpoint to sync holidays (requires auth)
 - `scripts/sync-holidays.js` - CLI script to sync holidays directly to database
@@ -22,6 +23,7 @@ Successfully integrated the [Nager.Date API](https://date.nager.at/) to fetch re
 - `test-sync-holidays.js` - Test script for sync endpoint
 
 ### Modified Files
+
 - `lib/holidayEngine.ts` - Added support for Good Friday calculation
 - Existing holiday API and dashboard already in place
 
@@ -36,6 +38,7 @@ Nager.Date API → nagerDateService → Database → Holiday API → Dashboard
 ### 2. Holiday Types
 
 **Fixed Holidays** (same date every year):
+
 - New Year's Day (1/1)
 - Independence Day (7/4)
 - Christmas Day (12/25)
@@ -43,12 +46,14 @@ Nager.Date API → nagerDateService → Database → Holiday API → Dashboard
 - etc.
 
 **Calculated Holidays** (date changes each year):
+
 - Good Friday (2 days before Easter)
 - Easter Sunday (calculated using Gregorian algorithm)
 
 ### 3. Database Schema
 
 Holidays are stored with:
+
 - `name` - Holiday name
 - `description` - Local name or description
 - `category` - Type: federal, bank, school, observance, etc.
@@ -92,6 +97,7 @@ node scripts/verify-holidays.js
 ## Current Status
 
 ✅ **Completed:**
+
 - Nager.Date API integration
 - Holiday sync functionality (CLI & API)
 - Database storage with proper types
@@ -101,6 +107,7 @@ node scripts/verify-holidays.js
 - Dashboard displays holidays
 
 ✅ **Tested:**
+
 - US holidays for 2026 and 2027 synced
 - 15 unique holidays loaded
 - Dates correctly parsed (Christmas on 12/25, New Year's on 1/1)
@@ -110,11 +117,13 @@ node scripts/verify-holidays.js
 ## Next Steps
 
 ### Immediate
+
 1. **Test dashboard display**: Sign in at http://localhost:3000 and view holidays
 2. **Enable notifications**: Set up reminder preferences for upcoming holidays
 3. **Configure email/push**: Test notification delivery
 
 ### Future Enhancements
+
 1. **Auto-sync**: Schedule automatic holiday sync for new years
 2. **Multi-country support**: Allow users to select multiple countries
 3. **Custom holidays**: Let users add personal holidays
@@ -135,6 +144,7 @@ node scripts/verify-holidays.js
 ## Available Countries
 
 Nager.Date supports 100+ countries including:
+
 - US (United States)
 - GB (United Kingdom)
 - CA (Canada)
@@ -151,15 +161,18 @@ Full list: https://date.nager.at/Country
 ## Technical Notes
 
 ### Date Parsing
+
 - Parse dates directly from YYYY-MM-DD format to avoid timezone issues
 - Don't use `new Date()` constructor which can cause off-by-one errors
 
 ### Calculated Holidays
+
 - Currently support: Easter Sunday, Good Friday
 - Can be extended to support: Mardi Gras, Ash Wednesday, Pentecost, etc.
 - Use existing date calculation functions in `lib/dateUtils.ts`
 
 ### Idempotency
+
 - Running sync multiple times won't create duplicates
 - Holidays are matched by name + country code
 - Existing holidays are updated, not duplicated
@@ -187,6 +200,6 @@ npx prisma studio
 ✅ 15 US holidays loaded for 2026-2027  
 ✅ Dashboard ready to display holidays  
 ✅ All dates correctly parsed  
-✅ Ready for user testing  
+✅ Ready for user testing
 
 **Next:** Sign in to the dashboard at http://localhost:3000 and view your holidays!

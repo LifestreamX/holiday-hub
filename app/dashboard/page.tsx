@@ -1,10 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Calendar, LogOut, Settings, Loader2 } from 'lucide-react';
+import {
+  Calendar,
+  LogOut,
+  Settings,
+  Loader2,
+  Search,
+  Filter,
+} from 'lucide-react';
 import HolidayCard from '@/components/HolidayCard';
 import HolidaySettingsModal from '@/components/HolidaySettingsModal';
 
@@ -22,12 +29,35 @@ interface Holiday {
   hasPreference: boolean;
 }
 
+const CATEGORY_LABELS: Record<string, string> = {
+  federal: '🏛️ Federal Holidays',
+  state: '🏛️ State Holidays',
+  'religious-christian': '✝️ Christian',
+  'religious-jewish': '✡️ Jewish',
+  'religious-islamic': '☪️ Islamic',
+  'religious-hindu': '🕉️ Hindu',
+  'religious-buddhist': '☸️ Buddhist',
+  'religious-sikh': '☬ Sikh',
+  cultural: '🎭 Cultural',
+  'cultural-sports': '🏈 Sports',
+  'cultural-shopping': '🛍️ Shopping',
+  heritage: '🌍 Heritage & Awareness',
+  awareness: '💡 Awareness',
+  professional: '💼 Professional',
+  military: '🎖️ Military',
+  patriotic: '🇺🇸 Patriotic',
+  civic: '🏛️ Civic',
+  seasonal: '🍂 Seasonal',
+};
+
 export default function DashboardPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [holidays, setHolidays] = useState<Holiday[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedHoliday, setSelectedHoliday] = useState<Holiday | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -126,10 +156,72 @@ export default function DashboardPage() {
     );
   }
 
+  // Filter and group holidays
   const upcomingHolidays = holidays.filter(
     (h) => h.daysUntil !== null && h.daysUntil >= 0,
   );
+
   const enabledHolidays = holidays.filter((h) => h.enabled);
+
+  // Get unique categories with counts
+  const categories = useMemo(() => {
+    const categoryMap = new Map<string, number>();
+    upcomingHolidays.forEach((h) => {
+      categoryMap.set(h.category, (categoryMap.get(h.category) || 0) + 1);
+    });
+    return Array.from(categoryMap.entries())
+      .sort((a, b) => b[1] - a[1])
+      .map(([cat, count]) => ({ category: cat, count }));
+  }, [upcomingHolidays]);
+
+  // Filter holidays by category and search
+  const filteredHolidays = useMemo(() => {
+    let filtered = upcomingHolidays;
+
+    // Category filter
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter((h) => h.category === selectedCategory);
+    }
+
+    // Search filter
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(
+        (h) =>
+          h.name.toLowerCase().includes(query) ||
+          h.description.toLowerCase().includes(query),
+      );
+    }
+
+    return filtered;
+  }, [upcomingHolidays, selectedCategory, searchQuery]);
+
+  // Group by category for display
+  const groupedHolidays = useMemo(() => {
+    const groups = new Map<string, Holiday[]>();
+    filteredHolidays.forEach((holiday) => {
+      const cat = holiday.category;
+      if (!groups.has(cat)) {
+        groups.set(cat, []);
+      }
+      groups.get(cat)!.push(holiday);
+    });
+    return Array.from(groups.entries()).sort((a, b) => {
+      // Sort by category priority
+      const priorityOrder = [
+        'federal',
+        'state',
+        'religious-christian',
+        'cultural',
+      ];
+      const aIndex = priorityOrder.indexOf(a[0]);
+      const bIndex = priorityOrder.indexOf(b[0]);
+      if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+      if (aIndex !== -1) return -1;
+      if (bIndex !== -1) return 1;
+      return a[0].localeCompare(b[0]);
+    });
+  }, [filteredHolidays]);
 
   return (
     <div className='min-h-screen bg-background'>
@@ -171,29 +263,101 @@ export default function DashboardPage() {
             Your Holidays
           </h1>
           <p className='text-muted-foreground'>
-            You have {enabledHolidays.length} active notifications
+            {upcomingHolidays.length} total holidays • {enabledHolidays.length}{' '}
+            active notifications
           </p>
         </div>
 
-        {upcomingHolidays.length === 0 ? (
+        {/* Search and Filters */}
+        <div className='mb-6 space-y-4'>
+          {/* Search Bar */}
+          <div className='relative'>
+            <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground' />
+            <input
+              type='text'
+              placeholder='Search holidays...'
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className='w-full pl-10 pr-4 py-2 bg-card border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary'
+            />
+          </div>
+
+          {/* Category Filter */}
+          <div className='flex items-center gap-2 overflow-x-auto pb-2'>
+            <Filter className='w-5 h-5 text-muted-foreground flex-shrink-0' />
+            <button
+              onClick={() => setSelectedCategory('all')}
+              className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
+                selectedCategory === 'all'
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-card text-foreground hover:bg-secondary border border-border'
+              }`}
+            >
+              All ({upcomingHolidays.length})
+            </button>
+            {categories.map(({ category, count }) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
+                  selectedCategory === category
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-card text-foreground hover:bg-secondary border border-border'
+                }`}
+              >
+                {CATEGORY_LABELS[category] || category} ({count})
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Holiday Display */}
+        {filteredHolidays.length === 0 ? (
           <div className='text-center py-12'>
             <Calendar className='w-16 h-16 mx-auto mb-4 text-muted-foreground' />
             <h2 className='text-xl font-semibold text-foreground mb-2'>
-              No holidays loaded
+              {searchQuery || selectedCategory !== 'all'
+                ? 'No holidays found'
+                : 'No holidays loaded'}
             </h2>
             <p className='text-muted-foreground'>
-              Check back later or refresh the page.
+              {searchQuery || selectedCategory !== 'all'
+                ? 'Try adjusting your filters or search query.'
+                : 'Check back later or refresh the page.'}
             </p>
+            {(searchQuery || selectedCategory !== 'all') && (
+              <button
+                onClick={() => {
+                  setSearchQuery('');
+                  setSelectedCategory('all');
+                }}
+                className='mt-4 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors'
+              >
+                Clear Filters
+              </button>
+            )}
           </div>
         ) : (
-          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-            {upcomingHolidays.map((holiday) => (
-              <HolidayCard
-                key={holiday.id}
-                holiday={holiday}
-                onToggle={handleToggle}
-                onSettings={setSelectedHoliday}
-              />
+          <div className='space-y-8'>
+            {groupedHolidays.map(([category, categoryHolidays]) => (
+              <div key={category}>
+                <h2 className='text-xl font-bold text-foreground mb-4 flex items-center gap-2'>
+                  <span>{CATEGORY_LABELS[category] || category}</span>
+                  <span className='text-sm font-normal text-muted-foreground'>
+                    ({categoryHolidays.length})
+                  </span>
+                </h2>
+                <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+                  {categoryHolidays.map((holiday) => (
+                    <HolidayCard
+                      key={holiday.id}
+                      holiday={holiday}
+                      onToggle={handleToggle}
+                      onSettings={setSelectedHoliday}
+                    />
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         )}
