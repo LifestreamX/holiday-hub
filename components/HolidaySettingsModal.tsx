@@ -144,13 +144,27 @@ export default function HolidaySettingsModal({
                 <h3 className='font-medium text-foreground mb-3'>
                   Time of Day
                 </h3>
-                <input
-                  type='time'
-                  value={reminderTime}
-                  onChange={(e) => setReminderTime(e.target.value)}
-                  className='w-full px-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-foreground cursor-pointer'
-                  style={{ colorScheme: 'dark light' }}
-                />
+                <div className='relative'>
+                  <input
+                    type='time'
+                    value={reminderTime}
+                    onChange={(e) => setReminderTime(e.target.value)}
+                    className='w-full px-4 py-3 bg-card border-2 border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-foreground text-base font-medium hover:border-primary/50 transition-all cursor-pointer'
+                    style={{ 
+                      colorScheme: 'dark',
+                      WebkitAppearance: 'none',
+                      MozAppearance: 'textfield',
+                    }}
+                  />
+                  <div className='absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-muted-foreground'>
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                </div>
+                <p className='text-xs text-muted-foreground mt-2'>
+                  Click to select the time for daily reminders
+                </p>
               </div>
 
               {/* Delivery Method */}

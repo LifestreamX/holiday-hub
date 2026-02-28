@@ -34,7 +34,9 @@ async function testNotifications() {
       },
     });
 
-    console.log(`📊 Found ${preferences.length} user(s) with Ramadan enabled\n`);
+    console.log(
+      `📊 Found ${preferences.length} user(s) with Ramadan enabled\n`,
+    );
 
     if (preferences.length === 0) {
       console.log('⚠️  No users have enabled Ramadan notifications yet.');
@@ -51,7 +53,8 @@ async function testNotifications() {
       if (pref.deliveryMethod === 'email' || pref.deliveryMethod === 'both') {
         try {
           await resend.emails.send({
-            from: process.env.EMAIL_FROM || 'Holiday Hub <noreply@tyler-allen.com>',
+            from:
+              process.env.EMAIL_FROM || 'Holiday Hub <noreply@tyler-allen.com>',
             to: user.email,
             subject: '🌙 TEST: Ramadan Reminder',
             html: `
@@ -79,8 +82,12 @@ async function testNotifications() {
           console.log('  ⚠️  No push subscriptions found for this user');
           console.log('     Enable push notifications in your browser first!');
         } else {
-          console.log(`  ✅ Found ${subscriptions.length} push subscription(s)`);
-          console.log('     (Push notifications require web-push library - skipping for now)');
+          console.log(
+            `  ✅ Found ${subscriptions.length} push subscription(s)`,
+          );
+          console.log(
+            '     (Push notifications require web-push library - skipping for now)',
+          );
         }
       }
 
@@ -92,7 +99,6 @@ async function testNotifications() {
     console.log('🔔 For push notifications, you need to:');
     console.log('   1. Allow notifications in your browser');
     console.log('   2. Visit the app and click "Enable Notifications"\n');
-
   } catch (error) {
     console.error('❌ Error:', error);
   } finally {
