@@ -4,7 +4,14 @@ import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Calendar, ArrowLeft, Loader2, Globe } from 'lucide-react';
+import { Calendar, ArrowLeft, Loader2, Globe, Bell, BellOff } from 'lucide-react';
+import {
+  isPushSupported,
+  getNotificationPermission,
+  subscribeToPush,
+  unsubscribeFromPush,
+  getCurrentSubscription,
+} from '@/lib/pushNotifications';
 
 export default function SettingsPage() {
   const { data: session, status } = useSession();
@@ -14,6 +21,9 @@ export default function SettingsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState('');
+  const [pushEnabled, setPushEnabled] = useState(false);
+  const [pushSupported, setPushSupported] = useState(false);
+  const [pushPermission, setPushPermission] = useState<NotificationPermission>('default');
 
   const timezones = [
     'America/New_York',
@@ -36,6 +46,17 @@ export default function SettingsPage() {
       fetchUserSettings();
     }
   }, [status]);
+
+  useEffect(() => {
+    // Check push notification support
+    setPushSupported(isPushSupported());
+    setPushPermission(getNotificationPermission());
+
+    // Check if user has an active subscription
+    getCurrentSubscription().then((sub) => {
+      setPushEnabled(!!sub);
+    });
+  }, []);
 
   const fetchUserSettings = async () => {
     try {
@@ -75,6 +96,36 @@ export default function SettingsPage() {
       setMessage('An error occurred');
     } finally {
       setIsSaving(false);
+    }
+  };
+
+  const handleTogglePush = async () => {
+    try {
+      if (pushEnabled) {
+        // Unsubscribe
+        const success = await unsubscribeFromPush();
+        if (success) {
+          setPushEnabled(false);
+          setMessage('Push notifications disabled');
+          setTimeout(() => setMessage(''), 3000);
+        }
+      } else {
+        // Subscribe
+        const subscription = await subscribeToPush();
+        if (subscription) {
+          setPushEnabled(true);
+          setPushPermission('granted');
+          setMessage('Push notifications enabled!');
+          setTimeout(() => setMessage(''), 3000);
+        } else {
+          setMessage('Failed to enable push notifications');
+          setTimeout(() => setMessage(''), 3000);
+        }
+      }
+    } catch (error) {
+      console.error('Error toggling push:', error);
+      setMessage('An error occurred');
+      setTimeout(() => setMessage(''), 3000);
     }
   };
 
@@ -194,6 +245,48 @@ export default function SettingsPage() {
               <p className='text-xs text-muted-foreground mt-1'>
                 Determines which holidays are available
               </p>
+            </div>
+
+            <div className='pt-4 border-t border-border'>
+              <div className='flex items-center justify-between mb-4'>
+                <div>
+                  <h3 className='text-sm font-medium text-foreground flex items-center gap-2'>
+                    {pushEnabled ? (
+                      <Bell className='w-4 h-4 text-primary' />
+                    ) : (
+                      <BellOff className='w-4 h-4 text-muted-foreground' />
+                    )}
+                    Push Notifications
+                  </h3>
+                  <p className='text-xs text-muted-foreground mt-1'>
+                    {pushSupported
+                      ? 'Receive browser notifications for holiday reminders'
+                      : 'Push notifications are not supported in this browser'}
+                  </p>
+                </div>
+                <button
+                  type='button'
+                  onClick={handleTogglePush}
+                  disabled={!pushSupported}
+                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                    pushEnabled
+                      ? 'bg-red-500 text-white hover:bg-red-600'
+                      : 'bg-primary text-primary-foreground hover:bg-primary/90'
+                  } disabled:opacity-50 disabled:cursor-not-allowed`}
+                >
+                  {pushEnabled ? 'Disable' : 'Enable'}
+                </button>
+              </div>
+              {pushPermission === 'denied' && (
+                <div className='bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-sm text-yellow-800'>
+                  ⚠️ Notifications are blocked. Please enable them in your browser settings.
+                </div>
+              )}
+              {pushEnabled && (
+                <div className='bg-green-50 border border-green-200 rounded-lg p-3 text-sm text-green-800'>
+                  ✓ Push notifications are active. You'll receive browser notifications for enabled holidays.
+                </div>
+              )}
             </div>
 
             <div className='flex items-center gap-4 pt-4'>
