@@ -13,7 +13,6 @@ interface Holiday {
   enabled: boolean;
   reminderOffsets: number[];
   reminderTime: string;
-  deliveryMethod: string;
   hasPreference: boolean;
 }
 

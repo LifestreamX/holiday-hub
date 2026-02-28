@@ -14,9 +14,6 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='en' className='dark'>
-      <head>
-        <script src='/react-devtools-hook.js' />
-      </head>
       <body className={inter.className}>
         <Providers>{children}</Providers>
       </body>

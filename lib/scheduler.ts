@@ -8,10 +8,6 @@ import { PrismaClient } from '@prisma/client';
 import { calculateHolidayDate } from './holidayEngine';
 import { getDaysBetween, getStartOfDayInTimezone } from './dateUtils';
 import { sendEmail, generateHolidayEmailHTML } from './emailService';
-import {
-  sendPushNotification,
-  generateHolidayPushPayload,
-} from './pushService';
 
 const prisma = new PrismaClient();
 
@@ -26,7 +22,6 @@ async function processUserNotifications(userId: string): Promise<void> {
         where: { enabled: true },
         include: { holiday: true },
       },
-      pushSubscriptions: true,
     },
   });
 
@@ -100,76 +95,36 @@ async function processUserNotifications(userId: string): Promise<void> {
           continue;
         }
 
-        // Send notification based on delivery method
-        const deliveryMethod = preference.deliveryMethod;
-        let emailSent = false;
-        let pushSent = false;
+        // Send email notification
+        const emailHTML = generateHolidayEmailHTML(
+          holiday.name,
+          holiday.description,
+          holidayDate,
+          daysUntil,
+        );
 
-        if (deliveryMethod === 'email' || deliveryMethod === 'both') {
-          const emailHTML = generateHolidayEmailHTML(
-            holiday.name,
-            holiday.description,
-            holidayDate,
-            daysUntil,
-          );
+        const emailSent = await sendEmail({
+          to: user.email,
+          subject: `Reminder: ${holiday.name} ${daysUntil === 0 ? 'is today!' : `in ${daysUntil} days`}`,
+          html: emailHTML,
+        });
 
-          emailSent = await sendEmail({
-            to: user.email,
-            subject: `Reminder: ${holiday.name} ${daysUntil === 0 ? 'is today!' : `in ${daysUntil} days`}`,
-            html: emailHTML,
+        if (emailSent) {
+          await prisma.notification.create({
+            data: {
+              userId: user.id,
+              holidayId: holiday.id,
+              scheduledFor: today,
+              sent: true,
+              sentAt: new Date(),
+              deliveryType: 'email',
+            },
           });
 
-          if (emailSent) {
-            await prisma.notification.create({
-              data: {
-                userId: user.id,
-                holidayId: holiday.id,
-                scheduledFor: today,
-                sent: true,
-                sentAt: new Date(),
-                deliveryType: 'email',
-              },
-            });
-          }
-        }
-
-        if (deliveryMethod === 'push' || deliveryMethod === 'both') {
-          // Send to all user's push subscriptions
-          const pushPayload = generateHolidayPushPayload(
-            holiday.name,
-            daysUntil,
+          console.log(
+            `Sent email notification for ${holiday.name} to ${user.email} (${daysUntil} days until)`,
           );
-
-          for (const subscription of user.pushSubscriptions) {
-            pushSent = await sendPushNotification(
-              {
-                endpoint: subscription.endpoint,
-                keys: {
-                  p256dh: subscription.p256dh,
-                  auth: subscription.auth,
-                },
-              },
-              pushPayload,
-            );
-          }
-
-          if (pushSent && user.pushSubscriptions.length > 0) {
-            await prisma.notification.create({
-              data: {
-                userId: user.id,
-                holidayId: holiday.id,
-                scheduledFor: today,
-                sent: true,
-                sentAt: new Date(),
-                deliveryType: 'push',
-              },
-            });
-          }
         }
-
-        console.log(
-          `Sent ${deliveryMethod} notification for ${holiday.name} to ${user.email} (${daysUntil} days until)`,
-        );
       }
     } catch (error) {
       console.error(
