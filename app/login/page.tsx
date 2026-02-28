@@ -68,15 +68,18 @@ export default function LoginPage() {
   const handleSignIn = async (provider: 'google' | 'github') => {
     try {
       setLoading(provider);
-      console.log(`Attempting sign in with ${provider}`);
+      setError(null);
+      console.log(`[Login] Starting ${provider} OAuth flow`);
 
       // For OAuth providers, use redirect: true to let NextAuth handle the redirect
-      await signIn(provider, {
+      const result = await signIn(provider, {
         callbackUrl: '/dashboard',
         redirect: true,
       });
+
+      console.log(`[Login] ${provider} signIn result:`, result);
     } catch (error) {
-      console.error('Sign in error:', error);
+      console.error(`[Login] ${provider} sign in error:`, error);
       setError(`${provider} sign-in failed. Please try again.`);
       setLoading(null);
     }
