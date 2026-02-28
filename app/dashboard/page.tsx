@@ -148,20 +148,14 @@ export default function DashboardPage() {
     }
   };
 
-  if (status === 'loading' || isLoading) {
-    return (
-      <div className='min-h-screen bg-background flex items-center justify-center'>
-        <Loader2 className='w-8 h-8 animate-spin text-primary' />
-      </div>
-    );
-  }
+  // Filter and group holidays - MUST be before any early returns
+  const upcomingHolidays = useMemo(() => {
+    return holidays.filter((h) => h.daysUntil !== null && h.daysUntil >= 0);
+  }, [holidays]);
 
-  // Filter and group holidays
-  const upcomingHolidays = holidays.filter(
-    (h) => h.daysUntil !== null && h.daysUntil >= 0,
-  );
-
-  const enabledHolidays = holidays.filter((h) => h.enabled);
+  const enabledHolidays = useMemo(() => {
+    return holidays.filter((h) => h.enabled);
+  }, [holidays]);
 
   // Get unique categories with counts
   const categories = useMemo(() => {
@@ -222,6 +216,14 @@ export default function DashboardPage() {
       return a[0].localeCompare(b[0]);
     });
   }, [filteredHolidays]);
+
+  if (status === 'loading' || isLoading) {
+    return (
+      <div className='min-h-screen bg-background flex items-center justify-center'>
+        <Loader2 className='w-8 h-8 animate-spin text-primary' />
+      </div>
+    );
+  }
 
   return (
     <div className='min-h-screen bg-background'>
