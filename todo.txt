@@ -13,24 +13,9 @@ HOLIDAY HUB - TODO LIST (IN ORDER)
 
 
 
-7. [ ] Test Dashboard Features
-   - View holidays on dashboard
-   - Toggle holiday notifications on/off
-   - Click settings icon on holiday card
-   - Configure reminder preferences
-   - Test different time settings
-
-8. [ ] Test Settings Page
-   - Navigate to Settings
-   - Update timezone
-   - Save changes
-   - Verify they persist after logout/login
 
 
 
-
-
-## OPTIONAL STEPS (Can do later):
 
 
 
@@ -38,6 +23,11 @@ HOLIDAY HUB - TODO LIST (IN ORDER)
     - Set a holiday reminder for tomorrow
     - Wait for scheduled notification
     - Or run: npm run scheduler (in development mode it runs immediately)
+
+
+
+
+    
 
 13. [ ] Set Up Push Notifications (Optional)
     - Verify VAPID keys are correct in .env

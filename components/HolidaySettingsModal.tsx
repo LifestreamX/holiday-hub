@@ -148,7 +148,8 @@ export default function HolidaySettingsModal({
                   type='time'
                   value={reminderTime}
                   onChange={(e) => setReminderTime(e.target.value)}
-                  className='w-full px-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'
+                  className='w-full px-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-foreground cursor-pointer'
+                  style={{ colorScheme: 'dark light' }}
                 />
               </div>
 
