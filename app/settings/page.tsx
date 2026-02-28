@@ -4,21 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import {
-  Calendar,
-  ArrowLeft,
-  Loader2,
-  Globe,
-  Bell,
-  BellOff,
-} from 'lucide-react';
-import {
-  isPushSupported,
-  getNotificationPermission,
-  subscribeToPush,
-  unsubscribeFromPush,
-  getCurrentSubscription,
-} from '@/lib/pushNotifications';
+import { Calendar, ArrowLeft, Loader2, Globe } from 'lucide-react';
 
 export default function SettingsPage() {
   const { data: session, status } = useSession();
@@ -28,10 +14,6 @@ export default function SettingsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState('');
-  const [pushEnabled, setPushEnabled] = useState(false);
-  const [pushSupported, setPushSupported] = useState(false);
-  const [pushPermission, setPushPermission] =
-    useState<NotificationPermission>('default');
 
   const timezones = [
     'America/New_York',
@@ -55,16 +37,7 @@ export default function SettingsPage() {
     }
   }, [status]);
 
-  useEffect(() => {
-    // Check push notification support
-    setPushSupported(isPushSupported());
-    setPushPermission(getNotificationPermission());
-
-    // Check if user has an active subscription
-    getCurrentSubscription().then((sub) => {
-      setPushEnabled(!!sub);
-    });
-  }, []);
+  
 
   const fetchUserSettings = async () => {
     try {
@@ -107,35 +80,7 @@ export default function SettingsPage() {
     }
   };
 
-  const handleTogglePush = async () => {
-    try {
-      if (pushEnabled) {
-        // Unsubscribe
-        const success = await unsubscribeFromPush();
-        if (success) {
-          setPushEnabled(false);
-          setMessage('Push notifications disabled');
-          setTimeout(() => setMessage(''), 3000);
-        }
-      } else {
-        // Subscribe
-        const subscription = await subscribeToPush();
-        if (subscription) {
-          setPushEnabled(true);
-          setPushPermission('granted');
-          setMessage('Push notifications enabled!');
-          setTimeout(() => setMessage(''), 3000);
-        } else {
-          setMessage('Failed to enable push notifications');
-          setTimeout(() => setMessage(''), 3000);
-        }
-      }
-    } catch (error) {
-      console.error('Error toggling push:', error);
-      setMessage('An error occurred');
-      setTimeout(() => setMessage(''), 3000);
-    }
-  };
+  
 
   if (status === 'loading' || isLoading) {
     return (
