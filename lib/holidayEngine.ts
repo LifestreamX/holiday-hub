@@ -68,6 +68,14 @@ export function calculateHolidayDate(holiday: HolidayRule, year: number): Date {
         return goodFriday;
       }
 
+      if (holidayNameLower.includes('mardi gras') || holidayNameLower.includes('fat tuesday')) {
+        // Mardi Gras is 47 days before Easter (Shrove Tuesday)
+        const easter = calculateEaster(year);
+        const mardiGras = new Date(easter);
+        mardiGras.setDate(easter.getDate() - 47);
+        return mardiGras;
+      }
+
       // For other calculated holidays, we can't recalculate them
       // Log a warning and throw error
       console.warn(

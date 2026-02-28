@@ -59,10 +59,10 @@ export async function GET(request: NextRequest) {
               | 'fixed'
               | 'nth_weekday'
               | 'calculated',
-            month: holiday.month || undefined,
-            day: holiday.day || undefined,
-            weekday: holiday.weekday || undefined,
-            nth: holiday.nth || undefined,
+            month: holiday.month ?? undefined,
+            day: holiday.day ?? undefined,
+            weekday: holiday.weekday ?? undefined,
+            nth: holiday.nth ?? undefined,
           },
           currentYear,
         );
@@ -77,10 +77,10 @@ export async function GET(request: NextRequest) {
                 | 'fixed'
                 | 'nth_weekday'
                 | 'calculated',
-              month: holiday.month || undefined,
-              day: holiday.day || undefined,
-              weekday: holiday.weekday || undefined,
-              nth: holiday.nth || undefined,
+              month: holiday.month ?? undefined,
+              day: holiday.day ?? undefined,
+              weekday: holiday.weekday ?? undefined,
+              nth: holiday.nth ?? undefined,
             },
             currentYear + 1,
           );
