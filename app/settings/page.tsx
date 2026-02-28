@@ -4,7 +4,14 @@ import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Calendar, ArrowLeft, Loader2, Globe, Bell, BellOff } from 'lucide-react';
+import {
+  Calendar,
+  ArrowLeft,
+  Loader2,
+  Globe,
+  Bell,
+  BellOff,
+} from 'lucide-react';
 import {
   isPushSupported,
   getNotificationPermission,
@@ -23,7 +30,8 @@ export default function SettingsPage() {
   const [message, setMessage] = useState('');
   const [pushEnabled, setPushEnabled] = useState(false);
   const [pushSupported, setPushSupported] = useState(false);
-  const [pushPermission, setPushPermission] = useState<NotificationPermission>('default');
+  const [pushPermission, setPushPermission] =
+    useState<NotificationPermission>('default');
 
   const timezones = [
     'America/New_York',
@@ -279,12 +287,14 @@ export default function SettingsPage() {
               </div>
               {pushPermission === 'denied' && (
                 <div className='bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-sm text-yellow-800'>
-                  ⚠️ Notifications are blocked. Please enable them in your browser settings.
+                  ⚠️ Notifications are blocked. Please enable them in your
+                  browser settings.
                 </div>
               )}
               {pushEnabled && (
                 <div className='bg-green-50 border border-green-200 rounded-lg p-3 text-sm text-green-800'>
-                  ✓ Push notifications are active. You'll receive browser notifications for enabled holidays.
+                  ✓ Push notifications are active. You'll receive browser
+                  notifications for enabled holidays.
                 </div>
               )}
             </div>

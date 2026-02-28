@@ -13,7 +13,7 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('push', (event) => {
   console.log('[Service Worker] Push received:', event);
-  
+
   if (!event.data) {
     console.log('[Service Worker] No data in push event');
     return;
@@ -45,9 +45,7 @@ self.addEventListener('push', (event) => {
       options.vibrate = data.vibrate;
     }
 
-    event.waitUntil(
-      self.registration.showNotification(title, options)
-    );
+    event.waitUntil(self.registration.showNotification(title, options));
   } catch (error) {
     console.error('[Service Worker] Error showing notification:', error);
   }
@@ -58,9 +56,7 @@ self.addEventListener('notificationclick', (event) => {
   event.notification.close();
 
   if (event.action === 'view' || !event.action) {
-    event.waitUntil(
-      clients.openWindow('/dashboard')
-    );
+    event.waitUntil(clients.openWindow('/dashboard'));
   }
 });
 

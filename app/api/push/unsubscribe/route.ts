@@ -19,12 +19,9 @@ export async function POST(request: NextRequest) {
     }
 
     const { endpoint } = await request.json();
-    
+
     if (!endpoint) {
-      return NextResponse.json(
-        { error: 'Endpoint required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Endpoint required' }, { status: 400 });
     }
 
     // Delete subscription
@@ -42,7 +39,7 @@ export async function POST(request: NextRequest) {
     console.error('Error removing push subscription:', error);
     return NextResponse.json(
       { error: 'Failed to remove subscription' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

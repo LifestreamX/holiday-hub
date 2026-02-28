@@ -19,11 +19,11 @@ export async function POST(request: NextRequest) {
     }
 
     const { subscription } = await request.json();
-    
+
     if (!subscription || !subscription.endpoint || !subscription.keys) {
       return NextResponse.json(
         { error: 'Invalid subscription data' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
     console.error('Error saving push subscription:', error);
     return NextResponse.json(
       { error: 'Failed to save subscription' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -90,7 +90,7 @@ export async function GET(request: NextRequest) {
     console.error('Error fetching push subscriptions:', error);
     return NextResponse.json(
       { error: 'Failed to fetch subscriptions' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
