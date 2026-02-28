@@ -15,10 +15,18 @@ export async function GET(request: NextRequest) {
 
     const userId = session.user.id;
 
+    // Get user to access timezone
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { timezone: true, countryCode: true },
+    });
+
+    const userTimezone = user?.timezone || 'America/New_York';
+
     // Get all holidays for user's country
     const holidays = await prisma.holiday.findMany({
       where: {
-        countryCode: session.user.countryCode,
+        countryCode: user?.countryCode || 'US',
       },
       include: {
         userPreferences: {
@@ -29,9 +37,12 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    // Calculate dates for current year and next year
+    // Calculate dates for current year and next year using user's timezone
     const currentYear = new Date().getFullYear();
-    const today = new Date();
+    // Get today in user's timezone
+    const today = new Date(
+      new Date().toLocaleString('en-US', { timeZone: userTimezone }),
+    );
     today.setHours(0, 0, 0, 0);
 
     const holidaysWithDates = holidays.map((holiday) => {

@@ -227,7 +227,6 @@ export default function SettingsPage() {
               All notifications are sent based on your timezone at the time you
               configure for each holiday.
             </p>
-            <p>Built with Next.js, Prisma, PostgreSQL, and Resend.</p>
           </div>
         </div>
       </main>

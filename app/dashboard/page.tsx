@@ -200,6 +200,14 @@ export default function DashboardPage() {
       }
       groups.get(cat)!.push(holiday);
     });
+    // Sort holidays within each category by daysUntil (closest first)
+    groups.forEach((holidays) => {
+      holidays.sort((a, b) => {
+        if (a.daysUntil === null) return 1;
+        if (b.daysUntil === null) return -1;
+        return a.daysUntil - b.daysUntil;
+      });
+    });
     return Array.from(groups.entries()).sort((a, b) => {
       // Sort by category priority
       const priorityOrder = [
@@ -285,26 +293,26 @@ export default function DashboardPage() {
           </div>
 
           {/* Category Filter */}
-          <div className='flex items-center gap-2 overflow-x-auto pb-2'>
-            <Filter className='w-5 h-5 text-muted-foreground flex-shrink-0' />
+          <div className='flex items-center gap-3 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent'>
+            <Filter className='w-5 h-5 text-primary flex-shrink-0' />
             <button
               onClick={() => setSelectedCategory('all')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
+              className={`px-5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-200 shadow-sm ${
                 selectedCategory === 'all'
-                  ? 'bg-primary text-primary-foreground'
-                  : 'bg-card text-foreground hover:bg-secondary border border-border'
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/30 scale-105'
+                  : 'bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 text-gray-700 dark:text-gray-200 hover:shadow-md hover:scale-102 border border-gray-300 dark:border-gray-600'
               }`}
             >
-              All ({upcomingHolidays.length})
+              🎉 All ({upcomingHolidays.length})
             </button>
             {categories.map(({ category, count }) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
+                className={`px-5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-200 shadow-sm ${
                   selectedCategory === category
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-card text-foreground hover:bg-secondary border border-border'
+                    ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/30 scale-105'
+                    : 'bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 text-gray-700 dark:text-gray-200 hover:shadow-md hover:scale-102 border border-gray-300 dark:border-gray-600'
                 }`}
               >
                 {CATEGORY_LABELS[category] || category} ({count})
