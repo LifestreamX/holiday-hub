@@ -54,10 +54,25 @@ export function calculateHolidayDate(holiday: HolidayRule, year: number): Date {
       }
 
     case 'calculated':
-      // For now, only Easter is supported
-      if (holiday.name.toLowerCase().includes('easter')) {
+      // Handle various calculated holidays
+      const holidayNameLower = holiday.name.toLowerCase();
+
+      if (holidayNameLower.includes('easter')) {
         return calculateEaster(year);
       }
+
+      if (holidayNameLower.includes('good friday')) {
+        const easter = calculateEaster(year);
+        const goodFriday = new Date(easter);
+        goodFriday.setDate(easter.getDate() - 2);
+        return goodFriday;
+      }
+
+      // For other calculated holidays, we can't recalculate them
+      // Log a warning and throw error
+      console.warn(
+        `Calculated holiday "${holiday.name}" is not supported for recalculation`,
+      );
       throw new Error(`Unknown calculated holiday: ${holiday.name}`);
 
     default:
