@@ -24,7 +24,6 @@ interface HolidaySettingsModalProps {
     enabled: boolean;
     reminderOffsets: number[];
     reminderTime: string;
-    deliveryMethod: string;
   }) => Promise<void>;
 }
 
@@ -38,16 +37,29 @@ export default function HolidaySettingsModal({
     holiday.reminderOffsets.length > 0 ? holiday.reminderOffsets : [1],
   );
   const [reminderTime, setReminderTime] = useState(holiday.reminderTime);
-  const [deliveryMethod, setDeliveryMethod] = useState(holiday.deliveryMethod);
   const [isSaving, setIsSaving] = useState(false);
 
+  // Simplified to most practical reminder options
   const availableOffsets = [
-    { value: 0, label: 'Day of' },
-    { value: 1, label: '1 day before' },
-    { value: 3, label: '3 days before' },
-    { value: 7, label: '1 week before' },
-    { value: 14, label: '2 weeks before' },
-    { value: 30, label: '1 month before' },
+    { value: 0, label: 'Day of', icon: '📅' },
+    { value: 1, label: '1 day before', icon: '⏰' },
+    { value: 7, label: '1 week before', icon: '📆' },
+    { value: 30, label: '1 month before', icon: '🗓️' },
+  ];
+
+  // Better time picker options
+  const timeOptions = [
+    { value: '06:00', label: '6:00 AM' },
+    { value: '07:00', label: '7:00 AM' },
+    { value: '08:00', label: '8:00 AM' },
+    { value: '09:00', label: '9:00 AM' },
+    { value: '10:00', label: '10:00 AM' },
+    { value: '12:00', label: '12:00 PM (Noon)' },
+    { value: '15:00', label: '3:00 PM' },
+    { value: '17:00', label: '5:00 PM' },
+    { value: '18:00', label: '6:00 PM' },
+    { value: '19:00', label: '7:00 PM' },
+    { value: '20:00', label: '8:00 PM' },
   ];
 
   const toggleOffset = (offset: number) => {
@@ -65,7 +77,6 @@ export default function HolidaySettingsModal({
         enabled,
         reminderOffsets,
         reminderTime,
-        deliveryMethod,
       });
       onClose();
     } catch (error) {
@@ -119,24 +130,26 @@ export default function HolidaySettingsModal({
                 <h3 className='font-medium text-foreground mb-3'>
                   When to Remind
                 </h3>
-                <div className='space-y-2'>
+                <div className='grid grid-cols-2 gap-2'>
                   {availableOffsets.map((offset) => (
-                    <label
+                    <button
                       key={offset.value}
-                      className='flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-secondary cursor-pointer transition-colors'
+                      type='button'
+                      onClick={() => toggleOffset(offset.value)}
+                      className={`flex items-center justify-center gap-2 p-3 rounded-lg border-2 transition-all ${
+                        reminderOffsets.includes(offset.value)
+                          ? 'border-primary bg-primary/10 text-primary font-semibold'
+                          : 'border-border hover:border-primary/50 hover:bg-secondary/50 text-foreground'
+                      }`}
                     >
-                      <input
-                        type='checkbox'
-                        checked={reminderOffsets.includes(offset.value)}
-                        onChange={() => toggleOffset(offset.value)}
-                        className='w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary'
-                      />
-                      <span className='text-sm text-foreground'>
-                        {offset.label}
-                      </span>
-                    </label>
+                      <span className='text-lg'>{offset.icon}</span>
+                      <span className='text-sm'>{offset.label}</span>
+                    </button>
                   ))}
                 </div>
+                <p className='text-xs text-muted-foreground mt-2'>
+                  Select one or more reminder times
+                </p>
               </div>
 
               {/* Time of Day */}
@@ -144,100 +157,20 @@ export default function HolidaySettingsModal({
                 <h3 className='font-medium text-foreground mb-3'>
                   Time of Day
                 </h3>
-                <div className='relative'>
-                  <input
-                    type='time'
-                    value={reminderTime}
-                    onChange={(e) => setReminderTime(e.target.value)}
-                    className='w-full px-4 py-3 bg-card border-2 border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-foreground text-base font-medium hover:border-primary/50 transition-all cursor-pointer'
-                    style={{
-                      colorScheme: 'dark',
-                      WebkitAppearance: 'none',
-                      MozAppearance: 'textfield',
-                    }}
-                  />
-                  <div className='absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-muted-foreground'>
-                    <svg
-                      className='w-5 h-5'
-                      fill='none'
-                      stroke='currentColor'
-                      viewBox='0 0 24 24'
-                    >
-                      <path
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        strokeWidth={2}
-                        d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
-                      />
-                    </svg>
-                  </div>
-                </div>
+                <select
+                  value={reminderTime}
+                  onChange={(e) => setReminderTime(e.target.value)}
+                  className='w-full px-4 py-3 bg-card border-2 border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-foreground text-base font-medium hover:border-primary/50 transition-all cursor-pointer'
+                >
+                  {timeOptions.map((time) => (
+                    <option key={time.value} value={time.value}>
+                      {time.label}
+                    </option>
+                  ))}
+                </select>
                 <p className='text-xs text-muted-foreground mt-2'>
-                  Click to select the time for daily reminders
+                  Reminders will be sent at this time
                 </p>
-              </div>
-
-              {/* Delivery Method */}
-              <div>
-                <h3 className='font-medium text-foreground mb-3'>
-                  Delivery Method
-                </h3>
-                <div className='space-y-2'>
-                  <label className='flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-secondary cursor-pointer transition-colors'>
-                    <input
-                      type='radio'
-                      name='deliveryMethod'
-                      value='email'
-                      checked={deliveryMethod === 'email'}
-                      onChange={(e) => setDeliveryMethod(e.target.value)}
-                      className='w-4 h-4 text-primary border-gray-300 focus:ring-primary'
-                    />
-                    <div>
-                      <div className='text-sm font-medium text-foreground'>
-                        Email
-                      </div>
-                      <div className='text-xs text-muted-foreground'>
-                        Receive reminders via email
-                      </div>
-                    </div>
-                  </label>
-                  <label className='flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-secondary cursor-pointer transition-colors'>
-                    <input
-                      type='radio'
-                      name='deliveryMethod'
-                      value='push'
-                      checked={deliveryMethod === 'push'}
-                      onChange={(e) => setDeliveryMethod(e.target.value)}
-                      className='w-4 h-4 text-primary border-gray-300 focus:ring-primary'
-                    />
-                    <div>
-                      <div className='text-sm font-medium text-foreground'>
-                        Push
-                      </div>
-                      <div className='text-xs text-muted-foreground'>
-                        Receive browser notifications
-                      </div>
-                    </div>
-                  </label>
-                  <label className='flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-secondary cursor-pointer transition-colors'>
-                    <input
-                      type='radio'
-                      name='deliveryMethod'
-                      value='both'
-                      checked={deliveryMethod === 'both'}
-                      onChange={(e) => setDeliveryMethod(e.target.value)}
-                      className='w-4 h-4 text-primary border-gray-300 focus:ring-primary'
-                    />
-                    <div>
-                      <div className='text-sm font-medium text-foreground'>
-                        Both
-                      </div>
-                      <div className='text-xs text-muted-foreground'>
-                        Email and push notifications
-                      </div>
-                    </div>
-                  </label>
-                </div>
               </div>
             </>
           )}

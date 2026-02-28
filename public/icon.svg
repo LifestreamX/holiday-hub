@@ -1,0 +1,6 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" fill="#667eea"/>
+  <path d="M128 128h256v32H128zm0 64h256v32H128zm0 64h256v32H128zm0 64h192v32H128z" fill="#fff"/>
+  <circle cx="256" cy="320" r="80" fill="#764ba2"/>
+  <text x="256" y="100" font-family="Arial, sans-serif" font-size="72" font-weight="bold" text-anchor="middle" fill="#fff">🎉</text>
+</svg>

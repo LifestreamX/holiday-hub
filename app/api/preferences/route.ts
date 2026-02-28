@@ -9,7 +9,6 @@ const preferenceSchema = z.object({
   enabled: z.boolean(),
   reminderOffsets: z.array(z.number()),
   reminderTime: z.string().regex(/^\d{2}:\d{2}$/),
-  deliveryMethod: z.enum(['email', 'push', 'both']),
 });
 
 export async function POST(request: NextRequest) {
@@ -44,7 +43,7 @@ export async function POST(request: NextRequest) {
         enabled: data.enabled,
         reminderOffsets: data.reminderOffsets,
         reminderTime: data.reminderTime,
-        deliveryMethod: data.deliveryMethod,
+        deliveryMethod: 'email',
       },
       create: {
         userId: session.user.id,
@@ -52,7 +51,7 @@ export async function POST(request: NextRequest) {
         enabled: data.enabled,
         reminderOffsets: data.reminderOffsets,
         reminderTime: data.reminderTime,
-        deliveryMethod: data.deliveryMethod,
+        deliveryMethod: 'email',
       },
     });
 

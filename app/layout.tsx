@@ -8,8 +8,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Holiday Hub - Never Miss a Holiday',
-  description:
-    'Customizable holiday notifications delivered via email and push notifications',
+  description: 'Customizable holiday notifications delivered via email',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

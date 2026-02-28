@@ -104,7 +104,6 @@ export async function GET(request: NextRequest) {
         enabled: preference?.enabled ?? false,
         reminderOffsets: preference?.reminderOffsets ?? [],
         reminderTime: preference?.reminderTime ?? '08:00',
-        deliveryMethod: preference?.deliveryMethod ?? 'email',
         hasPreference: !!preference,
       };
     });

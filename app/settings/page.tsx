@@ -37,8 +37,6 @@ export default function SettingsPage() {
     }
   }, [status]);
 
-  
-
   const fetchUserSettings = async () => {
     try {
       const response = await fetch('/api/user');
@@ -79,8 +77,6 @@ export default function SettingsPage() {
       setIsSaving(false);
     }
   };
-
-  
 
   if (status === 'loading' || isLoading) {
     return (
@@ -200,50 +196,6 @@ export default function SettingsPage() {
               </p>
             </div>
 
-            <div className='pt-4 border-t border-border'>
-              <div className='flex items-center justify-between mb-4'>
-                <div>
-                  <h3 className='text-sm font-medium text-foreground flex items-center gap-2'>
-                    {pushEnabled ? (
-                      <Bell className='w-4 h-4 text-primary' />
-                    ) : (
-                      <BellOff className='w-4 h-4 text-muted-foreground' />
-                    )}
-                    Push Notifications
-                  </h3>
-                  <p className='text-xs text-muted-foreground mt-1'>
-                    {pushSupported
-                      ? 'Receive browser notifications for holiday reminders'
-                      : 'Push notifications are not supported in this browser'}
-                  </p>
-                </div>
-                <button
-                  type='button'
-                  onClick={handleTogglePush}
-                  disabled={!pushSupported}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                    pushEnabled
-                      ? 'bg-red-500 text-white hover:bg-red-600'
-                      : 'bg-primary text-primary-foreground hover:bg-primary/90'
-                  } disabled:opacity-50 disabled:cursor-not-allowed`}
-                >
-                  {pushEnabled ? 'Disable' : 'Enable'}
-                </button>
-              </div>
-              {pushPermission === 'denied' && (
-                <div className='bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-sm text-yellow-800'>
-                  ⚠️ Notifications are blocked. Please enable them in your
-                  browser settings.
-                </div>
-              )}
-              {pushEnabled && (
-                <div className='bg-green-50 border border-green-200 rounded-lg p-3 text-sm text-green-800'>
-                  ✓ Push notifications are active. You'll receive browser
-                  notifications for enabled holidays.
-                </div>
-              )}
-            </div>
-
             <div className='flex items-center gap-4 pt-4'>
               <button
                 type='submit'
@@ -268,8 +220,7 @@ export default function SettingsPage() {
           </h2>
           <div className='space-y-2 text-sm text-muted-foreground'>
             <p>
-              Holiday Hub sends you reminders for your favorite holidays via
-              email and browser push notifications.
+              Holiday Hub sends you email reminders for your favorite holidays.
             </p>
             <p>
               All notifications are sent based on your timezone at the time you

@@ -25,7 +25,6 @@ interface Holiday {
   enabled: boolean;
   reminderOffsets: number[];
   reminderTime: string;
-  deliveryMethod: string;
   hasPreference: boolean;
 }
 
@@ -99,7 +98,6 @@ export default function DashboardPage() {
           reminderOffsets:
             holiday.reminderOffsets.length > 0 ? holiday.reminderOffsets : [1],
           reminderTime: holiday.reminderTime || '08:00',
-          deliveryMethod: holiday.deliveryMethod || 'email',
         }),
       });
 
@@ -119,7 +117,6 @@ export default function DashboardPage() {
     enabled: boolean;
     reminderOffsets: number[];
     reminderTime: string;
-    deliveryMethod: string;
   }) => {
     if (!selectedHoliday) return;
 

@@ -3,7 +3,7 @@ import { Bell, Users, Sparkles } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className='min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-700'>
+    <div className='min-h-screen flex flex-col bg-gradient-to-br from-slate-900 via-blue-900 to-slate-700'>
       <nav className='container mx-auto px-4 py-6'>
         <div className='flex items-center justify-between'>
           <div className='flex items-center gap-2'>
@@ -31,15 +31,15 @@ export default function Home() {
         </div>
       </nav>
 
-      <main className='container mx-auto px-4 py-20'>
+      <main className='flex-1 container mx-auto px-4 py-20'>
         <div className='max-w-4xl mx-auto text-center'>
           <h1 className='text-5xl md:text-6xl font-bold text-white mb-6'>
             Never Miss a Holiday Again
           </h1>
           <p className='text-xl text-gray-200 mb-12'>
-            Get customizable reminders for all your favorite holidays. Choose
-            when and how you want to be notified. Sign up with Google or GitHub
-            in seconds.
+            Get customizable email reminders for all your favorite holidays.
+            Choose when you want to be notified. Sign up with Google or GitHub in
+            seconds.
           </p>
 
           <div className='flex flex-wrap items-center justify-center gap-4 mb-20'>
@@ -63,10 +63,10 @@ export default function Home() {
 
             <div className='bg-white/10 backdrop-blur-lg rounded-lg p-8 text-white'>
               <Users className='w-12 h-12 mb-4 mx-auto' />
-              <h3 className='text-xl font-semibold mb-3'>Multi-Channel</h3>
+              <h3 className='text-xl font-semibold mb-3'>Customizable</h3>
               <p className='text-gray-200'>
-                Receive notifications via email, browser push notifications, or
-                both. Your choice.
+                Choose exactly when to be reminded - from the day of, to a month
+                in advance. Personalize every holiday.
               </p>
             </div>
 
@@ -82,7 +82,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className='container mx-auto px-4 py-8 mt-20 border-t border-white/20'>
+      <footer className='container mx-auto px-4 py-8 border-t border-white/20'>
         <div className='text-center text-gray-300'>
           <p>&copy; 2026 Holiday Hub. Never miss a celebration.</p>
         </div>
