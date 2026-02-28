@@ -15,9 +15,11 @@
 ## Changes Made
 
 ### 1. Dashboard - Holiday Sorting (`app/dashboard/page.tsx`)
+
 **Problem**: Holidays were grouped by category but not sorted by days until within each category.
 
 **Solution**: Added sorting logic in `groupedHolidays` useMemo:
+
 ```typescript
 groups.forEach((holidays) => {
   holidays.sort((a, b) => {
@@ -33,9 +35,11 @@ groups.forEach((holidays) => {
 ---
 
 ### 2. Dashboard - Category Filter Styling (`app/dashboard/page.tsx`)
+
 **Problem**: Category filters were plain gray with basic borders - "ugly compared to rest".
 
 **Solution**: Enhanced with:
+
 - Gradient backgrounds (blue-to-purple for active, gray gradient for inactive)
 - Shadow effects with colored glow on active state
 - Smooth scale transitions on hover/active
@@ -44,34 +48,40 @@ groups.forEach((holidays) => {
 - Better dark mode support
 
 **Before**:
+
 ```tsx
-className='bg-card text-foreground hover:bg-secondary border border-border'
+className = 'bg-card text-foreground hover:bg-secondary border border-border';
 ```
 
 **After**:
+
 ```tsx
-className='bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 
-           text-gray-700 dark:text-gray-200 hover:shadow-md hover:scale-102 
+className='bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700
+           text-gray-700 dark:text-gray-200 hover:shadow-md hover:scale-102
            border border-gray-300 dark:border-gray-600'
 ```
 
 **Active state**:
+
 ```tsx
-className='bg-gradient-to-r from-blue-500 to-purple-600 text-white 
+className='bg-gradient-to-r from-blue-500 to-purple-600 text-white
            shadow-lg shadow-blue-500/30 scale-105'
 ```
 
 ---
 
 ### 3. API - Timezone Support (`app/api/holidays/route.ts`)
+
 **Problem**: API used server time to calculate "days until", not user's timezone.
 
-**Solution**: 
+**Solution**:
+
 - Fetch user's timezone from database
 - Use timezone when calculating "today"
 - Ensure accurate date calculations for user's location
 
 **Code**:
+
 ```typescript
 // Get user to access timezone
 const user = await prisma.user.findUnique({
@@ -93,9 +103,11 @@ today.setHours(0, 0, 0, 0);
 ---
 
 ### 4. Settings - About Section (`app/settings/page.tsx`)
+
 **Problem**: "Built with Next.js, Prisma, PostgreSQL, and Resend" was unnecessary technical detail.
 
 **Solution**: Removed the third paragraph, kept only:
+
 1. "Holiday Hub sends you reminders..." (feature description)
 2. "All notifications are sent based on your timezone..." (important user info)
 
@@ -104,11 +116,13 @@ today.setHours(0, 0, 0, 0);
 ## Holiday Count Verification
 
 ### Database Status
+
 - **Total holidays in database**: 90 US holidays
 - **Categories**: 17 categories
 - **Types**: Federal, State, Religious (6 religions), Cultural, Heritage, Seasonal, Professional, Military, Patriotic, Civic
 
 ### Holiday Breakdown
+
 - Federal: 12 holidays
 - State: 12 holidays
 - Religious-Christian: 11 holidays
@@ -141,7 +155,7 @@ today.setHours(0, 0, 0, 0);
 ✅ **Grouped display** by category  
 ✅ **Sorted by days until** within each category (closest first)  
 ✅ **Modern UI** with gradients, shadows, and smooth animations  
-✅ **About section** accurate and concise  
+✅ **About section** accurate and concise
 
 ---
 
@@ -172,7 +186,7 @@ today.setHours(0, 0, 0, 0);
 ✅ "timezone thing actually works" - API uses user's timezone  
 ✅ "make the horizontal slider look better" - Enhanced with gradients and shadows  
 ✅ "get rid of Built with..." - Removed from About section  
-✅ "keep USA for now" - Confirmed countryCode="US"  
+✅ "keep USA for now" - Confirmed countryCode="US"
 
 ---
 
