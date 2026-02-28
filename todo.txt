@@ -4,30 +4,12 @@ HOLIDAY HUB - TODO LIST (IN ORDER)
 ## REQUIRED STEPS (Do these in order):
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 12. [ ] Test Email Notifications
     - Set a holiday reminder for tomorrow
     - Wait for scheduled notification
     - Or run: npm run scheduler (in development mode it runs immediately)
 
 
-
-
-    
 
 13. [ ] Set Up Push Notifications (Optional)
     - Verify VAPID keys are correct in .env
@@ -41,7 +23,3 @@ HOLIDAY HUB - TODO LIST (IN ORDER)
     - Update NEXTAUTH_URL in production .env
     - Set all environment variables in hosting platform
     - Run migrations in production
-
-
-
-
