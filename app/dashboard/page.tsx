@@ -85,12 +85,51 @@ export default function DashboardPage() {
       // initialize view country from session or default and fetch list of countries
       const defaultCountry = (session?.user as any)?.countryCode || 'US';
       setViewCountry(defaultCountry);
-      fetchCountries();
-      fetchHolidays(defaultCountry);
+
+      // Inline fetching to avoid stale/missing-hook dependency warnings
+      (async () => {
+        try {
+          // fetch countries
+          const res = await fetch('/api/holidays/countries');
+          if (res.ok) {
+            const data = await res.json();
+            setAvailableCountries(data);
+          }
+        } catch (err) {
+          console.error('Failed to load countries', err);
+        }
+
+        try {
+          // fetch holidays for default country
+          const params =
+            defaultCountry && defaultCountry !== 'ALL'
+              ? `?country=${encodeURIComponent(defaultCountry)}`
+              : '';
+          const response = await fetch(`/api/holidays${params}`);
+          if (response.ok) {
+            const data = await response.json();
+            setHolidays(data);
+            setErrorMessage(null);
+          } else {
+            setErrorMessage(
+              'Failed to load holidays. Please refresh or try again later.',
+            );
+            setHolidays([]);
+          }
+        } catch (error) {
+          console.error('[Dashboard] Error fetching holidays:', error);
+          setErrorMessage(
+            'Network error while loading holidays. Check your connection.',
+          );
+          setHolidays([]);
+        } finally {
+          setIsLoading(false);
+        }
+      })();
     } else {
       console.log('[Dashboard] Status not authenticated yet:', status);
     }
-  }, [status]);
+  }, [status, session?.user]);
 
   const fetchHolidays = async (countryArg?: string) => {
     try {
@@ -101,10 +140,11 @@ export default function DashboardPage() {
         (session?.user as any)?.countryCode ||
         'US';
       // Support 'ALL' to mean no country filter (show every holiday)
-      const params =
-        target && target !== 'ALL'
-          ? `?country=${encodeURIComponent(target)}`
-          : '';
+      const params = target
+        ? target === 'ALL'
+          ? `?country=ALL`
+          : `?country=${encodeURIComponent(target)}`
+        : '';
       const response = await fetch(`/api/holidays${params}`);
       console.log('[Dashboard] Response status:', response.status);
 

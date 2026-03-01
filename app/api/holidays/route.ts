@@ -7,15 +7,20 @@ import { getDaysBetween } from '@/lib/dateUtils';
 import { logger } from '@/lib/logger';
 import { rateLimit } from '@/lib/rateLimiter';
 
-export async function GET(request: NextRequest) {
+export async function buildHolidaysForSession(
+  session: Awaited<ReturnType<typeof getServerSession>> | null,
+  request: NextRequest,
+) {
   try {
-    const session = await getServerSession(authOptions);
-    logger.debug('Holidays.GET called');
+    // Resolve session from NextAuth; allow a dev-only header to impersonate a user when running locally.
+    let resolvedSession = await getServerSession(authOptions);
 
-    // Rate limit per user id or per IP if unauthenticated
-    const key =
-      session?.user?.id || request.headers.get('x-forwarded-for') || 'anon';
-    if (!(await rateLimit(String(key), 120, 60))) {
+    if (!resolvedSession?.user?.id && process.env.NODE_ENV !== 'production') {
+      const devUserId = request.headers.get('x-dev-user-id');
+      if (devUserId) {
+        // Build a minimal session object expected by the handler
+        resolvedSession = { user: { id: devUserId } } as any;
+        const session = await getServerSession(authOptions);
       logger.warn('Rate limit exceeded for /api/holidays', { key });
       return NextResponse.json(
         { error: 'Rate limit exceeded' },
@@ -25,7 +30,7 @@ export async function GET(request: NextRequest) {
 
     if (!session?.user?.id) {
       logger.warn('Unauthorized access to /api/holidays');
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      throw new Error('Unauthorized');
     }
 
     const userId = session.user.id;
@@ -40,14 +45,17 @@ export async function GET(request: NextRequest) {
 
     // Respect optional country query param (view-only). Notifications remain tied to user's primary country.
     const url = new URL(request.url);
-    const requestedCountry =
-      url.searchParams.get('country') || user?.countryCode || 'US';
+    const countryParam = url.searchParams.get('country');
 
-    // Get all holidays for selected country
+    // If `country=ALL` explicitly requested, do not filter by countryCode (return all holidays).
+    const whereClause: any =
+      countryParam === 'ALL'
+        ? {}
+        : { countryCode: countryParam || user?.countryCode || 'US' };
+
+    // Get all holidays for selected country (or all countries when whereClause is empty)
     const holidays = await prisma.holiday.findMany({
-      where: {
-        countryCode: requestedCountry,
-      },
+      where: whereClause,
       include: {
         userPreferences: {
           where: {
@@ -140,11 +148,24 @@ export async function GET(request: NextRequest) {
       if (b.daysUntil === null) return -1;
       return a.daysUntil - b.daysUntil;
     });
-    return NextResponse.json(holidaysWithDates);
+    return holidaysWithDates;
   } catch (error) {
     logger.error('Error fetching holidays', {
       message: error instanceof Error ? error.message : String(error),
     });
+    throw error;
+  }
+}
+
+export async function GET(request: NextRequest) {
+  try {
+    const session = await getServerSession(authOptions);
+    const holidaysWithDates = await buildHolidaysForSession(session, request);
+    return NextResponse.json(holidaysWithDates);
+  } catch (error) {
+    if ((error as Error).message === 'Unauthorized') {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 },
