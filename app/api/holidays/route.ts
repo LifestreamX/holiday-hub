@@ -4,12 +4,27 @@ import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { calculateHolidayDate } from '@/lib/holidayEngine';
 import { getDaysBetween } from '@/lib/dateUtils';
+import { logger } from '@/lib/logger';
+import { rateLimit } from '@/lib/rateLimiter';
 
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
+    logger.debug('Holidays.GET called');
+
+    // Rate limit per user id or per IP if unauthenticated
+    const key =
+      session?.user?.id || request.headers.get('x-forwarded-for') || 'anon';
+    if (!(await rateLimit(String(key), 120, 60))) {
+      logger.warn('Rate limit exceeded for /api/holidays', { key });
+      return NextResponse.json(
+        { error: 'Rate limit exceeded' },
+        { status: 429 },
+      );
+    }
 
     if (!session?.user?.id) {
+      logger.warn('Unauthorized access to /api/holidays');
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -35,6 +50,10 @@ export async function GET(request: NextRequest) {
           },
         },
       },
+    });
+    logger.debug('Fetched holidays from DB', {
+      count: holidays.length,
+      country: user?.countryCode || 'US',
     });
 
     // Calculate dates for current year and next year using user's timezone
@@ -89,7 +108,9 @@ export async function GET(request: NextRequest) {
         holidayDate = date;
         daysUntil = getDaysBetween(today, date);
       } catch (error) {
-        console.error(`Error calculating date for ${holiday.name}:`, error);
+        logger.error(`Error calculating date for ${holiday.name}`, {
+          message: error instanceof Error ? error.message : String(error),
+        });
       }
 
       const preference = holiday.userPreferences[0] || null;
@@ -114,10 +135,11 @@ export async function GET(request: NextRequest) {
       if (b.daysUntil === null) return -1;
       return a.daysUntil - b.daysUntil;
     });
-
     return NextResponse.json(holidaysWithDates);
   } catch (error) {
-    console.error('Error fetching holidays:', error);
+    logger.error('Error fetching holidays', {
+      message: error instanceof Error ? error.message : String(error),
+    });
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 },

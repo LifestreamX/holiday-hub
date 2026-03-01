@@ -3,6 +3,8 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
+import { logger } from '@/lib/logger';
+import { rateLimit } from '@/lib/rateLimiter';
 
 const preferenceSchema = z.object({
   holidayId: z.string(),
@@ -14,8 +16,23 @@ const preferenceSchema = z.object({
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
+    logger.debug('Preferences.POST called', {
+      ip: request.headers.get('x-forwarded-for') || 'local',
+    });
+
+    // Rate limit per user or IP
+    const rlKey =
+      session?.user?.id || request.headers.get('x-forwarded-for') || 'anon';
+    if (!(await rateLimit(String(rlKey), 60, 60))) {
+      logger.warn('Rate limit exceeded for /api/preferences', { key: rlKey });
+      return NextResponse.json(
+        { error: 'Rate limit exceeded' },
+        { status: 429 },
+      );
+    }
 
     if (!session?.user?.id) {
+      logger.warn('Unauthorized preference update attempt');
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -28,6 +45,9 @@ export async function POST(request: NextRequest) {
     });
 
     if (!holiday) {
+      logger.warn('Preference update: holiday not found', {
+        holidayId: data.holidayId,
+      });
       return NextResponse.json({ error: 'Holiday not found' }, { status: 404 });
     }
 
@@ -54,17 +74,22 @@ export async function POST(request: NextRequest) {
         deliveryMethod: 'email',
       },
     });
-
+    logger.info('Preference upserted', {
+      userId: session.user.id,
+      holidayId: data.holidayId,
+    });
     return NextResponse.json(preference);
   } catch (error) {
     if (error instanceof z.ZodError) {
+      logger.warn('Preference validation failed', { errors: error.errors });
       return NextResponse.json(
         { error: 'Invalid input', details: error.errors },
         { status: 400 },
       );
     }
-
-    console.error('Error updating preference:', error);
+    logger.error('Error updating preference', {
+      message: error instanceof Error ? error.message : String(error),
+    });
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 },
