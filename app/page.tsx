@@ -17,16 +17,14 @@ export default function Home() {
           <div className='flex items-center gap-4'>
             <Link
               href='/register'
-              className='px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center'
+              className='px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors'
             >
-              <img src='/trone-lts.svg' alt='icon' className='w-4 h-4 mr-2' />
               Sign up
             </Link>
             <Link
               href='/login'
-              className='px-6 py-2 bg-white text-blue-900 rounded-lg font-medium hover:bg-gray-100 transition-colors flex items-center'
+              className='px-6 py-2 bg-white text-blue-900 rounded-lg font-medium hover:bg-gray-100 transition-colors'
             >
-              <img src='/trone-lts.svg' alt='icon' className='w-4 h-4 mr-2' />
               Sign in
             </Link>
           </div>
