@@ -1,4 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true">
   <rect width="48" height="48" rx="8" fill="#0ea5e9"/>
-  <path d="M14 34V14h6l6 10 6-10h6v20h-6V20l-6 10-6-10v14h-6z" fill="#fff"/>
+  <!-- Calendar body -->
+  <rect x="9" y="11" width="30" height="26" rx="3" fill="#fff"/>
+  <!-- Calendar header (small bars) -->
+  <rect x="12" y="8" width="6" height="6" rx="2" fill="#fff"/>
+  <rect x="30" y="8" width="6" height="6" rx="2" fill="#fff"/>
+  <!-- Header strip -->
+  <rect x="9" y="13" width="30" height="4" rx="1" fill="#0ea5e9"/>
+  <!-- Single day dot to avoid complex strokes -->
+  <circle cx="24" cy="26" r="4" fill="#0ea5e9"/>
 </svg>
