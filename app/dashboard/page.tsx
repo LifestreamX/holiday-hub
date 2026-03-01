@@ -410,7 +410,9 @@ export default function DashboardPage() {
                   <option value=''>Loading…</option>
                 ) : (
                   <>
-                    <option value='ALL'>All countries ({totalCountryHolidays})</option>
+                    <option value='ALL'>
+                      All countries ({totalCountryHolidays})
+                    </option>
                     {availableCountries.map((c) => (
                       <option key={c.countryCode} value={c.countryCode}>
                         {c.name} ({c.countryCode})
