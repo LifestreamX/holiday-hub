@@ -3,7 +3,7 @@ import { fetchAvailableCountries } from '@/lib/nagerDateService';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/logger';
 
-export async function getAvailableCountriesWithCounts() {
+async function getAvailableCountriesWithCounts() {
   // Get available countries from Nager.Date
   const remote = await fetchAvailableCountries();
 

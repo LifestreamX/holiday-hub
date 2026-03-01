@@ -7,33 +7,35 @@ import { getDaysBetween } from '@/lib/dateUtils';
 import { logger } from '@/lib/logger';
 import { rateLimit } from '@/lib/rateLimiter';
 
-export async function buildHolidaysForSession(
+async function buildHolidaysForSession(
   session: Awaited<ReturnType<typeof getServerSession>> | null,
   request: NextRequest,
 ) {
   try {
-    // Resolve session from NextAuth; allow a dev-only header to impersonate a user when running locally.
-    let resolvedSession = await getServerSession(authOptions);
+    // Use provided session where available, otherwise resolve from NextAuth.
+    let resolvedSession: any = session ?? (await getServerSession(authOptions));
 
+    // Allow a dev-only header to impersonate a user when running locally.
     if (!resolvedSession?.user?.id && process.env.NODE_ENV !== 'production') {
       const devUserId = request.headers.get('x-dev-user-id');
       if (devUserId) {
-        // Build a minimal session object expected by the handler
         resolvedSession = { user: { id: devUserId } } as any;
-        const session = await getServerSession(authOptions);
-      logger.warn('Rate limit exceeded for /api/holidays', { key });
-      return NextResponse.json(
-        { error: 'Rate limit exceeded' },
-        { status: 429 },
-      );
+      }
     }
 
-    if (!session?.user?.id) {
+    if (!resolvedSession?.user?.id) {
       logger.warn('Unauthorized access to /api/holidays');
       throw new Error('Unauthorized');
     }
 
-    const userId = session.user.id;
+    const userId = resolvedSession.user.id;
+
+    // Rate-limit per-user to avoid abuse
+    const rlKey = String(userId);
+    if (!(await rateLimit(rlKey, 60, 60))) {
+      logger.warn('Rate limit exceeded for /api/holidays', { key: rlKey });
+      throw new Error('RateLimitExceeded');
+    }
 
     // Get user to access timezone
     const user = await prisma.user.findUnique({
@@ -163,8 +165,15 @@ export async function GET(request: NextRequest) {
     const holidaysWithDates = await buildHolidaysForSession(session, request);
     return NextResponse.json(holidaysWithDates);
   } catch (error) {
-    if ((error as Error).message === 'Unauthorized') {
+    const msg = (error as Error).message;
+    if (msg === 'Unauthorized') {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    if (msg === 'RateLimitExceeded') {
+      return NextResponse.json(
+        { error: 'Rate limit exceeded' },
+        { status: 429 },
+      );
     }
     return NextResponse.json(
       { error: 'Internal server error' },
