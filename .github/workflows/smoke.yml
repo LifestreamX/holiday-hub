@@ -27,6 +27,18 @@ jobs:
           node-version: '18'
       - name: Install dependencies
         run: npm ci
+      - name: Wait for Redis service
+        run: |
+          echo "Waiting for Redis on localhost:6379..."
+          for i in {1..30}; do
+            if command -v redis-cli >/dev/null 2>&1 && redis-cli -h localhost -p 6379 ping 2>/dev/null | grep -q PONG; then
+              echo "Redis is ready (redis-cli)."; break
+            fi
+            if command -v nc >/dev/null 2>&1 && nc -z localhost 6379 2>/dev/null; then
+              echo "Redis is ready (nc)."; break
+            fi
+            echo "Redis not ready yet ($i)..."; sleep 2
+          done
       - name: Start dev server
         run: |
           nohup npm run dev &
