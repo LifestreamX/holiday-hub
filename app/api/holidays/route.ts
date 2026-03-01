@@ -135,6 +135,7 @@ async function buildHolidaysForSession(
         name: holiday.name,
         description: holiday.description,
         category: holiday.category,
+        countryCode: holiday.countryCode,
         date: holidayDate?.toISOString(),
         daysUntil,
         enabled: preference?.enabled ?? false,
