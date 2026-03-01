@@ -7,6 +7,13 @@ import {
   convertNagerHolidayToDbFormat,
 } from '@/lib/nagerDateService';
 import { logger } from '@/lib/logger';
+import { z } from 'zod';
+import { handleApi } from '@/lib/apiHandler';
+
+const syncSchema = z.object({
+  countryCode: z.string(),
+  year: z.number().optional(),
+});
 
 /**
  * Sync holidays from Nager.Date API to database
@@ -14,31 +21,19 @@ import { logger } from '@/lib/logger';
  * Body: { countryCode: string, year?: number }
  */
 export async function POST(request: NextRequest) {
-  try {
+  return handleApi(request, { schema: syncSchema }, async (req, data) => {
     const session = await getServerSession(authOptions);
-
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const body = await request.json();
-    const { countryCode, year } = body;
-
-    if (!countryCode) {
-      return NextResponse.json(
-        { error: 'countryCode is required' },
-        { status: 400 },
-      );
-    }
-
-    // Default to current year if not specified
+    const { countryCode, year } = data as z.infer<typeof syncSchema>;
     const targetYear = year || new Date().getFullYear();
 
     logger.info(
       `Syncing holidays for ${countryCode} (${targetYear}) from Nager.Date...`,
     );
 
-    // Fetch holidays from Nager.Date
     const nagerHolidays = await fetchPublicHolidays(targetYear, countryCode);
 
     if (!nagerHolidays || nagerHolidays.length === 0) {
@@ -56,30 +51,20 @@ export async function POST(request: NextRequest) {
     let updated = 0;
     let skipped = 0;
 
-    // Sync each holiday to database
     for (const nagerHoliday of nagerHolidays) {
       const holidayData = convertNagerHolidayToDbFormat(nagerHoliday);
-
-      // Check if holiday already exists (by name and country)
       const existingHoliday = await prisma.holiday.findFirst({
-        where: {
-          name: holidayData.name,
-          countryCode: holidayData.countryCode,
-        },
+        where: { name: holidayData.name, countryCode: holidayData.countryCode },
       });
 
       if (existingHoliday) {
-        // Update existing holiday
         await prisma.holiday.update({
           where: { id: existingHoliday.id },
           data: holidayData,
         });
         updated++;
       } else {
-        // Create new holiday
-        await prisma.holiday.create({
-          data: holidayData,
-        });
+        await prisma.holiday.create({ data: holidayData });
         created++;
       }
     }
@@ -87,28 +72,11 @@ export async function POST(request: NextRequest) {
     logger.info(
       `Sync complete: ${created} created, ${updated} updated, ${skipped} skipped`,
     );
-
     return NextResponse.json({
       success: true,
       countryCode,
       year: targetYear,
-      stats: {
-        total: nagerHolidays.length,
-        created,
-        updated,
-        skipped,
-      },
+      stats: { total: nagerHolidays.length, created, updated, skipped },
     });
-  } catch (error) {
-    logger.error('Error syncing holidays:', {
-      message: error instanceof Error ? error.message : String(error),
-    });
-    return NextResponse.json(
-      {
-        error: 'Failed to sync holidays',
-        details: error instanceof Error ? error.message : 'Unknown error',
-      },
-      { status: 500 },
-    );
-  }
+  });
 }

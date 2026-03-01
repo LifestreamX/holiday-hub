@@ -56,6 +56,14 @@ export default function DashboardPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedHoliday, setSelectedHoliday] = useState<Holiday | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [viewCountry, setViewCountry] = useState<string | null>(null);
+  const [availableCountries, setAvailableCountries] = useState<
+    {
+      countryCode: string;
+      name: string;
+      count: number;
+    }[]
+  >([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -70,16 +78,26 @@ export default function DashboardPage() {
   useEffect(() => {
     if (status === 'authenticated') {
       console.log('[Dashboard] User authenticated, fetching holidays');
-      fetchHolidays();
+      // initialize view country from session or default and fetch list of countries
+      const defaultCountry = (session?.user as any)?.countryCode || 'US';
+      setViewCountry(defaultCountry);
+      fetchCountries();
+      fetchHolidays(defaultCountry);
     } else {
       console.log('[Dashboard] Status not authenticated yet:', status);
     }
   }, [status]);
 
-  const fetchHolidays = async () => {
+  const fetchHolidays = async (countryArg?: string) => {
     try {
       console.log('[Dashboard] Fetching holidays...');
-      const response = await fetch('/api/holidays');
+      const target =
+        countryArg ||
+        viewCountry ||
+        (session?.user as any)?.countryCode ||
+        'US';
+      const params = target ? `?country=${encodeURIComponent(target)}` : '';
+      const response = await fetch(`/api/holidays${params}`);
       console.log('[Dashboard] Response status:', response.status);
 
       if (response.ok) {
@@ -109,6 +127,18 @@ export default function DashboardPage() {
     } finally {
       console.log('[Dashboard] Finished loading');
       setIsLoading(false);
+    }
+  };
+
+  const fetchCountries = async () => {
+    try {
+      const res = await fetch('/api/holidays/countries');
+      if (res.ok) {
+        const data = await res.json();
+        setAvailableCountries(data);
+      }
+    } catch (err) {
+      console.error('Failed to load countries', err);
     }
   };
 
@@ -303,23 +333,80 @@ export default function DashboardPage() {
             Your Holidays
           </h1>
           <p className='text-muted-foreground'>
-            {upcomingHolidays.length} total holidays • {enabledHolidays.length}{' '}
-            active notifications
+            Showing {upcomingHolidays.length} holidays for{' '}
+            <strong>
+              {availableCountries.find((c) => c.countryCode === viewCountry)
+                ?.name ||
+                viewCountry ||
+                'US'}
+            </strong>{' '}
+            • {enabledHolidays.length} active notifications
           </p>
+          {enabledHolidays.length === 0 && (
+            <div className='mt-3'>
+              <button
+                onClick={async () => {
+                  try {
+                    setIsLoading(true);
+                    const res = await fetch('/api/preferences/enable-all', {
+                      method: 'POST',
+                    });
+                    if (res.ok) {
+                      await fetchHolidays();
+                    } else {
+                      console.error('Failed to enable all preferences');
+                    }
+                  } finally {
+                    setIsLoading(false);
+                  }
+                }}
+                className='mt-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors'
+              >
+                Enable notifications for all{' '}
+                {availableCountries.find((c) => c.countryCode === viewCountry)
+                  ?.name || viewCountry}
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Search and Filters */}
         <div className='mb-6 space-y-4'>
-          {/* Search Bar */}
-          <div className='relative'>
-            <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground' />
-            <input
-              type='text'
-              placeholder='Search holidays...'
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className='w-full pl-10 pr-4 py-2 bg-card border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary'
-            />
+          {/* Search Bar + Country Selector */}
+          <div className='flex items-center gap-4'>
+            <div className='relative flex-1'>
+              <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground' />
+              <input
+                type='text'
+                placeholder='Search holidays...'
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className='w-full pl-10 pr-4 py-2 bg-card border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary'
+              />
+            </div>
+            <div>
+              <select
+                value={viewCountry || ''}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  setViewCountry(v);
+                  setIsLoading(true);
+                  fetchHolidays(v);
+                }}
+                className='p-2 rounded-lg bg-card border border-border text-sm'
+                title='Select country to view holidays'
+              >
+                {availableCountries.length === 0 ? (
+                  <option value=''>Loading…</option>
+                ) : (
+                  availableCountries.map((c) => (
+                    <option key={c.countryCode} value={c.countryCode}>
+                      {c.name} ({c.countryCode})
+                    </option>
+                  ))
+                )}
+              </select>
+            </div>
           </div>
 
           {/* Category Filter */}

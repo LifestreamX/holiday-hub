@@ -38,10 +38,15 @@ export async function GET(request: NextRequest) {
 
     const userTimezone = user?.timezone || 'America/New_York';
 
-    // Get all holidays for user's country
+    // Respect optional country query param (view-only). Notifications remain tied to user's primary country.
+    const url = new URL(request.url);
+    const requestedCountry =
+      url.searchParams.get('country') || user?.countryCode || 'US';
+
+    // Get all holidays for selected country
     const holidays = await prisma.holiday.findMany({
       where: {
-        countryCode: user?.countryCode || 'US',
+        countryCode: requestedCountry,
       },
       include: {
         userPreferences: {

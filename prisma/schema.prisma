@@ -43,6 +43,7 @@ model Holiday {
   userPreferences   UserHolidayPreference[]
   notifications     Notification[]
 
+  @@unique([name, countryCode])
   @@map("holidays")
 }
 

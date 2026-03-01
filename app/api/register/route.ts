@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 import { logger } from '@/lib/logger';
 import { rateLimit } from '@/lib/rateLimiter';
+import { handleApi } from '@/lib/apiHandler';
 
 const registerSchema = z.object({
   email: z.string().email(),
@@ -13,35 +14,36 @@ const registerSchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
-  try {
+  return handleApi(request, { schema: registerSchema }, async (req, data) => {
+    // data is already validated by Zod
     const ip =
-      request.headers.get('x-forwarded-for')?.split(',')[0].trim() ??
-      request.headers.get('x-real-ip') ??
+      req.headers.get('x-forwarded-for')?.split(',')[0].trim() ??
+      req.headers.get('x-real-ip') ??
       'unknown';
-    const allowed = await rateLimit(ip, 5, 60); // 5 registrations per minute per IP
-    if (!allowed) {
-      logger.warn('Registration rate limit exceeded', { ip });
-      return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+
+    try {
+      const allowed = await rateLimit(ip, 5, 60); // 5 registrations per minute per IP
+      if (!allowed) {
+        logger.warn('Registration rate limit exceeded', { ip });
+        return NextResponse.json(
+          { error: 'Too many requests' },
+          { status: 429 },
+        );
+      }
+    } catch (e) {
+      logger.debug('Rate limiter check failed', { err: String(e) });
     }
 
     logger.debug('Registration attempt', { ip });
-  } catch (e) {
-    // proceed even if rate limiter fails
-    logger.debug('Rate limiter check failed', { err: String(e) });
-  }
-  try {
-    const body = await request.json();
-    const { email, password, timezone, countryCode } =
-      registerSchema.parse(body);
 
-    // Trim email to avoid whitespace issues
+    const { email, password, timezone, countryCode } = data as z.infer<
+      typeof registerSchema
+    >;
     const trimmedEmail = email.trim();
 
-    // Check if user already exists
     const existingUser = await prisma.user.findUnique({
       where: { email: trimmedEmail },
     });
-
     if (existingUser) {
       logger.warn('Attempt to register existing user', { email: trimmedEmail });
       return NextResponse.json(
@@ -50,10 +52,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Hash password
     const hashedPassword = await hash(password, 12);
-
-    // Create user
     const user = await prisma.user.create({
       data: {
         email: trimmedEmail,
@@ -71,23 +70,9 @@ export async function POST(request: NextRequest) {
     });
 
     logger.info('User created', { id: user.id, email: user.email });
-
     return NextResponse.json(
       { message: 'User created successfully', user },
       { status: 201 },
     );
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      logger.warn('Registration invalid input', { details: error.errors });
-      return NextResponse.json(
-        { error: 'Invalid input', details: error.errors },
-        { status: 400 },
-      );
-    }
-    logger.error('Registration error', { error: String(error) });
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 },
-    );
-  }
+  });
 }

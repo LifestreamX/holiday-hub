@@ -8,6 +8,28 @@ import { logger } from '@/lib/logger';
 
 // Use centralized logger
 
+// In development, print the effective OAuth callback URLs and configured client IDs
+if (process.env.NODE_ENV !== 'production') {
+  try {
+    const nextAuthUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
+    const googleCallback = `${nextAuthUrl.replace(/\/$/, '')}/api/auth/callback/google`;
+    const githubCallback = `${nextAuthUrl.replace(/\/$/, '')}/api/auth/callback/github`;
+    // Use console so this is visible when dev server starts
+    // eslint-disable-next-line no-console
+    console.info('[dev] NextAuth expected callback URLs:');
+    // eslint-disable-next-line no-console
+    console.info(`[dev] Google callback: ${googleCallback}`);
+    // eslint-disable-next-line no-console
+    console.info(`[dev] GitHub callback: ${githubCallback}`);
+    // eslint-disable-next-line no-console
+    console.info(
+      `[dev] GOOGLE_CLIENT_ID set: ${Boolean(process.env.GOOGLE_CLIENT_ID)}`,
+    );
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.warn('[dev] Unable to construct NextAuth callback URLs', err);
+  }
+}
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({

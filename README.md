@@ -55,7 +55,7 @@ cp .env.example .env
 
 Then edit `.env` with your actual values:
 
-```env
+````env
 npm run scheduler
 **Production:**
 Set up a cron job or use a service like:
@@ -100,5 +100,32 @@ Minimal holiday notification dashboard.
 - User input is validated
 - Never commit your `.env` file
 - Use strong, environment-specific secrets
+
+## Syncing holidays (Nager.Date)
+
+To refresh or populate the holidays database using the Nager.Date dataset, the repository includes sync scripts in `scripts/`.
+
+- Fetch and upsert a single country/year (example: US 2026):
+
+```bash
+START_YEAR=2026 END_YEAR=2026 COUNTRY=US node scripts/sync-holidays.js
+````
+
+- Sync multiple years or countries: adjust `START_YEAR`, `END_YEAR`, and `COUNTRY` (or run the provided multi-country scripts).
+
+Important notes:
+
+- The schema includes a uniqueness constraint for holidays by name and country. After pulling the latest `prisma/schema.prisma` changes you must generate a migration and apply it to your database before running syncs that depend on the constraint.
+
+Run these commands to generate and apply the migration (dev environment):
+
+```bash
+npx prisma generate
+npx prisma migrate dev --name add-unique-holiday-name-country
+```
+
+If you use a managed or production CockroachDB instance, follow your normal migration workflow and backup your database before applying migrations.
+
+```
 
 ```
