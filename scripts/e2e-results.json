@@ -1,0 +1,5209 @@
+{
+  "base": "http://localhost:3000",
+  "timestamp": 1772397170174,
+  "results": [
+    {
+      "countryCode": "ALL",
+      "name": "All countries",
+      "count": 28,
+      "apiSample": [
+        {
+          "id": "cmm6zybex000cm4w7g3fc8r0i",
+          "name": "St. Patrick's Day",
+          "description": "Irish cultural and religious celebration",
+          "category": "cultural",
+          "date": "2026-03-17T04:00:00.000Z",
+          "daysUntil": 15,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm73xyt20003j4l2dihytk82",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "optional",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm6zybg9000dm4w75093bd7r",
+          "name": "Easter Sunday",
+          "description": "Christian holiday celebrating the resurrection of Jesus",
+          "category": "religious",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "AD",
+      "name": "Andorra",
+      "count": 14,
+      "apiSample": [
+        {
+          "id": "cmm821twd00033j7ls7lpj19m",
+          "name": "Constitution Day",
+          "description": "Dia de la Constitució",
+          "category": "federal",
+          "date": "2026-03-14T04:00:00.000Z",
+          "daysUntil": 12,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm821tyy00043j7lnac1zt7g",
+          "name": "Good Friday",
+          "description": "Divendres Sant",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm821u1k00053j7lui7curet",
+          "name": "Easter Monday",
+          "description": "Dilluns de Pasqua",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "AL",
+      "name": "Albania",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm8221ld000f3j7li16rnzpy",
+          "name": "Summer Day",
+          "description": "Dita e Verës",
+          "category": "federal",
+          "date": "2026-03-16T04:00:00.000Z",
+          "daysUntil": 14,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm8221nx000g3j7lm9clcmw9",
+          "name": "Nowruz",
+          "description": "Dita e Sulltan Nevruzit",
+          "category": "federal",
+          "date": "2026-03-23T04:00:00.000Z",
+          "daysUntil": 21,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm8221ql000h3j7lkgjtx6mx",
+          "name": "Easter Sunday",
+          "description": "Pashkët Ortodokse",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "AM",
+      "name": "Armenia",
+      "count": 12,
+      "apiSample": [
+        {
+          "id": "cmm8229q2000s3j7lmnq7rdve",
+          "name": "Women's Day",
+          "description": "Կանանց տոն",
+          "category": "federal",
+          "date": "2026-03-08T05:00:00.000Z",
+          "daysUntil": 7,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm8229sq000t3j7l5mmyssfm",
+          "name": "Easter Sunday",
+          "description": "Ամանոր",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm8229ve000u3j7l75ka5fer",
+          "name": "Armenian Genocide Remembrance Day",
+          "description": "Եղեռնի զոհերի հիշատակի օր",
+          "category": "federal",
+          "date": "2026-04-24T04:00:00.000Z",
+          "daysUntil": 53,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "AR",
+      "name": "Argentina",
+      "count": 15,
+      "apiSample": [
+        {
+          "id": "cmm822h6e00133j7l3gz7l690",
+          "name": "Day of Remembrance for Truth and Justice",
+          "description": "Día Nacional de la Memoria por la Verdad y la Justicia",
+          "category": "federal",
+          "date": "2026-03-24T04:00:00.000Z",
+          "daysUntil": 22,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm822h9100143j7ltf7skdjb",
+          "name": "Day of the Veterans and Fallen of the Malvinas War",
+          "description": "Día del Veterano y de los Caídos en la Guerra de Malvinas",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm822hbt00153j7l9y4g87sy",
+          "name": "Good Friday",
+          "description": "Viernes Santo",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "AT",
+      "name": "Austria",
+      "count": 14,
+      "apiSample": [
+        {
+          "id": "cmm822ote001i3j7l4vq67j3j",
+          "name": "Easter Sunday",
+          "description": "Ostersonntag",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm822ow0001j3j7lixcsoizk",
+          "name": "Easter Monday",
+          "description": "Ostermontag",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm822p6n001n3j7lmdlhvn3j",
+          "name": "Whit Monday",
+          "description": "Pfingstmontag",
+          "category": "federal",
+          "date": "2026-05-25T04:00:00.000Z",
+          "daysUntil": 84,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "AU",
+      "name": "Australia",
+      "count": 22,
+      "apiSample": [
+        {
+          "id": "cmm822wo5001x3j7lmzvtj64g",
+          "name": "Canberra Day",
+          "description": "Canberra Day",
+          "category": "federal",
+          "date": "2026-03-09T04:00:00.000Z",
+          "daysUntil": 7,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm822wqt001y3j7lbch03dbp",
+          "name": "Adelaide Cup Day",
+          "description": "Adelaide Cup Day",
+          "category": "federal",
+          "date": "2026-03-09T04:00:00.000Z",
+          "daysUntil": 7,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm822wth001z3j7l0xp190nv",
+          "name": "Eight Hours Day",
+          "description": "Eight Hours Day",
+          "category": "federal",
+          "date": "2026-03-09T04:00:00.000Z",
+          "daysUntil": 7,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "AX",
+      "name": "Åland Islands",
+      "count": 16,
+      "apiSample": [
+        {
+          "id": "cmm8237x9002i3j7le3wg2v8y",
+          "name": "Good Friday",
+          "description": "Långfredag",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm823802002j3j7l9j6fu8pf",
+          "name": "Easter Sunday",
+          "description": "Påskdagen",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82382o002k3j7lmjd1p6k2",
+          "name": "Easter Monday",
+          "description": "Annandag påsk",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "BA",
+      "name": "Bosnia and Herzegovina",
+      "count": 13,
+      "apiSample": [
+        {
+          "id": "cmm823gkw002z3j7lyvp557n6",
+          "name": "Independence day",
+          "description": "Dan nezavisnosti Bosne i Hercegovine",
+          "category": "federal",
+          "date": "2026-03-01T05:00:00.000Z",
+          "daysUntil": 0,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm823gnm00303j7lqma4v6tk",
+          "name": "Good Friday",
+          "description": "Veliki petak",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm823gqk00313j7l4yzqf08d",
+          "name": "Easter Sunday",
+          "description": "Vaskrs (Uskrs)",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "BB",
+      "name": "Barbados",
+      "count": 12,
+      "apiSample": [
+        {
+          "id": "cmm823o8c003b3j7lxn6e5r9x",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm823ob0003c3j7lxccp1jbf",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm823odq003d3j7l91092q09",
+          "name": "National Heroes' Day",
+          "description": "National Heroes' Day",
+          "category": "federal",
+          "date": "2026-04-28T04:00:00.000Z",
+          "daysUntil": 57,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "BE",
+      "name": "Belgium",
+      "count": 14,
+      "apiSample": [
+        {
+          "id": "cmm823vbo003m3j7lu3py0a6f",
+          "name": "Good Friday",
+          "description": "Goede Vrijdag",
+          "category": "bank",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm823vec003n3j7lom3od91t",
+          "name": "Easter Sunday",
+          "description": "Pasen",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm823vgx003o3j7lnzzd091l",
+          "name": "Easter Monday",
+          "description": "Paasmaandag",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "BG",
+      "name": "Bulgaria",
+      "count": 15,
+      "apiSample": [
+        {
+          "id": "cmm82430300403j7l5yfbpqml",
+          "name": "Liberation Day",
+          "description": "Ден на oсвобождението на България от Oсманско робство",
+          "category": "federal",
+          "date": "2026-03-03T05:00:00.000Z",
+          "daysUntil": 2,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82432s00413j7l3bscg4kg",
+          "name": "Good Friday",
+          "description": "Разпети петък",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82438c00433j7loesvipbu",
+          "name": "Easter Sunday",
+          "description": "Великден",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "BJ",
+      "name": "Benin",
+      "count": 14,
+      "apiSample": [
+        {
+          "id": "cmm824aq4004g3j7lec8v4hyx",
+          "name": "Easter Sunday",
+          "description": "Easter Sunday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm824ass004h3j7l8g1svldx",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm824avg004i3j7lxb6up1ai",
+          "name": "Labour Day",
+          "description": "Labour Day",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "BO",
+      "name": "Bolivia",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm824ik1004v3j7lza7siezy",
+          "name": "Good Friday",
+          "description": "Viernes Santo",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm824imo004w3j7l8itoei95",
+          "name": "Labour Day",
+          "description": "Dia del trabajo",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm824irx004y3j7lucy2t55h",
+          "name": "Andean New Year",
+          "description": "Año Nuevo Andino",
+          "category": "federal",
+          "date": "2026-06-21T04:00:00.000Z",
+          "daysUntil": 111,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "BR",
+      "name": "Brazil",
+      "count": 14,
+      "apiSample": [
+        {
+          "id": "cmm824p4k00553j7lrebcxx4y",
+          "name": "Good Friday",
+          "description": "Sexta-feira Santa",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm824p7l00563j7l1pnz4ryw",
+          "name": "Easter Sunday",
+          "description": "Domingo de Páscoa",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm824pap00573j7l6eo2q70v",
+          "name": "Tiradentes",
+          "description": "Dia de Tiradentes",
+          "category": "federal",
+          "date": "2026-04-21T04:00:00.000Z",
+          "daysUntil": 50,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "BS",
+      "name": "Bahamas",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm824wf0005j3j7lnggq6x63",
+          "name": "Perry Christie Day",
+          "description": "Perry Christie Day",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm824whw005k3j7lrbr1ijlz",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm824wko005l3j7lfn7fma5y",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "BW",
+      "name": "Botswana",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm8252mg005t3j7l1xrbef3f",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm8252p9005u3j7ld5llzloi",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm8252s2005v3j7lhlaln8nm",
+          "name": "Labour Day",
+          "description": "Labour Day",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "BY",
+      "name": "Belarus",
+      "count": 9,
+      "apiSample": [
+        {
+          "id": "cmm8259o500653j7lc7s8ce0j",
+          "name": "International Women's Day",
+          "description": "Мiжнародны жаночы дзень",
+          "category": "federal",
+          "date": "2026-03-08T05:00:00.000Z",
+          "daysUntil": 7,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm8259tk00673j7lrngni0bi",
+          "name": "Commemoration Day",
+          "description": "Радунiца",
+          "category": "federal",
+          "date": "2026-04-21T04:00:00.000Z",
+          "daysUntil": 50,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm8259qw00663j7lcsw98rpp",
+          "name": "Labour Day",
+          "description": "Дзень працы",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "BZ",
+      "name": "Belize",
+      "count": 15,
+      "apiSample": [
+        {
+          "id": "cmm825fkc006e3j7lyiwqeh93",
+          "name": "National Heroes and Benefactors Day",
+          "description": "National Heroes and Benefactors Day",
+          "category": "federal",
+          "date": "2026-03-09T04:00:00.000Z",
+          "daysUntil": 7,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm825fn0006f3j7ly1vrinlu",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm825fpp006g3j7lvflk4nvg",
+          "name": "Holy Saturday",
+          "description": "Holy Saturday",
+          "category": "federal",
+          "date": "2026-04-04T04:00:00.000Z",
+          "daysUntil": 33,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "CA",
+      "name": "Canada",
+      "count": 30,
+      "apiSample": [
+        {
+          "id": "cmm825nck006w3j7ll6z121oe",
+          "name": "Saint Patrick's Day",
+          "description": "Saint Patrick's Day",
+          "category": "federal",
+          "date": "2026-03-17T04:00:00.000Z",
+          "daysUntil": 15,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm825nf7006x3j7l2zjad7xk",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm825nhv006y3j7lv0ijyli0",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "CD",
+      "name": "DR Congo",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm8260l1007p3j7lbsfuhis2",
+          "name": "Kimbangu's Day",
+          "description": "Kimbangu's Day",
+          "category": "federal",
+          "date": "2026-04-06T04:00:00.000Z",
+          "daysUntil": 35,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm8260nw007q3j7lmuufingu",
+          "name": "Labour Day",
+          "description": "Labour Day",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm8260qn007r3j7lpc6iv5ff",
+          "name": "Liberation Day",
+          "description": "Liberation Day",
+          "category": "federal",
+          "date": "2026-05-17T04:00:00.000Z",
+          "daysUntil": 76,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "CG",
+      "name": "Congo",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm8266xg007x3j7l3g958zyb",
+          "name": "Easter Sunday",
+          "description": "Dimanche de Pâques",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm826707007y3j7lmurskl33",
+          "name": "Easter Monday",
+          "description": "Lundi de Pâques",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm826730007z3j7lbboew4x9",
+          "name": "Labour Day",
+          "description": "Fête du Travail",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "CH",
+      "name": "Switzerland",
+      "count": 23,
+      "apiSample": [
+        {
+          "id": "cmm826d7s008a3j7lwvq4wraw",
+          "name": "Republic Day",
+          "description": "Jahrestag der Ausrufung der Republik",
+          "category": "federal",
+          "date": "2026-03-01T05:00:00.000Z",
+          "daysUntil": 0,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm826dam008b3j7lie0g34hd",
+          "name": "Saint Joseph's Day",
+          "description": "Josefstag",
+          "category": "observance",
+          "date": "2026-03-19T04:00:00.000Z",
+          "daysUntil": 17,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm826dks008d3j7lrt5rxxg1",
+          "name": "Good Friday",
+          "description": "Karfreitag",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "CL",
+      "name": "Chile",
+      "count": 18,
+      "apiSample": [
+        {
+          "id": "cmm826rin008v3j7ls2jr0g1f",
+          "name": "Good Friday",
+          "description": "Viernes Santo",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm826rlg008w3j7ljqauwunx",
+          "name": "Holy Saturday",
+          "description": "Sábado Santo",
+          "category": "federal",
+          "date": "2026-04-04T04:00:00.000Z",
+          "daysUntil": 33,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm826ro5008x3j7lxehvmmt2",
+          "name": "Labour Day",
+          "description": "Día del Trabajo",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "CN",
+      "name": "China",
+      "count": 6,
+      "apiSample": [
+        {
+          "id": "cmm827018009e3j7lhly30425",
+          "name": "Labour Day",
+          "description": "劳动节",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm827040009f3j7lfvlzh3xh",
+          "name": "Dragon Boat Festival",
+          "description": "端午节",
+          "category": "federal",
+          "date": "2026-06-19T04:00:00.000Z",
+          "daysUntil": 109,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82706p009g3j7ldc16bcw7",
+          "name": "Mid-Autumn Festival",
+          "description": "中秋节",
+          "category": "federal",
+          "date": "2026-09-25T04:00:00.000Z",
+          "daysUntil": 207,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "CO",
+      "name": "Colombia",
+      "count": 18,
+      "apiSample": [
+        {
+          "id": "cmm82747n009k3j7le6bx73zk",
+          "name": "Saint Joseph's Day",
+          "description": "Día de San José",
+          "category": "federal",
+          "date": "2026-03-23T04:00:00.000Z",
+          "daysUntil": 21,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm8274ab009l3j7l47dt4pot",
+          "name": "Maundy Thursday",
+          "description": "Jueves Santo",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm8274di009m3j7l75bkcvzr",
+          "name": "Good Friday",
+          "description": "Viernes Santo",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "CR",
+      "name": "Costa Rica",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm827co500a23j7lw1fjcagj",
+          "name": "Maundy Thursday",
+          "description": "Jueves Santo",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm827cr000a33j7lh930mirj",
+          "name": "Good Friday",
+          "description": "Viernes Santo",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm827clc00a13j7lfwi8upju",
+          "name": "Juan Santamaría Day",
+          "description": "Día de Juan Santamaría",
+          "category": "federal",
+          "date": "2026-04-11T04:00:00.000Z",
+          "daysUntil": 40,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "CU",
+      "name": "Cuba",
+      "count": 9,
+      "apiSample": [
+        {
+          "id": "cmm827ih300ad3j7lxko0zpi1",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm827ijt00ae3j7lcmbnjgoi",
+          "name": "Labour Day",
+          "description": "Día de los trabajadores",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm827imf00af3j7lmxmsmsq1",
+          "name": "Day before the Commemoration of the Assault of the Moncada garrison",
+          "description": "Conmemoración del asalto a Moncada",
+          "category": "federal",
+          "date": "2026-07-25T04:00:00.000Z",
+          "daysUntil": 145,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "CY",
+      "name": "Cyprus",
+      "count": 17,
+      "apiSample": [
+        {
+          "id": "cmm827nkc00an3j7lx7tl248l",
+          "name": "Greek Independence Day",
+          "description": "Επέτειος Ελληνικής Ανεξαρτησίας",
+          "category": "federal",
+          "date": "2026-03-25T04:00:00.000Z",
+          "daysUntil": 23,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm827nn000ao3j7lazo6yysk",
+          "name": "Cyprus National Day",
+          "description": "Κυπριακή Εθνική Επέτειος",
+          "category": "federal",
+          "date": "2026-04-01T04:00:00.000Z",
+          "daysUntil": 30,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm827nqc00ap3j7lswgif4q4",
+          "name": "Good Friday",
+          "description": "Μεγάλη Παρασκευή",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "CZ",
+      "name": "Czechia",
+      "count": 13,
+      "apiSample": [
+        {
+          "id": "cmm827vpk00b23j7lf2wd00al",
+          "name": "Good Friday",
+          "description": "Velký pátek",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm827vsb00b33j7loyh4lct2",
+          "name": "Easter Monday",
+          "description": "Velikonoční pondělí",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm827vv400b43j7l5hxrsh9n",
+          "name": "Labour Day",
+          "description": "Svátek práce",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "DE",
+      "name": "Germany",
+      "count": 20,
+      "apiSample": [
+        {
+          "id": "cmm8282kr00bg3j7lh536b3b8",
+          "name": "International Women's Day",
+          "description": "Internationaler Frauentag",
+          "category": "federal",
+          "date": "2026-03-08T05:00:00.000Z",
+          "daysUntil": 7,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm8282nf00bh3j7lmfokq0vc",
+          "name": "Good Friday",
+          "description": "Karfreitag",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm8282q200bi3j7ljw9fudqh",
+          "name": "Easter Sunday",
+          "description": "Ostersonntag",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "DK",
+      "name": "Denmark",
+      "count": 15,
+      "apiSample": [
+        {
+          "id": "cmm828bnj00bz3j7lzyhwsh4g",
+          "name": "Maundy Thursday",
+          "description": "Skærtorsdag",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm828bq800c03j7l0hitjkbl",
+          "name": "Good Friday",
+          "description": "Langfredag",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm828bsv00c13j7lpwxcp0a0",
+          "name": "Easter Sunday",
+          "description": "Påskedag",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "DO",
+      "name": "Dominican Republic",
+      "count": 13,
+      "apiSample": [
+        {
+          "id": "cmm828jq800ci3j7l6svd2mow",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm828jsz00cj3j7lhvvt0i2c",
+          "name": "Labour Day",
+          "description": "Día del Trabajador",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm828jvo00ck3j7lijgnmsgu",
+          "name": "Mother's Day",
+          "description": "Día de las Madres",
+          "category": "federal",
+          "date": "2026-05-28T04:00:00.000Z",
+          "daysUntil": 87,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "EC",
+      "name": "Ecuador",
+      "count": 10,
+      "apiSample": [
+        {
+          "id": "cmm828r0j00cs3j7l5m9sckvv",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm828r3700ct3j7lp0vmbxu7",
+          "name": "International Workers' Day",
+          "description": "International Workers' Day",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm828r6200cu3j7l3npwkyvj",
+          "name": "The Battle of Pichincha",
+          "description": "Batalla de Pichincha",
+          "category": "federal",
+          "date": "2026-05-24T04:00:00.000Z",
+          "daysUntil": 83,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "EE",
+      "name": "Estonia",
+      "count": 12,
+      "apiSample": [
+        {
+          "id": "cmm828xsf00d23j7ldpemvhz5",
+          "name": "Good Friday",
+          "description": "suur reede",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm828xv600d33j7ljrrnzavh",
+          "name": "Easter Sunday",
+          "description": "ülestõusmispühade 1. püha",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm828xxu00d43j7lvdmzhauf",
+          "name": "Spring Day",
+          "description": "kevadpüha",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "EG",
+      "name": "Egypt",
+      "count": 7,
+      "apiSample": [
+        {
+          "id": "cmm8294g200de3j7lfdwpdy03",
+          "name": "Sinai Liberation Day",
+          "description": "عيد تحرير سيناء",
+          "category": "federal",
+          "date": "2026-04-25T04:00:00.000Z",
+          "daysUntil": 54,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm8294iq00df3j7lkf9w435q",
+          "name": "Labour Day",
+          "description": "عيد العمال",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm8294lf00dg3j7lp6s01d5j",
+          "name": "June 30 Revolution",
+          "description": "ثورة 30 يونيو",
+          "category": "federal",
+          "date": "2026-07-02T04:00:00.000Z",
+          "daysUntil": 122,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "ES",
+      "name": "Spain",
+      "count": 35,
+      "apiSample": [
+        {
+          "id": "cmm8298zu00dm3j7les0uqpc5",
+          "name": "Day of the Balearic Islands",
+          "description": "Dia de les Illes Balears",
+          "category": "federal",
+          "date": "2026-03-01T05:00:00.000Z",
+          "daysUntil": 0,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82992i00dn3j7ljjdcms0e",
+          "name": "Saint Joseph's Day",
+          "description": "San José",
+          "category": "federal",
+          "date": "2026-03-20T04:00:00.000Z",
+          "daysUntil": 18,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82995c00do3j7l7ke15oup",
+          "name": "Maundy Thursday",
+          "description": "Jueves Santo",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "FI",
+      "name": "Finland",
+      "count": 15,
+      "apiSample": [
+        {
+          "id": "cmm829ng600ek3j7lpamm3jjj",
+          "name": "Good Friday",
+          "description": "Pitkäperjantai",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm829njb00el3j7lotkt9gp6",
+          "name": "Easter Sunday",
+          "description": "Pääsiäispäivä",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm829nlx00em3j7l0g780cdb",
+          "name": "Easter Monday",
+          "description": "Toinen pääsiäispäivä",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "FO",
+      "name": "Faroe Islands",
+      "count": 17,
+      "apiSample": [
+        {
+          "id": "cmm829vhe00ey3j7l0zt2u2fu",
+          "name": "Maundy Thursday",
+          "description": "Skírhósdagur",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm829vk900ez3j7lnmfch2a3",
+          "name": "Good Friday",
+          "description": "Langifríggjadagur",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm829vmx00f03j7lsmp2wo09",
+          "name": "Easter Sunday",
+          "description": "Páskadagur",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "FR",
+      "name": "France",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm82a3ti00ff3j7la3a21j6c",
+          "name": "Easter Monday",
+          "description": "Lundi de Pâques",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82a3w600fg3j7l0wfdfrhi",
+          "name": "Labour Day",
+          "description": "Fête du Travail",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82a3yu00fh3j7l09h0c8vx",
+          "name": "Victory in Europe Day",
+          "description": "Victoire 1945",
+          "category": "federal",
+          "date": "2026-05-08T04:00:00.000Z",
+          "daysUntil": 67,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "GA",
+      "name": "Gabon",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm82a9hx00fq3j7l0zczljia",
+          "name": "Renovation Day",
+          "description": "Renovation Day",
+          "category": "federal",
+          "date": "2026-03-12T04:00:00.000Z",
+          "daysUntil": 10,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82a9nx00fs3j7l7qwssdjo",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82a9kx00fr3j7lg91ecao9",
+          "name": "Women's Day",
+          "description": "Women's Day",
+          "category": "federal",
+          "date": "2026-04-17T04:00:00.000Z",
+          "daysUntil": 46,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "GB",
+      "name": "United Kingdom",
+      "count": 16,
+      "apiSample": [
+        {
+          "id": "cmm82aga100g23j7lyc91h684",
+          "name": "Saint Patrick's Day",
+          "description": "Saint Patrick's Day",
+          "category": "federal",
+          "date": "2026-03-17T04:00:00.000Z",
+          "daysUntil": 15,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82agcu00g33j7lsnadizot",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82agfi00g43j7l2ep2pfgu",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "GD",
+      "name": "Grenada",
+      "count": 13,
+      "apiSample": [
+        {
+          "id": "cmm82an4i00gi3j7l9bqh1v73",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82an7a00gj3j7l7o9lrr1w",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82anaa00gk3j7lbe0golvt",
+          "name": "Labour Day",
+          "description": "Labour Day",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "GE",
+      "name": "Georgia",
+      "count": 16,
+      "apiSample": [
+        {
+          "id": "cmm82auq200gw3j7lz6332pb4",
+          "name": "Mother's Day",
+          "description": "დედის დღე",
+          "category": "federal",
+          "date": "2026-03-03T05:00:00.000Z",
+          "daysUntil": 2,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82auss00gx3j7l4m9ocwn2",
+          "name": "International Women's Day",
+          "description": "ქალთა საერთაშორისო დღე",
+          "category": "federal",
+          "date": "2026-03-08T05:00:00.000Z",
+          "daysUntil": 7,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82auyc00gz3j7lktxtiyc0",
+          "name": "Good Friday",
+          "description": "ძველი პარასკევი",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "GG",
+      "name": "Guernsey",
+      "count": 9,
+      "apiSample": [
+        {
+          "id": "cmm82b3k900ha3j7ldmie4is3",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82b3my00hb3j7l9c6vuaku",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82b3q600hc3j7lj0bz5uw4",
+          "name": "Early May Bank Holiday",
+          "description": "Early May Bank Holiday",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "GH",
+      "name": "Ghana",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm82b9l000hk3j7lu2p97r5c",
+          "name": "Independence Day",
+          "description": "Independence Day",
+          "category": "federal",
+          "date": "2026-03-06T05:00:00.000Z",
+          "daysUntil": 5,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82b9no00hl3j7l91ah9vey",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82b9qc00hm3j7lblmmzp97",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "GI",
+      "name": "Gibraltar",
+      "count": 12,
+      "apiSample": [
+        {
+          "id": "cmm82bg3a00hu3j7lf0q5uolu",
+          "name": "Commonwealth Day",
+          "description": "Commonwealth Day",
+          "category": "federal",
+          "date": "2026-03-09T04:00:00.000Z",
+          "daysUntil": 7,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82bg6200hv3j7lsmgedqw9",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82bg8q00hw3j7lj272y0vs",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "GL",
+      "name": "Greenland",
+      "count": 16,
+      "apiSample": [
+        {
+          "id": "cmm82bmod00i73j7l2fcv63sc",
+          "name": "Maundy Thursday",
+          "description": "Sisamanngortoq illernartoq",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82bmr500i83j7lgo0rzmvf",
+          "name": "Good Friday",
+          "description": "Tallimanngorneq tannaartoq",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82bmty00i93j7l1czj8m93",
+          "name": "Easter Sunday",
+          "description": "Poorskip ullua",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "GM",
+      "name": "Gambia",
+      "count": 9,
+      "apiSample": [
+        {
+          "id": "cmm82bust00in3j7l5bnx2iv4",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82buvi00io3j7lht2dls8l",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82buy700ip3j7l4xwg3zqz",
+          "name": "Labour Day",
+          "description": "Labour Day",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "GR",
+      "name": "Greece",
+      "count": 15,
+      "apiSample": [
+        {
+          "id": "cmm82c0b800ix3j7lza7d3c5m",
+          "name": "Annunciation",
+          "description": "Ευαγγελισμός της Θεοτόκου",
+          "category": "federal",
+          "date": "2026-03-25T04:00:00.000Z",
+          "daysUntil": 23,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82c0e100iy3j7l0baznhop",
+          "name": "Independence Day",
+          "description": "Εικοστή Πέμπτη Μαρτίου",
+          "category": "federal",
+          "date": "2026-03-25T04:00:00.000Z",
+          "daysUntil": 23,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82c0gt00iz3j7llby4loix",
+          "name": "Good Friday",
+          "description": "Μεγάλη Παρασκευή",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "GT",
+      "name": "Guatemala",
+      "count": 13,
+      "apiSample": [
+        {
+          "id": "cmm82c89t00ja3j7l4tlscv0z",
+          "name": "Maundy Thursday",
+          "description": "Maundy Thursday",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82c8cl00jb3j7lguqscqus",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82c8f900jc3j7lm6lvx981",
+          "name": "Holy Saturday",
+          "description": "Holy Saturday",
+          "category": "federal",
+          "date": "2026-04-04T04:00:00.000Z",
+          "daysUntil": 33,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "GY",
+      "name": "Guyana",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm82cfal00jo3j7ll6us2ez1",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82cfde00jp3j7lj0w41k00",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82cfg700jq3j7l1q8n8a5u",
+          "name": "Labour Day",
+          "description": "Labour Day",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "HK",
+      "name": "Hong Kong",
+      "count": 17,
+      "apiSample": [
+        {
+          "id": "cmm82clsb00k23j7lql4afgqk",
+          "name": "Good Friday",
+          "description": "耶穌受難節",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82clpn00k13j7lsofj9jxi",
+          "name": "Ching Ming Festival",
+          "description": "清明節",
+          "category": "federal",
+          "date": "2026-04-04T04:00:00.000Z",
+          "daysUntil": 33,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82clv500k33j7lg18ezup5",
+          "name": "Holy Saturday",
+          "description": "耶穌受難節翌日",
+          "category": "federal",
+          "date": "2026-04-04T04:00:00.000Z",
+          "daysUntil": 33,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "HN",
+      "name": "Honduras",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm82cu5k00kg3j7lh301d2gj",
+          "name": "Maundy Thursday",
+          "description": "Holy Thursday",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82cu8d00kh3j7lget2akwp",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82cub400ki3j7llynranzs",
+          "name": "Holy Saturday",
+          "description": "Holy Saturday",
+          "category": "federal",
+          "date": "2026-04-04T04:00:00.000Z",
+          "daysUntil": 33,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "HR",
+      "name": "Croatia",
+      "count": 14,
+      "apiSample": [
+        {
+          "id": "cmm82d0f900kr3j7lmm30y77d",
+          "name": "Easter Sunday",
+          "description": "Uskrs i uskrsni ponedjeljak",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82d0i000ks3j7lftxrb0pv",
+          "name": "Easter Monday",
+          "description": "Uskrs i uskrsni ponedjeljak",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82d0ko00kt3j7lftyb7c1p",
+          "name": "International Workers' Day",
+          "description": "Međunarodni praznik rada",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "HT",
+      "name": "Haiti",
+      "count": 19,
+      "apiSample": [
+        {
+          "id": "cmm82d8b800l83j7l8pjlzr4h",
+          "name": "Maundy Thursday",
+          "description": "Jeudi saint",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82d8em00l93j7l7u4k8zqb",
+          "name": "Good Friday",
+          "description": "Vendredi saint",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82d8hb00la3j7lt1xhkxxh",
+          "name": "Easter Sunday",
+          "description": "Pâques",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "HU",
+      "name": "Hungary",
+      "count": 13,
+      "apiSample": [
+        {
+          "id": "cmm82dhrg00ln3j7lut1v9ac3",
+          "name": "1848 Revolution Memorial Day",
+          "description": "Nemzeti ünnep",
+          "category": "federal",
+          "date": "2026-03-15T04:00:00.000Z",
+          "daysUntil": 13,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82dhu900lo3j7ls41m361p",
+          "name": "Good Friday",
+          "description": "Nagypéntek",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82dhx100lp3j7l4q86aff6",
+          "name": "Easter Sunday",
+          "description": "Húsvétvasárnap",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "ID",
+      "name": "Indonesia",
+      "count": 8,
+      "apiSample": [
+        {
+          "id": "cmm82dosw00m03j7l53if9do3",
+          "name": "Good Friday",
+          "description": "Wafat Isa Almasih",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82dovj00m13j7lcyrfnd1h",
+          "name": "Easter Sunday",
+          "description": "Paskah",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82doy700m23j7lbpd0wznw",
+          "name": "Labour Day",
+          "description": "Hari Buruh Internasional",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "IE",
+      "name": "Ireland",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm82dty800m83j7lmx575nar",
+          "name": "Saint Patrick's Day",
+          "description": "Lá Fhéile Pádraig",
+          "category": "federal",
+          "date": "2026-03-17T04:00:00.000Z",
+          "daysUntil": 15,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82du0v00m93j7l12716pfx",
+          "name": "Good Friday",
+          "description": "Aoine an Chéasta",
+          "category": "bank",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82du3o00ma3j7lkjbze7uv",
+          "name": "Easter Monday",
+          "description": "Luan Cásca",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "IM",
+      "name": "Isle of Man",
+      "count": 13,
+      "apiSample": [
+        {
+          "id": "cmm82dzol00mj3j7l7u25wc5c",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82dzr900mk3j7lparaj1ui",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82dztv00ml3j7lpkorz9xa",
+          "name": "Early May Bank Holiday",
+          "description": "Early May Bank Holiday",
+          "category": "federal",
+          "date": "2026-05-04T04:00:00.000Z",
+          "daysUntil": 63,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "IS",
+      "name": "Iceland",
+      "count": 16,
+      "apiSample": [
+        {
+          "id": "cmm82e5ys00mw3j7lxfz2dnza",
+          "name": "Maundy Thursday",
+          "description": "Skírdagur",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82e61g00mx3j7ljt8tapsw",
+          "name": "Good Friday",
+          "description": "Föstudagurinn langi",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82e65800my3j7l9ubf59wx",
+          "name": "Easter Sunday",
+          "description": "Páskadagur",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "IT",
+      "name": "Italy",
+      "count": 14,
+      "apiSample": [
+        {
+          "id": "cmm82ee5d00nd3j7ltb6tnmhw",
+          "name": "Easter Sunday",
+          "description": "Pasqua",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82ee8400ne3j7l940tng4m",
+          "name": "Easter Monday",
+          "description": "Lunedì dell'Angelo",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82eeas00nf3j7l0q4h03fr",
+          "name": "Liberation Day",
+          "description": "Festa della Liberazione",
+          "category": "federal",
+          "date": "2026-04-25T04:00:00.000Z",
+          "daysUntil": 54,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "JE",
+      "name": "Jersey",
+      "count": 9,
+      "apiSample": [
+        {
+          "id": "cmm82ekza00nq3j7lwvxhyl8w",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82el1z00nr3j7l80aomkm8",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82el4o00ns3j7lkppe02vd",
+          "name": "Early May Bank Holiday",
+          "description": "Early May Bank Holiday",
+          "category": "federal",
+          "date": "2026-05-04T04:00:00.000Z",
+          "daysUntil": 63,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "JM",
+      "name": "Jamaica",
+      "count": 10,
+      "apiSample": [
+        {
+          "id": "cmm82eqxj00o03j7lvs2w6o32",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82er0700o13j7lceci1277",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82er2y00o23j7lhdvfbkwu",
+          "name": "Labour Day",
+          "description": "Labour Day",
+          "category": "federal",
+          "date": "2026-05-23T04:00:00.000Z",
+          "daysUntil": 82,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "JP",
+      "name": "Japan",
+      "count": 16,
+      "apiSample": [
+        {
+          "id": "cmm82ewpy00oc3j7lo0sr9j53",
+          "name": "Vernal Equinox Day",
+          "description": "春分の日",
+          "category": "federal",
+          "date": "2026-03-20T04:00:00.000Z",
+          "daysUntil": 18,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82ewsm00od3j7lq833k64d",
+          "name": "Shōwa Day",
+          "description": "昭和の日",
+          "category": "federal",
+          "date": "2026-04-29T04:00:00.000Z",
+          "daysUntil": 58,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82ewva00oe3j7lw9gal2q6",
+          "name": "Constitution Memorial Day",
+          "description": "憲法記念日",
+          "category": "federal",
+          "date": "2026-05-04T04:00:00.000Z",
+          "daysUntil": 63,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "KE",
+      "name": "Kenya",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm82f3zn00op3j7ljhrtj6ji",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82f42n00oq3j7lvvqeltix",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82f45a00or3j7lnb6qxpjb",
+          "name": "Labour Day",
+          "description": "Labour Day",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "KR",
+      "name": "South Korea",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm82f9zz00p13j7l12i602jd",
+          "name": "Independence Movement Day",
+          "description": "3·1절",
+          "category": "federal",
+          "date": "2026-03-01T05:00:00.000Z",
+          "daysUntil": 0,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82fa2s00p23j7leuab2914",
+          "name": "Children's Day",
+          "description": "어린이날",
+          "category": "federal",
+          "date": "2026-05-05T04:00:00.000Z",
+          "daysUntil": 64,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82fa5o00p33j7lez5uvddm",
+          "name": "Buddha's Birthday",
+          "description": "부처님 오신 날",
+          "category": "federal",
+          "date": "2026-05-24T04:00:00.000Z",
+          "daysUntil": 83,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "KZ",
+      "name": "Kazakhstan",
+      "count": 10,
+      "apiSample": [
+        {
+          "id": "cmm82fhde00pb3j7lxa4adkmm",
+          "name": "International Women's Day",
+          "description": "Халықаралық әйелдер күні",
+          "category": "federal",
+          "date": "2026-03-08T05:00:00.000Z",
+          "daysUntil": 7,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82fhgm00pc3j7lhxwzzkut",
+          "name": "Nauryz Meyramy",
+          "description": "Наурыз мейрамы",
+          "category": "federal",
+          "date": "2026-03-23T04:00:00.000Z",
+          "daysUntil": 21,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82fhon00pd3j7lasrco0y5",
+          "name": "Kazakhstan People's Unity Day",
+          "description": "Қазақстан халқының",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "LI",
+      "name": "Liechtenstein",
+      "count": 21,
+      "apiSample": [
+        {
+          "id": "cmm82fop000pp3j7lsdk3k401",
+          "name": "Saint Joseph's Day",
+          "description": "Josefstag",
+          "category": "federal",
+          "date": "2026-03-19T04:00:00.000Z",
+          "daysUntil": 17,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82form00pq3j7lra6smccz",
+          "name": "Good Friday",
+          "description": "Karfreitag",
+          "category": "bank",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82fouk00pr3j7la6ag2ony",
+          "name": "Easter Monday",
+          "description": "Ostermontag",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "LS",
+      "name": "Lesotho",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm82fyco00q63j7l5ijz5xgl",
+          "name": "Moshoeshoe Day",
+          "description": "Moshoeshoe Day",
+          "category": "federal",
+          "date": "2026-03-11T04:00:00.000Z",
+          "daysUntil": 9,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82fyfb00q73j7lk4yqi5vt",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82fyhy00q83j7lm5y02b10",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "LT",
+      "name": "Lithuania",
+      "count": 14,
+      "apiSample": [
+        {
+          "id": "cmm82g4ru00qi3j7l72ovm2ca",
+          "name": "Day of Restoration of Independence of Lithuania",
+          "description": "Lietuvos nepriklausomybės atkūrimo diena",
+          "category": "federal",
+          "date": "2026-03-11T04:00:00.000Z",
+          "daysUntil": 9,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82g4ue00qj3j7lw959r6dl",
+          "name": "Easter Sunday",
+          "description": "Velykos",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82g4x200qk3j7lfq79kndi",
+          "name": "Easter Monday",
+          "description": "Antroji Velykų diena",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "LU",
+      "name": "Luxembourg",
+      "count": 12,
+      "apiSample": [
+        {
+          "id": "cmm82gc7t00qv3j7l5hcuenva",
+          "name": "Good Friday",
+          "description": "Karfreideg",
+          "category": "bank",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82gcai00qw3j7lcnjfvwzs",
+          "name": "Easter Monday",
+          "description": "Ouschterméindeg",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82gcdb00qx3j7l8wtwg7tq",
+          "name": "Labour Day",
+          "description": "Dag vun der Aarbecht",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "LV",
+      "name": "Latvia",
+      "count": 14,
+      "apiSample": [
+        {
+          "id": "cmm82giwh00r73j7lo1musfxp",
+          "name": "Good Friday",
+          "description": "Lielā Piektdiena",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82gizn00r83j7lo0kz6vv1",
+          "name": "Easter Sunday",
+          "description": "Lieldienas",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82gj2j00r93j7lvxoqccy8",
+          "name": "Easter Monday",
+          "description": "Otrās Lieldienas",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "MA",
+      "name": "Morocco",
+      "count": 10,
+      "apiSample": [
+        {
+          "id": "cmm82gqhx00rm3j7l8fnv38jk",
+          "name": "Labour Day",
+          "description": "Eid Ash-Shughl",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82gqkm00rn3j7lpzbcvzy0",
+          "name": "Enthronement",
+          "description": "Eid Al-Ârch",
+          "category": "federal",
+          "date": "2026-07-30T04:00:00.000Z",
+          "daysUntil": 150,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82gqoi00ro3j7lbi33xfq5",
+          "name": "Zikra Oued Ed-Dahab",
+          "description": "Oued Ed-Dahab Day",
+          "category": "federal",
+          "date": "2026-08-14T04:00:00.000Z",
+          "daysUntil": 165,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "MC",
+      "name": "Monaco",
+      "count": 12,
+      "apiSample": [
+        {
+          "id": "cmm82gvid00rw3j7lshuls5m4",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82gvl100rx3j7l9pkx6lv0",
+          "name": "May Day",
+          "description": "Le 1er mai",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82gvqf00rz3j7lydk4wn5e",
+          "name": "Whit Monday",
+          "description": "Le lundi de Pentecôte",
+          "category": "federal",
+          "date": "2026-05-25T04:00:00.000Z",
+          "daysUntil": 84,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "MD",
+      "name": "Moldova",
+      "count": 15,
+      "apiSample": [
+        {
+          "id": "cmm82h20600s93j7lflnxcozj",
+          "name": "International Women's Day",
+          "description": "International Women's Day",
+          "category": "federal",
+          "date": "2026-03-08T05:00:00.000Z",
+          "daysUntil": 7,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82h22z00sa3j7l30nthewf",
+          "name": "Easter Sunday",
+          "description": "Orthodox Easter",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82h25m00sb3j7l4gbw0j2u",
+          "name": "Labour Day (Moldova)",
+          "description": "Labour Day (Moldova)",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "ME",
+      "name": "Montenegro",
+      "count": 13,
+      "apiSample": [
+        {
+          "id": "cmm82haa900so3j7l1q50xs4l",
+          "name": "Good Friday",
+          "description": "Vaskrs",
+          "category": "optional",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82had100sp3j7lwef5i4vm",
+          "name": "Easter Sunday",
+          "description": "Uskrs",
+          "category": "optional",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82hafv00sq3j7lsg92cef6",
+          "name": "Easter Monday",
+          "description": "Vaskrs",
+          "category": "optional",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "MG",
+      "name": "Madagascar",
+      "count": 10,
+      "apiSample": [
+        {
+          "id": "cmm82hjsu00sz3j7lybdq8ioo",
+          "name": "Martyrs' Day",
+          "description": "Martyrs' Day",
+          "category": "federal",
+          "date": "2026-03-29T04:00:00.000Z",
+          "daysUntil": 27,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82hjvk00t03j7ly99qoshk",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82hjya00t13j7lmko5v5at",
+          "name": "Labour Day",
+          "description": "Labour Day",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "MK",
+      "name": "North Macedonia",
+      "count": 12,
+      "apiSample": [
+        {
+          "id": "cmm82hpsx00ta3j7lad7bf0ju",
+          "name": "Good Friday",
+          "description": "Велики Петок, Veliki Petok",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82hpvt00tb3j7l0kver7c1",
+          "name": "Easter Sunday",
+          "description": "Прв ден Велигден, Prv den Veligden",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82hpyi00tc3j7l06oss3cm",
+          "name": "Easter Monday",
+          "description": "Втор ден Велигден, Vtor den Veligden",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "MN",
+      "name": "Mongolia",
+      "count": 5,
+      "apiSample": [
+        {
+          "id": "cmm82hvzt00tl3j7lknin7j81",
+          "name": "International Women's Day",
+          "description": "Олон Улсын Эмэгтэйчүүдийн Баяр",
+          "category": "federal",
+          "date": "2026-03-08T05:00:00.000Z",
+          "daysUntil": 7,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82hw2h00tm3j7lztlo8js2",
+          "name": "Naadam Holiday",
+          "description": "Наадам",
+          "category": "federal",
+          "date": "2026-07-15T04:00:00.000Z",
+          "daysUntil": 135,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82hwj500tn3j7l2gu5ntqc",
+          "name": "Republic Day",
+          "description": "Улс тунхагласны өдөр",
+          "category": "federal",
+          "date": "2026-11-26T05:00:00.000Z",
+          "daysUntil": 270,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "MS",
+      "name": "Montserrat",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm82i1sy00tq3j7lepm1v9kk",
+          "name": "Saint Patrick's Day",
+          "description": "Saint Patrick's Day",
+          "category": "federal",
+          "date": "2026-03-17T04:00:00.000Z",
+          "daysUntil": 15,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82i1vm00tr3j7lxes77ftq",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82i1yd00ts3j7lkvqcfhpv",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "MT",
+      "name": "Malta",
+      "count": 14,
+      "apiSample": [
+        {
+          "id": "cmm82i7ud00u23j7l3iex0w2r",
+          "name": "Feast of St. Joseph",
+          "description": "San Ġużepp",
+          "category": "federal",
+          "date": "2026-03-19T04:00:00.000Z",
+          "daysUntil": 17,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82i7xd00u33j7lzb7swgrq",
+          "name": "Freedom Day",
+          "description": "Jum il-Ħelsien",
+          "category": "federal",
+          "date": "2026-03-31T04:00:00.000Z",
+          "daysUntil": 29,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82i80300u43j7lc54d7wov",
+          "name": "Good Friday",
+          "description": "Il-Ġimgħa l-Kbira",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "MX",
+      "name": "Mexico",
+      "count": 10,
+      "apiSample": [
+        {
+          "id": "cmm82iezg00ug3j7lnhcjp7q1",
+          "name": "Benito Juárez's birthday",
+          "description": "Natalicio de Benito Juárez",
+          "category": "federal",
+          "date": "2026-03-16T04:00:00.000Z",
+          "daysUntil": 14,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82if2500uh3j7llxx1qh7c",
+          "name": "Maundy Thursday",
+          "description": "Jueves Santo",
+          "category": "bank",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82if5000ui3j7lylser4d1",
+          "name": "Good Friday",
+          "description": "Viernes Santo",
+          "category": "bank",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "MZ",
+      "name": "Mozambique",
+      "count": 9,
+      "apiSample": [
+        {
+          "id": "cmm82ijww00uq3j7l8t5irtkb",
+          "name": "Women's Day",
+          "description": "Dia da Mulher",
+          "category": "federal",
+          "date": "2026-04-07T04:00:00.000Z",
+          "daysUntil": 36,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82ijzk00ur3j7lx9k8036k",
+          "name": "Worker's Day",
+          "description": "Dia do Trabalhador",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82ik2c00us3j7lc4yg20js",
+          "name": "Independence Day",
+          "description": "Dia da Independência",
+          "category": "federal",
+          "date": "2026-06-25T04:00:00.000Z",
+          "daysUntil": 115,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "NA",
+      "name": "Namibia",
+      "count": 13,
+      "apiSample": [
+        {
+          "id": "cmm82iplg00uy3j7l3ifln9hr",
+          "name": "Independence Day",
+          "description": "Independence Day",
+          "category": "federal",
+          "date": "2026-03-21T04:00:00.000Z",
+          "daysUntil": 19,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82ipo300uz3j7lmb20rhxd",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82ipqs00v03j7lzutnny5z",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "NE",
+      "name": "Niger",
+      "count": 7,
+      "apiSample": [
+        {
+          "id": "cmm82iw4900vb3j7l0k5xwfut",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82iw7400vc3j7lvsksbc3w",
+          "name": "Concord Day",
+          "description": "Concord Day",
+          "category": "federal",
+          "date": "2026-04-24T04:00:00.000Z",
+          "daysUntil": 53,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82iw9t00vd3j7l2c279nkc",
+          "name": "Labour Day",
+          "description": "Labour Day",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "NG",
+      "name": "Nigeria",
+      "count": 10,
+      "apiSample": [
+        {
+          "id": "cmm82j0w000vi3j7lc6bqti6m",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82j0yo00vj3j7l7f229h8j",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82j11g00vk3j7ln0jmzu71",
+          "name": "Workers' Day",
+          "description": "Workers' Day",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "NI",
+      "name": "Nicaragua",
+      "count": 12,
+      "apiSample": [
+        {
+          "id": "cmm82j6o800vt3j7l027bbfay",
+          "name": "Holy Thursday",
+          "description": "Holy Thursday",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82j6qx00vu3j7lisatgw18",
+          "name": "Labour Day",
+          "description": "Labour Day",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82j6to00vv3j7lbm6fwes8",
+          "name": "Army Day",
+          "description": "Army Day",
+          "category": "federal",
+          "date": "2026-05-27T04:00:00.000Z",
+          "daysUntil": 86,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "NL",
+      "name": "Netherlands",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm82jcwc00w43j7lx61t1rie",
+          "name": "Good Friday",
+          "description": "Goede Vrijdag",
+          "category": "school",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82jcz000w53j7lmjc4tzyx",
+          "name": "Easter Sunday",
+          "description": "Eerste Paasdag",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82jd1o00w63j7lgefs0d8l",
+          "name": "Easter Monday",
+          "description": "Tweede Paasdag",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "NO",
+      "name": "Norway",
+      "count": 12,
+      "apiSample": [
+        {
+          "id": "cmm82jirp00wf3j7l98ujihcb",
+          "name": "Maundy Thursday",
+          "description": "Skjærtorsdag",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82jiug00wg3j7lj9z50lzp",
+          "name": "Good Friday",
+          "description": "Langfredag",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82jixf00wh3j7lhsmzikir",
+          "name": "Easter Sunday",
+          "description": "Første påskedag",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "NZ",
+      "name": "New Zealand",
+      "count": 25,
+      "apiSample": [
+        {
+          "id": "cmm82jp7300ww3j7lxfvf3pyz",
+          "name": "Taranaki Anniversary Day",
+          "description": "Taranaki Anniversary Day",
+          "category": "federal",
+          "date": "2026-03-09T04:00:00.000Z",
+          "daysUntil": 7,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82jp9u00wx3j7l588fokru",
+          "name": "Otago Anniversary Day",
+          "description": "Otago Anniversary Day",
+          "category": "federal",
+          "date": "2026-03-23T04:00:00.000Z",
+          "daysUntil": 21,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82jpcs00wy3j7l028cjl2b",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "PA",
+      "name": "Panama",
+      "count": 12,
+      "apiSample": [
+        {
+          "id": "cmm82k01100xi3j7l1mr7b6rs",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82k03o00xj3j7l2u4il3sx",
+          "name": "Labour Day",
+          "description": "Labour Day",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82k06c00xk3j7lga6zdim0",
+          "name": "Separation Day",
+          "description": "Separation Day",
+          "category": "federal",
+          "date": "2026-11-03T05:00:00.000Z",
+          "daysUntil": 247,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "PE",
+      "name": "Peru",
+      "count": 13,
+      "apiSample": [
+        {
+          "id": "cmm82k77z00xs3j7losp5c7g9",
+          "name": "Holy Thursday",
+          "description": "Jueves Santo",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82k7ao00xt3j7lnjtvjfg2",
+          "name": "Maundy Thursday",
+          "description": "Jueves Santo",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82k7dc00xu3j7ltm2lk2ua",
+          "name": "Good Friday",
+          "description": "Viernes Santo",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "PG",
+      "name": "Papua New Guinea",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm82keus00y53j7l5w0nbwz5",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82kexk00y63j7ljcduxhdn",
+          "name": "Holy Saturday",
+          "description": "Holy Saturday",
+          "category": "federal",
+          "date": "2026-04-04T04:00:00.000Z",
+          "daysUntil": 33,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82kf0800y73j7lauqg9jsi",
+          "name": "Easter Sunday",
+          "description": "Easter Sunday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "PH",
+      "name": "Philippines",
+      "count": 21,
+      "apiSample": [
+        {
+          "id": "cmm82kqxz00yx3j7lex03alwm",
+          "name": "Feast of Ramadhan",
+          "description": "Eid’l Fitr",
+          "category": "federal",
+          "date": "2026-04-01T04:00:00.000Z",
+          "daysUntil": 30,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82klej00yi3j7lynkwkou8",
+          "name": "Maundy Thursday",
+          "description": "Huwebes Santo",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82klh800yj3j7lfi6ufong",
+          "name": "Good Friday",
+          "description": "Biyernes Santo",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "PL",
+      "name": "Poland",
+      "count": 14,
+      "apiSample": [
+        {
+          "id": "cmm82kv1700z23j7ly1b1x551",
+          "name": "Easter Sunday",
+          "description": "Wielkanoc",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82kv3v00z33j7l776937fy",
+          "name": "Easter Monday",
+          "description": "Drugi Dzień Wielkanocy",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82kv6j00z43j7l3niix3s5",
+          "name": "May Day",
+          "description": "Święto Pracy",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "PR",
+      "name": "Puerto Rico",
+      "count": 21,
+      "apiSample": [
+        {
+          "id": "cmm82l22400zk3j7lstws5z9o",
+          "name": "Emancipation Day",
+          "description": "Día de la Abolición de Esclavitud",
+          "category": "federal",
+          "date": "2026-03-22T04:00:00.000Z",
+          "daysUntil": 20,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82l24z00zl3j7layjv9qck",
+          "name": "Good Friday",
+          "description": "Viernes Santo",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82l27o00zm3j7lzpz57ujv",
+          "name": "Birthday of José de Diego",
+          "description": "Natalicio de José de Diego",
+          "category": "federal",
+          "date": "2026-04-20T04:00:00.000Z",
+          "daysUntil": 49,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "PT",
+      "name": "Portugal",
+      "count": 17,
+      "apiSample": [
+        {
+          "id": "cmm82lc1k01013j7ldq1qeono",
+          "name": "Good Friday",
+          "description": "Sexta-feira Santa",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82lc4b01023j7lmphecd7c",
+          "name": "Easter Sunday",
+          "description": "Domingo de Páscoa",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82lc6z01033j7l6eii7876",
+          "name": "Freedom Day",
+          "description": "Dia da Liberdade",
+          "category": "federal",
+          "date": "2026-04-25T04:00:00.000Z",
+          "daysUntil": 54,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "PY",
+      "name": "Paraguay",
+      "count": 11,
+      "apiSample": [
+        {
+          "id": "cmm82lkek010h3j7lgr122heg",
+          "name": "Heroes' day",
+          "description": "Dia de los héroes",
+          "category": "federal",
+          "date": "2026-03-01T05:00:00.000Z",
+          "daysUntil": 0,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82lkh7010i3j7l7o9ramiz",
+          "name": "Maundy Thursday",
+          "description": "Jueves Santo",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82lkjv010j3j7laqrpw19o",
+          "name": "Good Friday",
+          "description": "Viernes Santo",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "RO",
+      "name": "Romania",
+      "count": 17,
+      "apiSample": [
+        {
+          "id": "cmm82lr8j010u3j7ly843ic8d",
+          "name": "Good Friday",
+          "description": "Vinerea mare",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82lrbb010v3j7l1tim7fln",
+          "name": "Easter Sunday",
+          "description": "Paștele",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82lre0010w3j7lyewhwrsw",
+          "name": "Easter Monday",
+          "description": "Paștele",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "RS",
+      "name": "Serbia",
+      "count": 8,
+      "apiSample": [
+        {
+          "id": "cmm82lzhn011b3j7ln64q440z",
+          "name": "Good Friday",
+          "description": "Veliki petak",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82lzkd011c3j7la47zlf5p",
+          "name": "Easter Sunday",
+          "description": "Vaskrs (Uskrs)",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82lzn4011d3j7lbklww01z",
+          "name": "Easter Monday",
+          "description": "Vaskrsni (Uskrsni) ponedeljak",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "RU",
+      "name": "Russia",
+      "count": 9,
+      "apiSample": [
+        {
+          "id": "cmm82m5gn011k3j7ldzzmnzvn",
+          "name": "International Women's Day",
+          "description": "Международный женский день",
+          "category": "federal",
+          "date": "2026-03-08T05:00:00.000Z",
+          "daysUntil": 7,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82m5jb011l3j7l9jr5jcop",
+          "name": "Labour Day",
+          "description": "День труда",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82m5m0011m3j7lrll6lujl",
+          "name": "Victory Day",
+          "description": "День Победы",
+          "category": "federal",
+          "date": "2026-05-09T04:00:00.000Z",
+          "daysUntil": 68,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "SC",
+      "name": "Seychelles",
+      "count": 13,
+      "apiSample": [
+        {
+          "id": "cmm82mcfv011r3j7lrjrknoli",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82mcik011s3j7lux9absu9",
+          "name": "Holy Saturday",
+          "description": "Easter Saturday",
+          "category": "federal",
+          "date": "2026-04-04T04:00:00.000Z",
+          "daysUntil": 33,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82mcl8011t3j7l2rewmh3e",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "SE",
+      "name": "Sweden",
+      "count": 16,
+      "apiSample": [
+        {
+          "id": "cmm82mk5u01243j7lb3nea5ef",
+          "name": "Good Friday",
+          "description": "Långfredagen",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82mk9501253j7l2ucie8vh",
+          "name": "Easter Sunday",
+          "description": "Påskdagen",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82mkcb01263j7lsy365j4v",
+          "name": "Easter Monday",
+          "description": "Annandag påsk",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "SG",
+      "name": "Singapore",
+      "count": 12,
+      "apiSample": [
+        {
+          "id": "cmm82msaq012m3j7l31aq9t5r",
+          "name": "Hari Raya Puasa",
+          "description": "Hari Raya Puasa",
+          "category": "federal",
+          "date": "2026-03-20T04:00:00.000Z",
+          "daysUntil": 18,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82ms5b012k3j7l3d73sl88",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82ms84012l3j7ly1h3lkka",
+          "name": "Labour Day",
+          "description": "Labour Day",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "SI",
+      "name": "Slovenia",
+      "count": 20,
+      "apiSample": [
+        {
+          "id": "cmm82myaq012w3j7lhxc03st1",
+          "name": "Easter Sunday",
+          "description": "velikonočna nedelja in ponedeljek",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82mydw012x3j7lj4ypsjb7",
+          "name": "Easter Monday",
+          "description": "velikonočna nedelja in ponedeljek",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82mygm012y3j7lnkg7qbdo",
+          "name": "Day of Uprising Against Occupation",
+          "description": "dan upora proti okupatorju",
+          "category": "federal",
+          "date": "2026-04-27T04:00:00.000Z",
+          "daysUntil": 56,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "SJ",
+      "name": "Svalbard and Jan Mayen",
+      "count": 12,
+      "apiSample": [
+        {
+          "id": "cmm82n89v013f3j7lb81xws79",
+          "name": "Maundy Thursday",
+          "description": "Skjærtorsdag",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82n8cj013g3j7lc69a65jk",
+          "name": "Good Friday",
+          "description": "Langfredag",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82n8f8013h3j7lwrzci7or",
+          "name": "Easter Sunday",
+          "description": "Første påskedag",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "SK",
+      "name": "Slovakia",
+      "count": 15,
+      "apiSample": [
+        {
+          "id": "cmm82nfcm013s3j7lnxg5d2in",
+          "name": "Good Friday",
+          "description": "Veľkonočný piatok",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82nffa013t3j7l6hf37xq1",
+          "name": "Easter Monday",
+          "description": "Veľkonočný pondelok",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82nfhy013u3j7l45c69y2r",
+          "name": "International Workers' Day",
+          "description": "Sviatok práce",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "SM",
+      "name": "San Marino",
+      "count": 18,
+      "apiSample": [
+        {
+          "id": "cmm82nnei01483j7lhvu2mfxh",
+          "name": "Anniversary of the Arengo",
+          "description": "Anniversary of the Arengo",
+          "category": "federal",
+          "date": "2026-03-25T04:00:00.000Z",
+          "daysUntil": 23,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82nnhi01493j7lapiategs",
+          "name": "Easter Sunday",
+          "description": "Easter Sunday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82nnka014a3j7l0ow1npsk",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "SR",
+      "name": "Suriname",
+      "count": 18,
+      "apiSample": [
+        {
+          "id": "cmm82nwmx014s3j7lrkhghpw8",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82nwpm014t3j7ltq9rlgq2",
+          "name": "Easter Sunday",
+          "description": "Easter Sunday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82nwsm014u3j7lfetewtrf",
+          "name": "Labour Day",
+          "description": "Labour Day",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "SV",
+      "name": "El Salvador",
+      "count": 14,
+      "apiSample": [
+        {
+          "id": "cmm82o4wy01553j7lo5y1hjle",
+          "name": "Labour Day",
+          "description": "Día del Trabajo",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82o4zq01563j7ltw3ygh6d",
+          "name": "The Day of the Cross",
+          "description": "Día de la Cru",
+          "category": "federal",
+          "date": "2026-05-03T04:00:00.000Z",
+          "daysUntil": 62,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82o52i01573j7l2j7481eh",
+          "name": "Soldiers' Day",
+          "description": "Día del Soldado",
+          "category": "federal",
+          "date": "2026-05-07T04:00:00.000Z",
+          "daysUntil": 66,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "TN",
+      "name": "Tunisia",
+      "count": 8,
+      "apiSample": [
+        {
+          "id": "cmm82ohpj015k3j7l51yseevz",
+          "name": "Independence Day",
+          "description": "عيد الاستقلال",
+          "category": "federal",
+          "date": "2026-03-20T04:00:00.000Z",
+          "daysUntil": 18,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82ohss015l3j7l28y41bq5",
+          "name": "Martyrs' Day",
+          "description": "عيد الشهداء",
+          "category": "federal",
+          "date": "2026-04-09T04:00:00.000Z",
+          "daysUntil": 38,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82ohvo015m3j7lbpqatx6j",
+          "name": "Labour Day",
+          "description": "عيد الشغل",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "TR",
+      "name": "Türkiye",
+      "count": 7,
+      "apiSample": [
+        {
+          "id": "cmm82omp9015s3j7lycf3q3l5",
+          "name": "National Independence & Children's Day",
+          "description": "Ulusal Egemenlik ve Çocuk Bayramı",
+          "category": "federal",
+          "date": "2026-04-23T04:00:00.000Z",
+          "daysUntil": 52,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82oms2015t3j7luxbjzm2a",
+          "name": "Labour Day",
+          "description": "İşçi Bayramı",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82omuq015u3j7l2fcuf6kt",
+          "name": "Atatürk Commemoration & Youth Day",
+          "description": "Atatürk'ü Anma, Gençlik ve Spor Bayramı",
+          "category": "federal",
+          "date": "2026-05-19T04:00:00.000Z",
+          "daysUntil": 78,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "UA",
+      "name": "Ukraine",
+      "count": 12,
+      "apiSample": [
+        {
+          "id": "cmm82ordq01603j7lnwj2o4e0",
+          "name": "International Women's Day",
+          "description": "Міжнародний жіночий день",
+          "category": "federal",
+          "date": "2026-03-08T05:00:00.000Z",
+          "daysUntil": 7,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82orgh01613j7l0ci3a5bw",
+          "name": "Easter Sunday",
+          "description": "Великдень",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82orjd01623j7le189tcm8",
+          "name": "International Workers' Day",
+          "description": "День праці",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "US",
+      "name": "United States",
+      "count": 28,
+      "apiSample": [
+        {
+          "id": "cmm6zybex000cm4w7g3fc8r0i",
+          "name": "St. Patrick's Day",
+          "description": "Irish cultural and religious celebration",
+          "category": "cultural",
+          "date": "2026-03-17T04:00:00.000Z",
+          "daysUntil": 15,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm73xyt20003j4l2dihytk82",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "optional",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm6zybg9000dm4w75093bd7r",
+          "name": "Easter Sunday",
+          "description": "Christian holiday celebrating the resurrection of Jesus",
+          "category": "religious",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "UY",
+      "name": "Uruguay",
+      "count": 14,
+      "apiSample": [
+        {
+          "id": "cmm82p5bh016d3j7l7qimrkhc",
+          "name": "Maundy Thursday",
+          "description": "Semana de Turismo",
+          "category": "federal",
+          "date": "2026-04-02T04:00:00.000Z",
+          "daysUntil": 31,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82p5e4016e3j7lwse9xoi6",
+          "name": "Good Friday",
+          "description": "Semana de Turismo",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82p5he016f3j7l9gisfbqq",
+          "name": "Landing of the 33 Patriots Day",
+          "description": "Desembarco de los 33 Orientales",
+          "category": "federal",
+          "date": "2026-04-19T04:00:00.000Z",
+          "daysUntil": 48,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "VA",
+      "name": "Vatican City",
+      "count": 15,
+      "apiSample": [
+        {
+          "id": "cmm82pd32016r3j7l9toup3ya",
+          "name": "Anniversary of the election of Pope Francis",
+          "description": "Anniversario dell'Elezione del Santo Padre",
+          "category": "federal",
+          "date": "2026-03-13T04:00:00.000Z",
+          "daysUntil": 11,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82pd5q016s3j7l214wcni5",
+          "name": "Saint Joseph's Day",
+          "description": "San Giuseppe",
+          "category": "federal",
+          "date": "2026-03-19T04:00:00.000Z",
+          "daysUntil": 17,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82pd8j016t3j7lbq89px9r",
+          "name": "Easter Monday",
+          "description": "Lunedì dell'Angelo",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "VE",
+      "name": "Venezuela",
+      "count": 33,
+      "apiSample": [
+        {
+          "id": "cmm82plhs01793j7laftqeoho",
+          "name": "International Women's Day",
+          "description": "Dia Internacional de la Mujer",
+          "category": "observance",
+          "date": "2026-03-08T05:00:00.000Z",
+          "daysUntil": 7,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82plkh017a3j7lrehzi2ia",
+          "name": "Saint Joseph's Day",
+          "description": "Día de San José",
+          "category": "bank",
+          "date": "2026-03-19T04:00:00.000Z",
+          "daysUntil": 17,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82pln5017b3j7leu5er0lz",
+          "name": "Slavery Abolition Anniversary",
+          "description": "Día del abolición de la esclavitud",
+          "category": "observance",
+          "date": "2026-03-21T04:00:00.000Z",
+          "daysUntil": 19,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "VN",
+      "name": "Vietnam",
+      "count": 4,
+      "apiSample": [
+        {
+          "id": "cmm82pzx301813j7lo1seg7cf",
+          "name": "Reunification Day",
+          "description": "Ngày Giải phóng miền Nam, thống nhất đất nước",
+          "category": "federal",
+          "date": "2026-04-30T04:00:00.000Z",
+          "daysUntil": 59,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82pzzv01823j7ldwmslngj",
+          "name": "Labour Day",
+          "description": "Ngày Quốc tế lao động",
+          "category": "federal",
+          "date": "2026-05-01T04:00:00.000Z",
+          "daysUntil": 60,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82q02l01833j7lzq2qvidw",
+          "name": "National Day",
+          "description": "Quốc khánh",
+          "category": "federal",
+          "date": "2026-09-02T04:00:00.000Z",
+          "daysUntil": 184,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "ZA",
+      "name": "South Africa",
+      "count": 14,
+      "apiSample": [
+        {
+          "id": "cmm82q3aq01853j7l6c86gbh3",
+          "name": "Human Rights Day",
+          "description": "Human Rights Day",
+          "category": "federal",
+          "date": "2026-03-21T04:00:00.000Z",
+          "daysUntil": 19,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82q3dh01863j7lia1ns1zm",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82q3gg01873j7ltiw3cn1d",
+          "name": "Family Day",
+          "description": "Family Day",
+          "category": "federal",
+          "date": "2026-04-06T04:00:00.000Z",
+          "daysUntil": 35,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    },
+    {
+      "countryCode": "ZW",
+      "name": "Zimbabwe",
+      "count": 13,
+      "apiSample": [
+        {
+          "id": "cmm82q9r4018k3j7luo8j8mnr",
+          "name": "Good Friday",
+          "description": "Good Friday",
+          "category": "federal",
+          "date": "2026-04-03T04:00:00.000Z",
+          "daysUntil": 32,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82q9u1018l3j7lyx2ruhu5",
+          "name": "Holy Saturday",
+          "description": "Easter Saturday",
+          "category": "federal",
+          "date": "2026-04-04T04:00:00.000Z",
+          "daysUntil": 33,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        },
+        {
+          "id": "cmm82qa0o018n3j7ltgsniq3l",
+          "name": "Easter Monday",
+          "description": "Easter Monday",
+          "category": "federal",
+          "date": "2026-04-05T04:00:00.000Z",
+          "daysUntil": 34,
+          "enabled": false,
+          "reminderOffsets": [],
+          "reminderTime": "08:00",
+          "hasPreference": false
+        }
+      ]
+    }
+  ]
+}

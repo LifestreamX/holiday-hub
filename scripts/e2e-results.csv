@@ -1,0 +1,122 @@
+countryCode,name,count
+ALL,"All countries",28
+AD,"Andorra",14
+AL,"Albania",11
+AM,"Armenia",12
+AR,"Argentina",15
+AT,"Austria",14
+AU,"Australia",22
+AX,"Åland Islands",16
+BA,"Bosnia and Herzegovina",13
+BB,"Barbados",12
+BE,"Belgium",14
+BG,"Bulgaria",15
+BJ,"Benin",14
+BO,"Bolivia",11
+BR,"Brazil",14
+BS,"Bahamas",11
+BW,"Botswana",11
+BY,"Belarus",9
+BZ,"Belize",15
+CA,"Canada",30
+CD,"DR Congo",11
+CG,"Congo",11
+CH,"Switzerland",23
+CL,"Chile",18
+CN,"China",6
+CO,"Colombia",18
+CR,"Costa Rica",11
+CU,"Cuba",9
+CY,"Cyprus",17
+CZ,"Czechia",13
+DE,"Germany",20
+DK,"Denmark",15
+DO,"Dominican Republic",13
+EC,"Ecuador",10
+EE,"Estonia",12
+EG,"Egypt",7
+ES,"Spain",35
+FI,"Finland",15
+FO,"Faroe Islands",17
+FR,"France",11
+GA,"Gabon",11
+GB,"United Kingdom",16
+GD,"Grenada",13
+GE,"Georgia",16
+GG,"Guernsey",9
+GH,"Ghana",11
+GI,"Gibraltar",12
+GL,"Greenland",16
+GM,"Gambia",9
+GR,"Greece",15
+GT,"Guatemala",13
+GY,"Guyana",11
+HK,"Hong Kong",17
+HN,"Honduras",11
+HR,"Croatia",14
+HT,"Haiti",19
+HU,"Hungary",13
+ID,"Indonesia",8
+IE,"Ireland",11
+IM,"Isle of Man",13
+IS,"Iceland",16
+IT,"Italy",14
+JE,"Jersey",9
+JM,"Jamaica",10
+JP,"Japan",16
+KE,"Kenya",11
+KR,"South Korea",11
+KZ,"Kazakhstan",10
+LI,"Liechtenstein",21
+LS,"Lesotho",11
+LT,"Lithuania",14
+LU,"Luxembourg",12
+LV,"Latvia",14
+MA,"Morocco",10
+MC,"Monaco",12
+MD,"Moldova",15
+ME,"Montenegro",13
+MG,"Madagascar",10
+MK,"North Macedonia",12
+MN,"Mongolia",5
+MS,"Montserrat",11
+MT,"Malta",14
+MX,"Mexico",10
+MZ,"Mozambique",9
+NA,"Namibia",13
+NE,"Niger",7
+NG,"Nigeria",10
+NI,"Nicaragua",12
+NL,"Netherlands",11
+NO,"Norway",12
+NZ,"New Zealand",25
+PA,"Panama",12
+PE,"Peru",13
+PG,"Papua New Guinea",11
+PH,"Philippines",21
+PL,"Poland",14
+PR,"Puerto Rico",21
+PT,"Portugal",17
+PY,"Paraguay",11
+RO,"Romania",17
+RS,"Serbia",8
+RU,"Russia",9
+SC,"Seychelles",13
+SE,"Sweden",16
+SG,"Singapore",12
+SI,"Slovenia",20
+SJ,"Svalbard and Jan Mayen",12
+SK,"Slovakia",15
+SM,"San Marino",18
+SR,"Suriname",18
+SV,"El Salvador",14
+TN,"Tunisia",8
+TR,"Türkiye",7
+UA,"Ukraine",12
+US,"United States",28
+UY,"Uruguay",14
+VA,"Vatican City",15
+VE,"Venezuela",33
+VN,"Vietnam",4
+ZA,"South Africa",14
+ZW,"Zimbabwe",13
