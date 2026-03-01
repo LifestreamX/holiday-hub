@@ -4,21 +4,9 @@ import GitHubProvider from 'next-auth/providers/github';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { compare } from 'bcryptjs';
 import { prisma } from '@/lib/prisma';
+import { logger } from '@/lib/logger';
 
-// lightweight structured logger to keep logs consistent
-function log(
-  level: 'info' | 'warn' | 'error' | 'debug',
-  msg: string,
-  meta?: any,
-) {
-  const ts = new Date().toISOString();
-  const payload = meta ? ` - ${JSON.stringify(meta)}` : '';
-  if (level === 'info') console.info(`[Auth] ${ts} ${msg}${payload}`);
-  else if (level === 'warn') console.warn(`[Auth] ${ts} ${msg}${payload}`);
-  else if (level === 'error') console.error(`[Auth] ${ts} ${msg}${payload}`);
-  else if (process.env.NODE_ENV !== 'production')
-    console.debug(`[Auth] ${ts} ${msg}${payload}`);
-}
+// Use centralized logger
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -30,7 +18,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          log('warn', 'Missing credentials');
+          logger.warn('Missing credentials');
           return null;
         }
 
@@ -38,31 +26,31 @@ export const authOptions: NextAuthOptions = {
         const email = credentials.email.trim();
         const password = credentials.password;
 
-        log('info', 'Attempting login', { email });
+        logger.info('Attempting login', { email });
 
         const user = await prisma.user.findUnique({
           where: { email },
         });
 
         if (!user) {
-          log('warn', 'User not found', { email });
+          logger.warn('User not found', { email });
           return null;
         }
 
         if (!user.password) {
-          log('warn', 'OAuth-only account attempted password login', { email });
+          logger.warn('OAuth-only account attempted password login', { email });
           return null;
         }
 
-        log('debug', 'Found user, comparing passwords', { email });
+        logger.debug('Found user, comparing passwords', { email });
         const isValid = await compare(password, user.password);
 
         if (!isValid) {
-          log('warn', 'Password mismatch', { email });
+          logger.warn('Password mismatch', { email });
           return null;
         }
 
-        log('info', 'Login successful', { email, id: user.id });
+        logger.info('Login successful', { email, id: user.id });
 
         return {
           id: user.id,
@@ -94,26 +82,26 @@ export const authOptions: NextAuthOptions = {
   debug: process.env.NODE_ENV !== 'production',
   events: {
     signIn(message: any) {
-      console.log('NextAuth event signIn:', message);
+      logger.info('NextAuth signIn', { event: message?.provider || 'unknown' });
     },
     signOut(message: any) {
-      console.log('NextAuth event signOut:', message);
+      logger.info('NextAuth signOut', {
+        event: message?.provider || 'unknown',
+      });
     },
   },
   logger: {
     error(code: any, metadata?: any) {
-      console.error('NextAuth logger error:', code, metadata || '');
-      console.error(
-        'Full error details:',
-        JSON.stringify({ code, metadata }, null, 2),
-      );
+      logger.error('NextAuth error', {
+        code,
+        metadata: metadata ? String(metadata) : undefined,
+      });
     },
     warn(code: any) {
-      console.warn('NextAuth logger warn:', code);
+      logger.warn('NextAuth warn', { code });
     },
     debug(code: any) {
-      if (process.env.NODE_ENV !== 'production')
-        console.debug('NextAuth logger debug:', code);
+      logger.debug('NextAuth debug', { code });
     },
   },
   callbacks: {
@@ -150,7 +138,7 @@ export const authOptions: NextAuthOptions = {
 
         return true;
       } catch (error) {
-        console.error('Error in signIn callback:', error);
+        logger.error('Error in signIn callback', { error: String(error) });
         return false;
       }
     },

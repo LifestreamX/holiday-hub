@@ -57,29 +57,57 @@ export default function DashboardPage() {
   const [selectedHoliday, setSelectedHoliday] = useState<Holiday | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log('[Dashboard] Session status:', status);
     if (status === 'unauthenticated') {
+      console.log('[Dashboard] User not authenticated, redirecting to login');
       router.push('/login');
     }
   }, [status, router]);
 
   useEffect(() => {
     if (status === 'authenticated') {
+      console.log('[Dashboard] User authenticated, fetching holidays');
       fetchHolidays();
+    } else {
+      console.log('[Dashboard] Status not authenticated yet:', status);
     }
   }, [status]);
 
   const fetchHolidays = async () => {
     try {
+      console.log('[Dashboard] Fetching holidays...');
       const response = await fetch('/api/holidays');
+      console.log('[Dashboard] Response status:', response.status);
+
       if (response.ok) {
         const data = await response.json();
+        console.log('[Dashboard] Received holidays:', data.length);
         setHolidays(data);
+        setErrorMessage(null);
+      } else {
+        const body = await response.text().catch(() => '');
+        console.error(
+          '[Dashboard] Failed to fetch holidays:',
+          response.status,
+          response.statusText,
+          body,
+        );
+        setErrorMessage(
+          'Failed to load holidays. Please refresh or try again later.',
+        );
+        setHolidays([]);
       }
     } catch (error) {
-      console.error('Error fetching holidays:', error);
+      console.error('[Dashboard] Error fetching holidays:', error);
+      setErrorMessage(
+        'Network error while loading holidays. Check your connection.',
+      );
+      setHolidays([]);
     } finally {
+      console.log('[Dashboard] Finished loading');
       setIsLoading(false);
     }
   };
@@ -266,6 +294,11 @@ export default function DashboardPage() {
 
       <main className='container mx-auto px-4 py-8'>
         <div className='mb-8'>
+          {errorMessage && (
+            <div className='mb-4 p-3 rounded border border-red-300 bg-red-50 text-red-700'>
+              {errorMessage}
+            </div>
+          )}
           <h1 className='text-3xl font-bold text-foreground mb-2'>
             Your Holidays
           </h1>

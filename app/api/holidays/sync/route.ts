@@ -6,6 +6,7 @@ import {
   fetchPublicHolidays,
   convertNagerHolidayToDbFormat,
 } from '@/lib/nagerDateService';
+import { logger } from '@/lib/logger';
 
 /**
  * Sync holidays from Nager.Date API to database
@@ -33,7 +34,7 @@ export async function POST(request: NextRequest) {
     // Default to current year if not specified
     const targetYear = year || new Date().getFullYear();
 
-    console.log(
+    logger.info(
       `Syncing holidays for ${countryCode} (${targetYear}) from Nager.Date...`,
     );
 
@@ -41,6 +42,10 @@ export async function POST(request: NextRequest) {
     const nagerHolidays = await fetchPublicHolidays(targetYear, countryCode);
 
     if (!nagerHolidays || nagerHolidays.length === 0) {
+      logger.warn('No holidays returned from Nager.Date', {
+        countryCode,
+        year: targetYear,
+      });
       return NextResponse.json(
         { error: 'No holidays found for this country' },
         { status: 404 },
@@ -79,7 +84,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    console.log(
+    logger.info(
       `Sync complete: ${created} created, ${updated} updated, ${skipped} skipped`,
     );
 
@@ -95,7 +100,9 @@ export async function POST(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('Error syncing holidays:', error);
+    logger.error('Error syncing holidays:', {
+      message: error instanceof Error ? error.message : String(error),
+    });
     return NextResponse.json(
       {
         error: 'Failed to sync holidays',

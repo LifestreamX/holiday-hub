@@ -3,10 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('Seeding database...');
-
-  // Clear existing holidays
-  await prisma.holiday.deleteMany();
+  console.log('Seeding database (non-destructive)...');
 
   const holidays = [
     // US Federal Holidays
@@ -235,14 +232,30 @@ async function main() {
     },
   ];
 
-  // Insert holidays
+  // Upsert holidays: preserve existing records, update when name+countryCode match
+  let created = 0;
+  let updated = 0;
+
   for (const holiday of holidays) {
-    await prisma.holiday.create({
-      data: holiday,
+    const existing = await prisma.holiday.findFirst({
+      where: { name: holiday.name, countryCode: holiday.countryCode },
     });
+
+    if (existing) {
+      await prisma.holiday.update({
+        where: { id: existing.id },
+        data: holiday,
+      });
+      updated++;
+    } else {
+      await prisma.holiday.create({ data: holiday });
+      created++;
+    }
   }
 
-  console.log(`✅ Seeded ${holidays.length} holidays`);
+  console.log(
+    `✅ Seed complete: ${created} created, ${updated} updated (${holidays.length} attempted)`,
+  );
 }
 
 main()
