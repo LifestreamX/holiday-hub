@@ -7,20 +7,26 @@ export default function Home() {
       <nav className='container mx-auto px-4 py-6'>
         <div className='flex items-center justify-between'>
           <div className='flex items-center gap-2'>
-            <img src='/trone-lts.svg' alt='Trone LTS logo' className='w-8 h-8' />
+            <img
+              src='/trone-lts.svg'
+              alt='Trone LTS logo'
+              className='w-8 h-8'
+            />
             <span className='text-2xl font-bold text-white'>Holiday Hub</span>
           </div>
           <div className='flex items-center gap-4'>
             <Link
               href='/register'
-              className='px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors'
+              className='px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center'
             >
+              <img src='/trone-lts.svg' alt='icon' className='w-4 h-4 mr-2' />
               Sign up
             </Link>
             <Link
               href='/login'
-              className='px-6 py-2 bg-white text-blue-900 rounded-lg font-medium hover:bg-gray-100 transition-colors'
+              className='px-6 py-2 bg-white text-blue-900 rounded-lg font-medium hover:bg-gray-100 transition-colors flex items-center'
             >
+              <img src='/trone-lts.svg' alt='icon' className='w-4 h-4 mr-2' />
               Sign in
             </Link>
           </div>
