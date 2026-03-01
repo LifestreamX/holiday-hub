@@ -9,6 +9,10 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'Holiday Hub - Never Miss a Holiday',
   description: 'Customizable holiday notifications delivered via email',
+  icons: {
+    icon: '/trone-lts.svg',
+    shortcut: '/trone-lts.svg',
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
