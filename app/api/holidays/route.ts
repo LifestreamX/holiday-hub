@@ -6,6 +6,7 @@ import { calculateHolidayDate } from '@/lib/holidayEngine';
 import { getDaysBetween } from '@/lib/dateUtils';
 import { logger } from '@/lib/logger';
 import { rateLimit } from '@/lib/rateLimiter';
+import { fetchAvailableCountries } from '@/lib/nagerDateService';
 
 async function buildHolidaysForSession(
   session: Awaited<ReturnType<typeof getServerSession>> | null,
@@ -70,6 +71,17 @@ async function buildHolidaysForSession(
       count: holidays.length,
       country: user?.countryCode || 'US',
     });
+
+    // Fetch country names once (Nager.Date) to attach readable country names to results
+    let countryNameMap: Record<string, string> = {};
+    try {
+      const available = await fetchAvailableCountries();
+      available.forEach((c) => (countryNameMap[c.countryCode] = c.name));
+    } catch (e) {
+      logger.warn('Failed to fetch available countries for mapping', {
+        message: e instanceof Error ? e.message : String(e),
+      });
+    }
 
     // Calculate dates for current year and next year using user's timezone
     const currentYear = new Date().getFullYear();
@@ -136,6 +148,7 @@ async function buildHolidaysForSession(
         description: holiday.description,
         category: holiday.category,
         countryCode: holiday.countryCode,
+        countryName: countryNameMap[holiday.countryCode] || holiday.countryCode,
         date: holidayDate?.toISOString(),
         daysUntil,
         enabled: preference?.enabled ?? false,
