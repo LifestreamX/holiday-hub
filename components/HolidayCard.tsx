@@ -8,6 +8,7 @@ interface Holiday {
   name: string;
   description: string;
   category: string;
+  countryCode?: string;
   date: string | null;
   daysUntil: number | null;
   enabled: boolean;
@@ -86,6 +87,11 @@ export default function HolidayCard({
             >
               {holiday.category}
             </span>
+            {holiday.countryCode && (
+              <span className='ml-2 px-2 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200'>
+                {holiday.countryCode}
+              </span>
+            )}
           </div>
           <p className='text-sm text-muted-foreground'>{holiday.description}</p>
         </div>
