@@ -64,6 +64,10 @@ export default function DashboardPage() {
       count: number;
     }[]
   >([]);
+
+  const totalCountryHolidays = useMemo(() => {
+    return availableCountries.reduce((sum, c) => sum + (c.count || 0), 0);
+  }, [availableCountries]);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -96,7 +100,11 @@ export default function DashboardPage() {
         viewCountry ||
         (session?.user as any)?.countryCode ||
         'US';
-      const params = target ? `?country=${encodeURIComponent(target)}` : '';
+      // Support 'ALL' to mean no country filter (show every holiday)
+      const params =
+        target && target !== 'ALL'
+          ? `?country=${encodeURIComponent(target)}`
+          : '';
       const response = await fetch(`/api/holidays${params}`);
       console.log('[Dashboard] Response status:', response.status);
 
@@ -335,10 +343,12 @@ export default function DashboardPage() {
           <p className='text-muted-foreground'>
             Showing {upcomingHolidays.length} holidays for{' '}
             <strong>
-              {availableCountries.find((c) => c.countryCode === viewCountry)
-                ?.name ||
-                viewCountry ||
-                'US'}
+              {viewCountry === 'ALL'
+                ? 'All countries'
+                : availableCountries.find((c) => c.countryCode === viewCountry)
+                    ?.name ||
+                  viewCountry ||
+                  'US'}
             </strong>{' '}
             • {enabledHolidays.length} active notifications
           </p>
@@ -386,24 +396,27 @@ export default function DashboardPage() {
             </div>
             <div>
               <select
-                value={viewCountry || ''}
+                value={viewCountry || 'US'}
                 onChange={(e) => {
                   const v = e.target.value;
-                  setViewCountry(v);
+                  setViewCountry(v === 'ALL' ? 'ALL' : v);
                   setIsLoading(true);
-                  fetchHolidays(v);
+                  fetchHolidays(v === 'ALL' ? 'ALL' : v);
                 }}
-                className='p-2 rounded-lg bg-card border border-border text-sm'
+                className='px-4 py-2 rounded-xl bg-card border border-border text-sm font-semibold'
                 title='Select country to view holidays'
               >
                 {availableCountries.length === 0 ? (
                   <option value=''>Loading…</option>
                 ) : (
-                  availableCountries.map((c) => (
-                    <option key={c.countryCode} value={c.countryCode}>
-                      {c.name} ({c.countryCode})
-                    </option>
-                  ))
+                  <>
+                    <option value='ALL'>All countries ({totalCountryHolidays})</option>
+                    {availableCountries.map((c) => (
+                      <option key={c.countryCode} value={c.countryCode}>
+                        {c.name} ({c.countryCode})
+                      </option>
+                    ))}
+                  </>
                 )}
               </select>
             </div>
