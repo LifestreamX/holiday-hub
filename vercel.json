@@ -1,11 +1,1 @@
-{
-  "cron": [
-    {
-      "path": "/api/cron/notify",
-      "schedule": "0 13 * * *",
-      "headers": {
-        "Authorization": "Bearer f3b2e1c7-8a4d-4e2b-9c6a-7d5e4f1b2c3d"
-      }
-    }
-  ]
-}
+{}
