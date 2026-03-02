@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { signIn } from 'next-auth/react';
 import { useState, FormEvent, useRef } from 'react';
 import { useRouter } from 'next/navigation';
@@ -12,6 +13,7 @@ export default function RegisterPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
   const confirmRef = useRef<HTMLInputElement | null>(null);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -59,8 +61,14 @@ export default function RegisterPage() {
         return;
       }
 
-      // 4. Success! Redirect using replace so users can't click 'back' into a dead state
-      router.replace('/login?registered=1');
+      // 4. Success! Show check email message
+      setSuccess(
+        'Account created! Please check your email to verify your account before logging in.',
+      );
+      setLoading(null);
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
     } catch (error) {
       console.error('Registration error:', error);
       setError('A network error occurred. Please check your connection.');
@@ -91,125 +99,136 @@ export default function RegisterPage() {
       <div className='w-full max-w-md'>
         <div className='text-center mb-8'>
           <Link href='/' className='inline-flex items-center gap-2 mb-4'>
-            <img src='/trone-lts.svg' alt='Holiday Hub' className='w-10 h-10' />
+            <Image
+              src='/trone-lts.svg'
+              alt='Holiday Hub'
+              width={40}
+              height={40}
+              className='w-10 h-10'
+            />
             <span className='text-3xl font-bold text-white'>Holiday Hub</span>
           </Link>
           <h1 className='text-2xl font-semibold text-white'>Create Account</h1>
           <p className='text-gray-200 mt-2'>Get started with Holiday Hub</p>
         </div>
         <div className='bg-white rounded-lg shadow-xl p-8 text-gray-900'>
-          {/* Wrapped onSubmit in a safe arrow function to guarantee React intercepts it */}
-          <form
-            className='space-y-4 mb-6'
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit(e);
-            }}
-            autoComplete='off'
-          >
-            <div>
-              <label
-                htmlFor='email'
-                className='block text-sm font-medium text-gray-700 mb-1'
-              >
-                Email
-              </label>
-              <input
-                id='email'
-                type='email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
-                placeholder='your@email.com'
-                disabled={loading !== null}
-              />
+          {success ? (
+            <div className='p-4 mb-6 rounded border border-green-300 bg-green-50 text-green-700 text-center'>
+              {success}
             </div>
-            <div>
-              <label
-                htmlFor='password'
-                className='block text-sm font-medium text-gray-700 mb-1'
-              >
-                Password
-              </label>
-              <input
-                id='password'
-                type='password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                minLength={6}
-                className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
-                placeholder='••••••••'
-                disabled={loading !== null}
-              />
-            </div>
-            <div>
-              <label
-                htmlFor='confirmPassword'
-                className='block text-sm font-medium text-gray-700 mb-1'
-              >
-                Confirm Password
-              </label>
-              <input
-                id='confirmPassword'
-                ref={confirmRef}
-                type='password'
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-                minLength={6}
-                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${error?.toLowerCase().includes('match') ? 'border-red-500' : 'border-gray-300'}`}
-                placeholder='••••••••'
-                disabled={loading !== null}
-              />
-            </div>
-            {error && (
-              <div className='p-3 rounded border border-red-300 bg-red-50 text-red-700'>
-                {error}
+          ) : (
+            <form
+              className='space-y-4 mb-6'
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit(e);
+              }}
+              autoComplete='off'
+            >
+              <div>
+                <label
+                  htmlFor='email'
+                  className='block text-sm font-medium text-gray-700 mb-1'
+                >
+                  Email
+                </label>
+                <input
+                  id='email'
+                  type='email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+                  placeholder='your@email.com'
+                  disabled={loading !== null}
+                />
               </div>
-            )}
-            <button
-              type='submit'
-              disabled={loading !== null}
-              className='w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center'
-            >
-              {loading === 'credentials' ? (
-                <div className='flex items-center gap-3'>
-                  <svg
-                    className='animate-spin h-5 w-5 text-white'
-                    xmlns='http://www.w3.org/2000/svg'
-                    viewBox='0 0 24 24'
-                    aria-hidden
-                  >
-                    <circle
-                      className='opacity-25'
-                      cx='12'
-                      cy='12'
-                      r='10'
-                      stroke='currentColor'
-                      strokeWidth='4'
-                      fill='none'
-                    />
-                    <path
-                      className='opacity-75'
-                      fill='currentColor'
-                      d='M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z'
-                    />
-                  </svg>
-                  <span>Creating account...</span>
+              <div>
+                <label
+                  htmlFor='password'
+                  className='block text-sm font-medium text-gray-700 mb-1'
+                >
+                  Password
+                </label>
+                <input
+                  id='password'
+                  type='password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  minLength={6}
+                  className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+                  placeholder='••••••••'
+                  disabled={loading !== null}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor='confirmPassword'
+                  className='block text-sm font-medium text-gray-700 mb-1'
+                >
+                  Confirm Password
+                </label>
+                <input
+                  id='confirmPassword'
+                  ref={confirmRef}
+                  type='password'
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  minLength={6}
+                  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${error?.toLowerCase().includes('match') ? 'border-red-500' : 'border-gray-300'}`}
+                  placeholder='••••••••'
+                  disabled={loading !== null}
+                />
+              </div>
+              {error && (
+                <div className='p-3 rounded border border-red-300 bg-red-50 text-red-700'>
+                  {error}
                 </div>
-              ) : (
-                'Sign up'
               )}
-            </button>
-            <div
-              aria-live='polite'
-              className='min-h-[1.25rem] text-sm text-red-600'
-            >
-              {/* Error is also displayed at the top, but keeping this space reserved */}
-            </div>
-          </form>
+              <button
+                type='submit'
+                disabled={loading !== null}
+                className='w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center'
+              >
+                {loading === 'credentials' ? (
+                  <div className='flex items-center gap-3'>
+                    <svg
+                      className='animate-spin h-5 w-5 text-white'
+                      xmlns='http://www.w3.org/2000/svg'
+                      viewBox='0 0 24 24'
+                      aria-hidden
+                    >
+                      <circle
+                        className='opacity-25'
+                        cx='12'
+                        cy='12'
+                        r='10'
+                        stroke='currentColor'
+                        strokeWidth='4'
+                        fill='none'
+                      />
+                      <path
+                        className='opacity-75'
+                        fill='currentColor'
+                        d='M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z'
+                      />
+                    </svg>
+                    <span>Creating account...</span>
+                  </div>
+                ) : (
+                  'Sign up'
+                )}
+              </button>
+              <div
+                aria-live='polite'
+                className='min-h-[1.25rem] text-sm text-red-600'
+              >
+                {/* Error is also displayed at the top, but keeping this space reserved */}
+              </div>
+            </form>
+          )}
           <div className='relative mb-6'>
             <div className='absolute inset-0 flex items-center'>
               <div className='w-full border-t border-gray-300'></div>

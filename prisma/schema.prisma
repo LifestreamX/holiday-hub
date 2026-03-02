@@ -25,7 +25,11 @@ model User {
   pushSubscriptions      PushSubscription[]
 
   @@map("users")
+  emailVerified     Boolean   @default(false)
+  verificationToken String?
+  verificationTokenExpires DateTime?
 }
+
 
 model Holiday {
   id                String                   @id @default(cuid())

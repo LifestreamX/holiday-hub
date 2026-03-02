@@ -34,7 +34,6 @@ export default function LoginPage() {
       });
 
       console.log('[Login] SignIn result:', result);
-
       console.debug('credentials signIn result', result);
 
       // If NextAuth returned no result (rare), fall back to a full redirect
@@ -48,6 +47,19 @@ export default function LoginPage() {
         return;
       }
 
+      // Detect unverified email error
+      if (
+        result.error === 'EMAIL_NOT_VERIFIED' ||
+        (typeof result.error === 'string' &&
+          result.error.includes('EMAIL_NOT_VERIFIED'))
+      ) {
+        setError(
+          'You must verify your email before logging in. Please check your inbox for a verification link.',
+        );
+        setLoading(null);
+        return;
+      }
+
       if (result.error) {
         setError('Invalid email or password');
         setLoading(null);
@@ -58,9 +70,15 @@ export default function LoginPage() {
         setError('Sign-in failed. Please try again.');
         setLoading(null);
       }
-    } catch (error) {
-      console.error('Sign in error:', error);
-      setError('An error occurred. Please try again.');
+    } catch (error: any) {
+      // Detect thrown error for unverified email
+      if (error?.message === 'EMAIL_NOT_VERIFIED') {
+        setError(
+          'You must verify your email before logging in. Please check your inbox for a verification link.',
+        );
+      } else {
+        setError('An error occurred. Please try again.');
+      }
       setLoading(null);
     }
   };

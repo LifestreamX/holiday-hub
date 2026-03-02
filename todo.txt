@@ -1,14 +1,16 @@
 
 
 
-TODO: Email Notifications
 
 
 
 
 
-TODO: Push Notifications
 
-TODO: How often does sync with holidays the database
+TODO: Deployed version not logging in 
 
-TODO: Deploy
+TODO: are email notificaitons working
+
+TODO: Any other source of ntoificaitons besides emails 
+
+TODO: Once finished add to portfolio

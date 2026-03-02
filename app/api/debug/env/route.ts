@@ -13,7 +13,10 @@ export async function GET(request: Request) {
   if (!inNonProd) {
     const header = request.headers.get('x-debug-token') || '';
     if (!debugToken || header !== debugToken) {
-      return NextResponse.json({ error: 'debug endpoint disabled' }, { status: 404 });
+      return NextResponse.json(
+        { error: 'debug endpoint disabled' },
+        { status: 404 },
+      );
     }
   }
 

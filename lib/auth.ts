@@ -44,8 +44,8 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
-        // Trim whitespace to avoid issues
-        const email = credentials.email.trim();
+        // Trim and normalize to lowercase to avoid case-sensitivity issues
+        const email = credentials.email.trim().toLowerCase();
         const password = credentials.password;
 
         logger.info('Attempting login', { email });
@@ -62,6 +62,13 @@ export const authOptions: NextAuthOptions = {
         if (!user.password) {
           logger.warn('OAuth-only account attempted password login', { email });
           return null;
+        }
+
+        // Block login if email not verified
+        if (!user.emailVerified) {
+          logger.warn('Attempted login with unverified email', { email });
+          // Special error string for UI to detect
+          throw new Error('EMAIL_NOT_VERIFIED');
         }
 
         logger.debug('Found user, comparing passwords', { email });
@@ -131,16 +138,25 @@ export const authOptions: NextAuthOptions = {
       if (!user.email) return false;
 
       try {
-        // Check if user exists
+        // Normalize incoming OAuth email and check if user exists
+        const oauthEmail = user.email.toLowerCase();
         const existingUser = await prisma.user.findUnique({
-          where: { email: user.email },
+          where: { email: oauthEmail },
         });
 
+        // Block OAuth login if email not verified
+        if (existingUser && !existingUser.emailVerified) {
+          logger.warn('OAuth login blocked: email not verified', {
+            email: oauthEmail,
+          });
+          return false;
+        }
+
         if (!existingUser) {
-          // Create new user with OAuth data
+          // Create new user with OAuth data (store email normalized)
           await prisma.user.create({
             data: {
-              email: user.email,
+              email: oauthEmail,
               name: user.name,
               image: user.image,
               timezone: 'America/New_York',
@@ -150,7 +166,7 @@ export const authOptions: NextAuthOptions = {
         } else if (!existingUser.name && user.name) {
           // Update existing user with OAuth profile data if missing
           await prisma.user.update({
-            where: { email: user.email },
+            where: { email: oauthEmail },
             data: {
               name: user.name,
               image: user.image,
@@ -166,9 +182,10 @@ export const authOptions: NextAuthOptions = {
     },
     async jwt({ token, user, account }) {
       if (user?.email) {
-        // Fetch user from database to get all fields
+        // Fetch user from database to get all fields (normalize email)
+        const tokenEmail = (user.email as string).toLowerCase();
         const dbUser = await prisma.user.findUnique({
-          where: { email: user.email },
+          where: { email: tokenEmail },
         });
 
         if (dbUser) {

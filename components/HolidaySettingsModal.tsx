@@ -47,19 +47,17 @@ export default function HolidaySettingsModal({
   ];
 
   // Better time picker options
-  const timeOptions = [
-    { value: '06:00', label: '6:00 AM' },
-    { value: '07:00', label: '7:00 AM' },
-    { value: '08:00', label: '8:00 AM' },
-    { value: '09:00', label: '9:00 AM' },
-    { value: '10:00', label: '10:00 AM' },
-    { value: '12:00', label: '12:00 PM (Noon)' },
-    { value: '15:00', label: '3:00 PM' },
-    { value: '17:00', label: '5:00 PM' },
-    { value: '18:00', label: '6:00 PM' },
-    { value: '19:00', label: '7:00 PM' },
-    { value: '20:00', label: '8:00 PM' },
-  ];
+  // 30-minute increments from 6:00 AM to 10:00 PM
+  const timeOptions = [];
+  for (let hour = 6; hour <= 22; hour++) {
+    for (let min = 0; min < 60; min += 30) {
+      const value = `${hour.toString().padStart(2, '0')}:${min === 0 ? '00' : '30'}`;
+      let displayHour = hour % 12 === 0 ? 12 : hour % 12;
+      const ampm = hour < 12 ? 'AM' : 'PM';
+      const label = `${displayHour}:${min === 0 ? '00' : '30'} ${ampm}`;
+      timeOptions.push({ value, label });
+    }
+  }
 
   const toggleOffset = (offset: number) => {
     if (reminderOffsets.includes(offset)) {

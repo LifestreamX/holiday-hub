@@ -40,9 +40,10 @@ export async function POST(request: NextRequest) {
       typeof registerSchema
     >;
     const trimmedEmail = email.trim();
+    const normalizedEmail = trimmedEmail.toLowerCase();
 
     const existingUser = await prisma.user.findUnique({
-      where: { email: trimmedEmail },
+      where: { email: normalizedEmail },
     });
     if (existingUser) {
       logger.warn('Attempt to register existing user', { email: trimmedEmail });
@@ -53,12 +54,20 @@ export async function POST(request: NextRequest) {
     }
 
     const hashedPassword = await hash(password, 12);
+    // Generate verification token
+    const crypto = await import('crypto');
+    const verificationToken = crypto.randomBytes(32).toString('hex');
+    const verificationTokenExpires = new Date(Date.now() + 1000 * 60 * 60 * 24); // 24 hours
+
     const user = await prisma.user.create({
       data: {
-        email: trimmedEmail,
+        email: normalizedEmail,
         password: hashedPassword,
         timezone,
         countryCode,
+        emailVerified: false,
+        verificationToken,
+        verificationTokenExpires,
       },
       select: {
         id: true,
@@ -69,9 +78,26 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    logger.info('User created', { id: user.id, email: user.email });
+    // Send verification email
+    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
+    const verifyUrl = `${baseUrl}/verify-email?token=${verificationToken}`;
+    const { sendEmail } = await import('../../../lib/emailService');
+    await sendEmail({
+      to: normalizedEmail,
+      subject: 'Verify your email for Holiday Hub',
+      html: `<h2>Welcome to Holiday Hub!</h2><p>Please verify your email by clicking the link below:</p><p><a href="${verifyUrl}">${verifyUrl}</a></p><p>This link will expire in 24 hours.</p>`,
+    });
+
+    logger.info('User created, verification email sent', {
+      id: user.id,
+      email: user.email,
+    });
     return NextResponse.json(
-      { message: 'User created successfully', user },
+      {
+        message:
+          'User created successfully. Please check your email to verify your account.',
+        user,
+      },
       { status: 201 },
     );
   });
