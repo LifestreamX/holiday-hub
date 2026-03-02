@@ -14,7 +14,7 @@ const prisma = new PrismaClient();
 /**
  * Process notifications for a single user
  */
-async function processUserNotifications(userId: string): Promise<void> {
+export async function processUserNotifications(userId: string): Promise<void> {
   const user = await prisma.user.findUnique({
     where: { id: userId },
     include: {
