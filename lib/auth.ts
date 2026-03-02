@@ -145,7 +145,11 @@ export const authOptions: NextAuthOptions = {
         // fetching the primary email via the provider access token.
         let oauthEmail = user?.email as string | undefined;
 
-        if (!oauthEmail && account?.provider === 'github' && account?.access_token) {
+        if (
+          !oauthEmail &&
+          account?.provider === 'github' &&
+          account?.access_token
+        ) {
           try {
             const resp = await fetch('https://api.github.com/user/emails', {
               headers: {
@@ -156,11 +160,20 @@ export const authOptions: NextAuthOptions = {
             });
 
             if (resp.ok) {
-              const emails = (await resp.json()) as Array<{ email: string; primary: boolean; verified: boolean }>;
-              const primary = emails.find((e) => e.primary && e.verified) || emails.find((e) => e.verified) || emails[0];
+              const emails = (await resp.json()) as Array<{
+                email: string;
+                primary: boolean;
+                verified: boolean;
+              }>;
+              const primary =
+                emails.find((e) => e.primary && e.verified) ||
+                emails.find((e) => e.verified) ||
+                emails[0];
               if (primary?.email) oauthEmail = primary.email;
             } else {
-              logger.warn('Failed to fetch GitHub user emails', { status: resp.status });
+              logger.warn('Failed to fetch GitHub user emails', {
+                status: resp.status,
+              });
             }
           } catch (err) {
             logger.warn('Error fetching GitHub emails', { err: String(err) });
@@ -168,18 +181,24 @@ export const authOptions: NextAuthOptions = {
         }
 
         if (!oauthEmail) {
-          logger.warn('OAuth login blocked: no email provided', { provider: account?.provider });
+          logger.warn('OAuth login blocked: no email provided', {
+            provider: account?.provider,
+          });
           return false;
         }
 
         oauthEmail = oauthEmail.toLowerCase();
 
         // Normalize incoming OAuth email and check if user exists
-        const existingUser = await prisma.user.findUnique({ where: { email: oauthEmail } });
+        const existingUser = await prisma.user.findUnique({
+          where: { email: oauthEmail },
+        });
 
         // Block OAuth login if email not verified
         if (existingUser && !existingUser.emailVerified) {
-          logger.warn('OAuth login blocked: email not verified', { email: oauthEmail });
+          logger.warn('OAuth login blocked: email not verified', {
+            email: oauthEmail,
+          });
           return false;
         }
 
@@ -196,7 +215,10 @@ export const authOptions: NextAuthOptions = {
           });
         } else if (!existingUser.name && user.name) {
           // Update existing user with OAuth profile data if missing
-          await prisma.user.update({ where: { email: oauthEmail }, data: { name: user.name, image: user.image } });
+          await prisma.user.update({
+            where: { email: oauthEmail },
+            data: { name: user.name, image: user.image },
+          });
         }
 
         return true;
