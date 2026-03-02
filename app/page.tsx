@@ -17,7 +17,7 @@ export default function Home() {
           <div className='flex items-center gap-4'>
             <Link
               href='/register'
-              className='px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors'
+              className='px-6 py-2 bg-white text-blue-900 rounded-lg font-medium hover:bg-gray-100 transition-colors shadow'
             >
               Sign up
             </Link>
