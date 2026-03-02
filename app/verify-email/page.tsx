@@ -1,8 +1,8 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<
@@ -17,10 +17,6 @@ export default function VerifyEmailPage() {
     setMessage('Verifying your email...');
     const token = searchParams.get('token');
     if (!token) {
-      // Delay showing the missing-token error briefly to avoid a
-      // hydration/navigation flash where `searchParams` may be empty
-      // momentarily on mount. If token still missing after 250ms,
-      // show the error.
       const missingTimer = window.setTimeout(() => {
         setStatus('error');
         setMessage('Missing verification token.');
@@ -47,8 +43,6 @@ export default function VerifyEmailPage() {
             router.push('/login');
           }, 3000);
         } else {
-          // Delay showing the error briefly to avoid a transient flash
-          // if a follow-up success response arrives shortly after.
           errorTimerRef.current = window.setTimeout(() => {
             setStatus('error');
             setMessage((data as any).error || 'Verification failed.');
@@ -107,5 +101,13 @@ export default function VerifyEmailPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VerifyEmailContent />
+    </Suspense>
   );
 }
