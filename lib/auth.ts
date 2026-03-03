@@ -197,37 +197,69 @@ export const authOptions: NextAuthOptions = {
         // Block OAuth login if email not verified
         if (existingUser && !existingUser.emailVerified) {
           logger.warn('OAuth login blocked: email not verified', {
-            email: oauthEmail,
-          });
-          return false;
-        }
+            if (!oauthEmail) {
+              logger.warn('OAuth login blocked: no email provided', { provider: account?.provider });
+              return false;
+            }
 
-        if (!existingUser) {
-          // Create new user with OAuth data (store email normalized)
-          await prisma.user.create({
-            data: {
-              email: oauthEmail,
-              name: user.name,
-              image: user.image,
-              timezone: 'America/New_York',
-              countryCode: 'US',
-            },
-          });
-        } else if (!existingUser.name && user.name) {
-          // Update existing user with OAuth profile data if missing
-          await prisma.user.update({
-            where: { email: oauthEmail },
-            data: { name: user.name, image: user.image },
-          });
-        }
+            oauthEmail = oauthEmail.toLowerCase();
 
-        return true;
-      } catch (error) {
-        logger.error('Error in signIn callback', { error: String(error) });
-        return false;
-      }
-    },
-    async jwt({ token, user, account }) {
+            // Normalize incoming OAuth email and check if user exists
+            const existingUser = await prisma.user.findUnique({ where: { email: oauthEmail } });
+
+            // Determine whether provider has verified the email
+            let providerVerified = false;
+            if (account?.provider === 'github' && account?.access_token) {
+              try {
+                const resp = await fetch('https://api.github.com/user/emails', {
+                  headers: {
+                    Authorization: `token ${account.access_token}`,
+                    Accept: 'application/vnd.github+json',
+                    'User-Agent': 'holiday-hub',
+                  },
+                });
+                if (resp.ok) {
+                  const emails = (await resp.json()) as Array<{ email: string; primary: boolean; verified: boolean }>;
+                  const primary = emails.find((e) => e.primary && e.verified) || emails.find((e) => e.verified) || emails[0];
+                  providerVerified = Boolean(primary?.verified);
+                }
+              } catch (err) {
+                logger.warn('Error checking GitHub email verified status', { err: String(err) });
+              }
+            } else {
+              // For other providers, treat OAuth-provided email as verified
+              // since providers like Google usually verify emails
+              providerVerified = true;
+            }
+
+            // If there is an existing user with unverified email, update it
+            if (existingUser && !existingUser.emailVerified && providerVerified) {
+              await prisma.user.update({ where: { email: oauthEmail }, data: { emailVerified: true } });
+              logger.info('Marked existing user email as verified via OAuth', { email: oauthEmail });
+            }
+
+            // Block OAuth login if email not verified and provider didn't verify it
+            if (existingUser && !existingUser.emailVerified && !providerVerified) {
+              logger.warn('OAuth login blocked: email not verified', { email: oauthEmail });
+              return false;
+            }
+
+            if (!existingUser) {
+              // Create new user with OAuth data (store email normalized)
+              await prisma.user.create({
+                data: {
+                  email: oauthEmail,
+                  name: user.name,
+                  image: user.image,
+                  timezone: 'America/New_York',
+                  countryCode: 'US',
+                  emailVerified: providerVerified,
+                },
+              });
+            } else if (!existingUser.name && user.name) {
+              // Update existing user with OAuth profile data if missing
+              await prisma.user.update({ where: { email: oauthEmail }, data: { name: user.name, image: user.image } });
+            }
       if (user?.email) {
         // Fetch user from database to get all fields (normalize email)
         const tokenEmail = (user.email as string).toLowerCase();
