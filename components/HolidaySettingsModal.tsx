@@ -153,6 +153,9 @@ export default function HolidaySettingsModal({
                 <h3 className='font-medium text-foreground mb-3'>
                   Time of Day
                 </h3>
+                <p className='text-xs text-muted-foreground mb-2'>
+                  Reminders will be sent to your email address.
+                </p>
                 <select
                   value={reminderTime}
                   onChange={(e) => setReminderTime(e.target.value)}

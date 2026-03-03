@@ -12,5 +12,3 @@ TODO: are email notificaitons working
 TODO: DO holidays emaisl need more desirptions
 
 TODO: Any other source of ntoificaitons besides emails 
-
-TODO: Once finished add to portfolio
