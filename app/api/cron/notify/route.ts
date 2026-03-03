@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
+import jwt from 'jsonwebtoken';
 import { processAllUsers, processUsersPage } from '../../../../lib/scheduler';
 
 const QSTASH_CURRENT_SIGNING_KEY = process.env.QSTASH_CURRENT_SIGNING_KEY;
@@ -12,30 +13,41 @@ async function verifyQstashSignature(req: NextRequest): Promise<boolean> {
 
   const body = await req.text();
 
-  const check = (key?: string) => {
+  // Debug: log signature and body
+  console.log('QStash Debug: Received signature:', signature);
+  console.log('QStash Debug: Received body:', body);
+  // Log all headers
+  console.log('QStash Debug: Headers:');
+  for (const [key, value] of req.headers.entries()) {
+    console.log(`  ${key}: ${value}`);
+  }
+
+  // QStash now uses JWT for signatures
+  const checkJwt = (key?: string) => {
     if (!key) return false;
     try {
-      const hmac = crypto.createHmac('sha256', key).update(body).digest('hex');
-      const sigBuf = Buffer.from(signature, 'hex');
-      const hmacBuf = Buffer.from(hmac, 'hex');
-      if (sigBuf.length !== hmacBuf.length) return false;
-      return crypto.timingSafeEqual(sigBuf, hmacBuf);
+      jwt.verify(signature, key, { algorithms: ['HS256'] });
+      return true;
     } catch (err) {
       return false;
     }
   };
 
-  return check(QSTASH_CURRENT_SIGNING_KEY) || check(QSTASH_NEXT_SIGNING_KEY);
+  return (
+    checkJwt(QSTASH_CURRENT_SIGNING_KEY) || checkJwt(QSTASH_NEXT_SIGNING_KEY)
+  );
 }
 
 export async function POST(req: NextRequest) {
   // Require QStash-signed requests only
   const ok = await verifyQstashSignature(req);
-  if (!ok)
+  if (!ok) {
+    console.log('QStash Debug: Signature verification failed.');
     return NextResponse.json(
       { error: 'Unauthorized - signature required' },
       { status: 401 },
     );
+  }
 
   try {
     // Support paging via query params so QStash can trigger one page per run

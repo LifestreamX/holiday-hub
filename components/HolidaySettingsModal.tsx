@@ -46,15 +46,14 @@ export default function HolidaySettingsModal({
     { value: 30, label: '1 month before', icon: '🗓️' },
   ];
 
-  // Better time picker options
-  // 30-minute increments from 6:00 AM to 10:00 PM
+  // 15-minute increments from 6:00 AM to 10:00 PM
   const timeOptions = [];
   for (let hour = 6; hour <= 22; hour++) {
-    for (let min = 0; min < 60; min += 30) {
-      const value = `${hour.toString().padStart(2, '0')}:${min === 0 ? '00' : '30'}`;
+    for (let min = 0; min < 60; min += 15) {
+      const value = `${hour.toString().padStart(2, '0')}:${min.toString().padStart(2, '0')}`;
       let displayHour = hour % 12 === 0 ? 12 : hour % 12;
       const ampm = hour < 12 ? 'AM' : 'PM';
-      const label = `${displayHour}:${min === 0 ? '00' : '30'} ${ampm}`;
+      const label = `${displayHour}:${min.toString().padStart(2, '0')} ${ampm}`;
       timeOptions.push({ value, label });
     }
   }
