@@ -194,8 +194,56 @@ export const authOptions: NextAuthOptions = {
           where: { email: oauthEmail },
         });
 
-        // Block OAuth login if email not verified
-        if (existingUser && !existingUser.emailVerified) {
+        // Determine whether provider has verified the email
+        let providerVerified = false;
+        if (account?.provider === 'github' && account?.access_token) {
+          try {
+            const resp = await fetch('https://api.github.com/user/emails', {
+              headers: {
+                Authorization: `token ${account.access_token}`,
+                Accept: 'application/vnd.github+json',
+                'User-Agent': 'holiday-hub',
+              },
+            });
+            if (resp.ok) {
+              const emails = (await resp.json()) as Array<{
+                email: string;
+                primary: boolean;
+                verified: boolean;
+              }>;
+              const primary =
+                emails.find((e) => e.primary && e.verified) ||
+                emails.find((e) => e.verified) ||
+                emails[0];
+              providerVerified = Boolean(primary?.verified);
+            } else {
+              logger.warn('Failed to check GitHub email verification status', {
+                status: resp.status,
+              });
+            }
+          } catch (err) {
+            logger.warn('Error checking GitHub email verification status', {
+              err: String(err),
+            });
+          }
+        } else {
+          // Other providers (e.g., Google) typically provide verified emails
+          providerVerified = true;
+        }
+
+        // If there is an existing user with unverified email, mark verified when provider confirms
+        if (existingUser && !existingUser.emailVerified && providerVerified) {
+          await prisma.user.update({
+            where: { email: oauthEmail },
+            data: { emailVerified: true },
+          });
+          logger.info('Marked existing user email as verified via OAuth', {
+            email: oauthEmail,
+          });
+        }
+
+        // Block OAuth login if email not verified and provider didn't verify it
+        if (existingUser && !existingUser.emailVerified && !providerVerified) {
           logger.warn('OAuth login blocked: email not verified', {
             email: oauthEmail,
           });
@@ -211,6 +259,7 @@ export const authOptions: NextAuthOptions = {
               image: user.image,
               timezone: 'America/New_York',
               countryCode: 'US',
+              emailVerified: providerVerified,
             },
           });
         } else if (!existingUser.name && user.name) {
