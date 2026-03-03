@@ -1,19 +1,11 @@
-/**
- * Holiday notification scheduler
- * Runs daily to check and send holiday notifications
- */
-
-import cron from 'node-cron';
 import { PrismaClient } from '@prisma/client';
 import { calculateHolidayDate } from './holidayEngine';
 import { getDaysBetween, getStartOfDayInTimezone } from './dateUtils';
+import { utcToZonedTime } from 'date-fns-tz';
 import { sendEmail, generateHolidayEmailHTML } from './emailService';
 
 const prisma = new PrismaClient();
 
-/**
- * Process notifications for a single user
- */
 export async function processUserNotifications(userId: string): Promise<void> {
   const user = await prisma.user.findUnique({
     where: { id: userId },
@@ -25,19 +17,15 @@ export async function processUserNotifications(userId: string): Promise<void> {
     },
   });
 
-  if (!user) {
-    console.error(`User ${userId} not found`);
-    return;
-  }
+  if (!user) return;
 
-  const today = getStartOfDayInTimezone(new Date(), user.timezone);
+  const tz = user.timezone || 'UTC';
+  const today = getStartOfDayInTimezone(new Date(), tz);
   const currentYear = today.getFullYear();
 
-  for (const preference of user.holidayPreferences) {
-    const holiday = preference.holiday;
-
+  for (const pref of user.holidayPreferences) {
+    const holiday = pref.holiday;
     try {
-      // Calculate holiday date
       let holidayDate = calculateHolidayDate(
         {
           id: holiday.id,
@@ -50,8 +38,9 @@ export async function processUserNotifications(userId: string): Promise<void> {
         },
         currentYear,
       );
+      // Normalize holidayDate to the user's timezone start-of-day so comparisons are consistent
+      holidayDate = getStartOfDayInTimezone(holidayDate, tz);
 
-      // If holiday has passed, check next year
       if (holidayDate < today) {
         holidayDate = calculateHolidayDate(
           {
@@ -68,130 +57,124 @@ export async function processUserNotifications(userId: string): Promise<void> {
           },
           currentYear + 1,
         );
+        holidayDate = getStartOfDayInTimezone(holidayDate, tz);
       }
 
       const daysUntil = getDaysBetween(today, holidayDate);
 
-      // Check if we should send a notification today
-      const reminderOffsets = Array.isArray(preference.reminderOffsets)
-        ? preference.reminderOffsets
-        : JSON.parse((preference.reminderOffsets as string) || '[]');
+      const reminderOffsets = Array.isArray(pref.reminderOffsets)
+        ? pref.reminderOffsets
+        : JSON.parse((pref.reminderOffsets as string) || '[]');
 
-      if (reminderOffsets.includes(daysUntil)) {
-        // Check if we've already sent this notification
-        const existingNotification = await prisma.notification.findFirst({
-          where: {
-            userId: user.id,
-            holidayId: holiday.id,
-            scheduledFor: today,
-            sent: true,
-          },
-        });
+      if (!reminderOffsets.includes(daysUntil)) continue;
 
-        if (existingNotification) {
-          console.log(
-            `Notification already sent for ${holiday.name} to ${user.email}`,
-          );
+      // Time-window check: send only when current local time is within window of reminderTime
+      const windowMinutes = Number(process.env.SCHEDULER_WINDOW_MINUTES) || 15;
+      const reminderTime = (pref.reminderTime as string) || '08:00';
+
+      try {
+        const nowZoned = utcToZonedTime(new Date(), tz);
+        const [h, m] = reminderTime.split(':').map(Number);
+        const target = new Date(nowZoned);
+        target.setHours(h, m, 0, 0);
+
+        const diffMinutes = Math.abs(
+          (nowZoned.getTime() - target.getTime()) / 60000,
+        );
+        if (diffMinutes > windowMinutes) {
+          // Not the right time for this user yet
           continue;
         }
-
-        // Send email notification
-        const emailHTML = generateHolidayEmailHTML(
-          holiday.name,
-          holiday.description,
-          holidayDate,
-          daysUntil,
-        );
-
-        const emailSent = await sendEmail({
-          to: user.email,
-          subject: `Reminder: ${holiday.name} ${daysUntil === 0 ? 'is today!' : `in ${daysUntil} days`}`,
-          html: emailHTML,
-        });
-
-        if (emailSent) {
-          await prisma.notification.create({
-            data: {
-              userId: user.id,
-              holidayId: holiday.id,
-              scheduledFor: today,
-              sent: true,
-              sentAt: new Date(),
-              deliveryType: 'email',
-            },
-          });
-
-          console.log(
-            `Sent email notification for ${holiday.name} to ${user.email} (${daysUntil} days until)`,
-          );
-        }
+      } catch (err) {
+        console.error('Timezone parse error for user', user.id, err);
+        // If timezone parsing fails, fall back to sending (avoid silent failure)
       }
-    } catch (error) {
+
+      // Use the holiday date (start of day in user's timezone) as the scheduledFor
+      const scheduledFor = getStartOfDayInTimezone(holidayDate, user.timezone);
+
+      const existing = await prisma.notification.findFirst({
+        where: {
+          userId: user.id,
+          holidayId: holiday.id,
+          scheduledFor: scheduledFor,
+          sent: true,
+        },
+      });
+
+      if (existing) continue;
+
+      const emailHTML = generateHolidayEmailHTML(
+        holiday.name,
+        holiday.description,
+        holidayDate,
+        daysUntil,
+      );
+
+      const emailSent = await sendEmail({
+        to: user.email,
+        subject: `Reminder: ${holiday.name} ${daysUntil === 0 ? 'is today!' : `in ${daysUntil} days`}`,
+        html: emailHTML,
+      });
+
+      if (emailSent) {
+        await prisma.notification.create({
+          data: {
+            userId: user.id,
+            holidayId: holiday.id,
+            scheduledFor: scheduledFor,
+            sent: true,
+            sentAt: new Date(),
+            deliveryType: 'email',
+          },
+        });
+      }
+    } catch (err) {
       console.error(
-        `Error processing holiday ${holiday.name} for user ${user.email}:`,
-        error,
+        'Error processing holiday preference for user',
+        user.email,
+        err,
       );
     }
   }
 }
 
-/**
- * Main scheduler function
- */
-async function runScheduler(): Promise<void> {
-  console.log('Running holiday notification scheduler...');
-
-  try {
-    // Get all users with active preferences
+export async function processAllUsers(pageSize = 100): Promise<number> {
+  let page = 0;
+  let processed = 0;
+  while (true) {
     const users = await prisma.user.findMany({
-      where: {
-        holidayPreferences: {
-          some: { enabled: true },
-        },
-      },
+      skip: page * pageSize,
+      take: pageSize,
+      where: { holidayPreferences: { some: { enabled: true } } },
       select: { id: true },
     });
 
-    console.log(`Processing notifications for ${users.length} users`);
+    if (users.length === 0) break;
 
-    for (const user of users) {
-      await processUserNotifications(user.id);
-    }
-
-    console.log('Scheduler completed successfully');
-  } catch (error) {
-    console.error('Scheduler error:', error);
+    const promises = users.map((u) => processUserNotifications(u.id));
+    await Promise.allSettled(promises);
+    processed += users.length;
+    page++;
   }
+
+  return processed;
 }
 
-/**
- * Start the cron job
- * Runs every day at 6 AM server time
- */
-export function startScheduler(): void {
-  console.log('Starting holiday notification scheduler...');
-
-  // Run daily at 6:00 AM
-  cron.schedule('0 6 * * *', async () => {
-    await runScheduler();
+export async function processUsersPage(
+  page = 0,
+  pageSize = 100,
+): Promise<number> {
+  const users = await prisma.user.findMany({
+    skip: page * pageSize,
+    take: pageSize,
+    where: { holidayPreferences: { some: { enabled: true } } },
+    select: { id: true },
   });
 
-  console.log('Scheduler started - will run daily at 6:00 AM');
+  if (users.length === 0) return 0;
 
-  // Run immediately on startup for testing
-  if (process.env.NODE_ENV === 'development') {
-    console.log('Running scheduler immediately (development mode)...');
-    runScheduler();
-  }
-}
-
-// If running directly
-if (require.main === module) {
-  startScheduler();
-
-  // Keep process alive
-  process.on('SIGINT', async () => {
-    await prisma.$disconnect();
-    process.exit(0);
-  });
+  const promises = users.map((u) => processUserNotifications(u.id));
+  await Promise.allSettled(promises);
+  return users.length;
 }

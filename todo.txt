@@ -7,10 +7,6 @@
 
 
 
-TODO: Deployed version not logging in 
-
-
-
 TODO: are email notificaitons working
 
 TODO: Any other source of ntoificaitons besides emails 

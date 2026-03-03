@@ -9,9 +9,6 @@ Use this checklist to deploy Holiday Hub to production.
 ### 1. Local Testing
 
 - [ ] Application builds successfully (`npm run build`)
-- [ ] No TypeScript errors (`npx tsc --noEmit`)
-- [ ] Database connection works
-- [ ] Can create account and login
 - [ ] Can enable/disable holidays
 - [ ] Can configure notification settings
 - [ ] Test email sending (if Resend configured)
@@ -44,21 +41,15 @@ Use this checklist to deploy Holiday Hub to production.
 - Edge functions for API routes
 - **Important**: Set up Vercel Cron for scheduler
 
-**Vercel Cron Setup:**
-Create `vercel.json`:
+Use the included workflow file `.github/workflows/cron-notify.yml`. It POSTs to your deployed site at `/api/cron/notify` and sends the `Authorization: Bearer $CRON_SECRET` header.
 
-```json
-{
-  "crons": [
-    {
-      "path": "/api/cron/notifications",
-      "schedule": "0 6 * * *"
-    }
-  ]
-}
-```
+Setup steps:
 
-Then create `/app/api/cron/notifications/route.ts` that calls your scheduler.
+- Add a repository secret `CRON_BASE_URL` with your site URL (e.g. `https://holiday-hub.vercel.app`).
+- Add a repository secret `CRON_SECRET` (a random string). Also add the same `CRON_SECRET` to your Vercel environment variables so the endpoint accepts the request.
+- The workflow runs daily at 06:00 UTC by default and can be manually triggered from the Actions tab.
+
+This approach is simple, works across hosts, and avoids relying on unsupported `vercel.json` keys.
 
 **Pros:**
 
@@ -67,16 +58,8 @@ Then create `/app/api/cron/notifications/route.ts` that calls your scheduler.
 - Great performance
 - Automatic CI/CD
 
-**Cons:**
-
 - Need separate cron setup
 - Function timeout limits (10s free, 30s hobby)
-
----
-
-### Option 2: Railway
-
-**Steps:**
 
 1. Push code to GitHub
 2. Go to [railway.app](https://railway.app)
@@ -97,15 +80,7 @@ Then create `/app/api/cron/notifications/route.ts` that calls your scheduler.
 - Can run long-running processes
 - Simple pricing
 
-**Cons:**
-
-- Paid after free trial ($5/month minimum)
-
----
-
 ### Option 3: Render
-
-**Steps:**
 
 1. Push code to GitHub
 2. Go to [render.com](https://render.com)
@@ -249,7 +224,29 @@ Add secrets in GitHub repository settings.
 - Sign up at [upstash.com](https://upstash.com)
 - Create scheduled job
 - Points to your API endpoint
-- Free tier: 500 requests/day
+- Create scheduled job
+- Points to your API endpoint
+- Free tier: check your account for current quotas (example: 1,000 messages/day on some accounts)
+
+**QStash integration steps (recommended):**
+
+1. Add environment variables to your deployment platform:
+   - `CRON_SECRET` — fallback bearer secret for scheduler requests
+   - `QSTASH_CURRENT_SIGNING_KEY` — current signing key from QStash (do not commit)
+   - `QSTASH_NEXT_SIGNING_KEY` — next signing key (optional; rotate keys safely)
+
+2. Create a scheduled job in QStash that POSTs your endpoint:
+   - URL: `https://<your-site>/api/cron/notify`
+   - Method: `POST`
+   - Headers: you can add `Authorization: Bearer <CRON_SECRET>` or rely on QStash signature verification.
+   - Cron expression: e.g., `*/15 * * * *` (every 15 minutes) or a daily schedule.
+
+3. Monitor delivery logs in QStash dashboard. One scheduled delivery counts as one message; retries may consume extra messages.
+
+Notes:
+
+- Use a single scheduled job to call `/api/cron/notify`. Avoid creating per-user messages from QStash as each counts toward your quota.
+- Verify signatures server-side using `QSTASH_CURRENT_SIGNING_KEY` and `QSTASH_NEXT_SIGNING_KEY` for rotation support.
 
 ### Option D: Separate Service (Railway/Render)
 
