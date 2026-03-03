@@ -33,7 +33,7 @@ export default function HolidaySettingsModal({
 }: HolidaySettingsModalProps) {
   const [enabled, setEnabled] = useState(holiday.enabled);
   const [reminderOffsets, setReminderOffsets] = useState<number[]>(
-    holiday.reminderOffsets.length > 0 ? holiday.reminderOffsets : [1],
+    holiday.reminderOffsets.length > 0 ? holiday.reminderOffsets : [0],
   );
   const [reminderTime, setReminderTime] = useState(holiday.reminderTime);
   const [isSaving, setIsSaving] = useState(false);

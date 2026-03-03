@@ -202,7 +202,7 @@ export default function DashboardPage() {
           holidayId,
           enabled,
           reminderOffsets:
-            holiday.reminderOffsets.length > 0 ? holiday.reminderOffsets : [1],
+            holiday.reminderOffsets.length > 0 ? holiday.reminderOffsets : [0],
           reminderTime: holiday.reminderTime || '08:00',
         }),
       });
