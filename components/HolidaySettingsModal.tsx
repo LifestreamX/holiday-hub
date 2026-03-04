@@ -127,21 +127,38 @@ export default function HolidaySettingsModal({
                   When to Remind
                 </h3>
                 <div className='grid grid-cols-2 gap-2'>
-                  {availableOffsets.map((offset) => (
-                    <button
-                      key={offset.value}
-                      type='button'
-                      onClick={() => toggleOffset(offset.value)}
-                      className={`flex items-center justify-center gap-2 p-3 rounded-lg border-2 transition-all ${
-                        reminderOffsets.includes(offset.value)
-                          ? 'border-primary bg-primary/10 text-primary font-semibold'
-                          : 'border-border hover:border-primary/50 hover:bg-secondary/50 text-foreground'
-                      }`}
-                    >
-                      <span className='text-lg'>{offset.icon}</span>
-                      <span className='text-sm'>{offset.label}</span>
-                    </button>
-                  ))}
+                  {availableOffsets.map((offset) => {
+                    const isDisabled =
+                      holiday.daysUntil !== null &&
+                      offset.value > holiday.daysUntil;
+                    return (
+                      <button
+                        key={offset.value}
+                        type='button'
+                        disabled={isDisabled}
+                        onClick={() => toggleOffset(offset.value)}
+                        className={`flex items-center justify-center gap-2 p-3 rounded-lg border-2 transition-all ${
+                          reminderOffsets.includes(offset.value)
+                            ? 'border-primary bg-primary/10 text-primary font-semibold'
+                            : isDisabled
+                              ? 'border-muted bg-secondary text-muted-foreground opacity-50 cursor-not-allowed'
+                              : 'border-border hover:border-primary/50 hover:bg-secondary/50 text-foreground'
+                        }`}
+                      >
+                        <span className='text-lg'>{offset.icon}</span>
+                        <div className='flex flex-col items-center'>
+                          <span className='text-sm leading-tight'>
+                            {offset.label}
+                          </span>
+                          {isDisabled && (
+                            <span className='text-[10px] font-normal'>
+                              Too late
+                            </span>
+                          )}
+                        </div>
+                      </button>
+                    );
+                  })}
                 </div>
                 <p className='text-xs text-muted-foreground mt-2'>
                   Select one or more reminder times
