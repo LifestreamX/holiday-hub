@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import TimeSelect from '@/components/TimeSelect';
 import { X } from 'lucide-react';
 
 interface Holiday {
@@ -182,17 +183,13 @@ export default function HolidaySettingsModal({
                 <p className='text-xs text-muted-foreground mb-2'>
                   Reminders will be sent to your email address.
                 </p>
-                <select
-                  value={reminderTime}
-                  onChange={(e) => setReminderTime(e.target.value)}
-                  className='w-full px-4 py-3 bg-card border-2 border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-foreground text-base font-medium hover:border-primary/50 transition-all cursor-pointer'
-                >
-                  {timeOptions.map((time) => (
-                    <option key={time.value} value={time.value}>
-                      {time.label}
-                    </option>
-                  ))}
-                </select>
+                <div>
+                  <TimeSelect
+                    value={reminderTime}
+                    onChange={setReminderTime}
+                    options={timeOptions}
+                  />
+                </div>
                 <p className='text-xs text-muted-foreground mt-2'>
                   Reminders will be sent at this time
                 </p>

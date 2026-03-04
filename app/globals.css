@@ -63,3 +63,21 @@ body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
 }
+
+/* Scoped dropdown scrollbar used by CountrySelect/TimeSelect */
+.dropdown-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.dropdown-scroll::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 9999px;
+}
+.dropdown-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #7c3aed, #c084fc);
+  border-radius: 9999px;
+}
+.dropdown-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #7c3aed transparent;
+}

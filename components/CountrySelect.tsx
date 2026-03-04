@@ -92,7 +92,7 @@ export default function CountrySelect({ value, onChange, options }: Props) {
               className='w-full px-3 py-2 rounded-md bg-background border border-border text-sm'
             />
           </div>
-          <div className='max-h-56 overflow-auto country-select-scroll'>
+          <div className='max-h-56 overflow-auto dropdown-scroll'>
             <button
               onClick={() => {
                 onChange('ALL');
@@ -125,12 +125,6 @@ export default function CountrySelect({ value, onChange, options }: Props) {
           </div>
         </div>
       )}
-      <style>{`
-        .country-select-scroll::-webkit-scrollbar{width:8px;height:8px}
-        .country-select-scroll::-webkit-scrollbar-track{background:transparent;border-radius:9999px}
-        .country-select-scroll::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#7c3aed,#c084fc);border-radius:9999px}
-        .country-select-scroll{scrollbar-width:thin;scrollbar-color:#7c3aed transparent}
-      `}</style>
     </div>
   );
 }
