@@ -21,7 +21,10 @@ export interface HolidayRule {
 /**
  * Calculate the actual date of a holiday for a specific year
  */
-export function calculateHolidayDate(holiday: HolidayRule, year: number): Date {
+export function calculateHolidayDate(
+  holiday: HolidayRule,
+  year: number,
+): Date | null {
   switch (holiday.ruleType) {
     case 'fixed':
       if (holiday.month === undefined || holiday.day === undefined) {
@@ -140,6 +143,7 @@ export function getUpcomingHolidays(
     for (const holiday of holidays) {
       try {
         const date = calculateHolidayDate(holiday, year);
+        if (!date) continue;
         if (date >= startDate && date <= endDate) {
           result.push({ holiday, date });
         }
