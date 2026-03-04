@@ -81,23 +81,23 @@ export default function HolidayCard({
             <h3 className='text-xl font-semibold text-foreground'>
               {holiday.name}
             </h3>
-            <span
-              className={`px-2 py-1 text-xs font-medium rounded-full ${getCategoryColor(
-                holiday.category,
-              )}`}
+            <button
+              onClick={() => onSettings(holiday)}
+              className='p-2 rounded-lg hover:bg-secondary transition-colors'
+              title='Settings'
             >
-              {holiday.category}
-            </span>
-            {holiday.countryName ? (
-              <span className='ml-2 inline-flex items-center justify-center px-2 py-1 text-xs font-medium rounded-full text-center bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200'>
-                {holiday.countryName}
-              </span>
-            ) : holiday.countryCode ? (
-              <span className='ml-2 inline-flex items-center justify-center px-2 py-1 text-xs font-medium rounded-full text-center bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200'>
-                {holiday.countryCode}
-              </span>
-            ) : null}
-          </div>
+              <SettingsIcon className='w-5 h-5 text-muted-foreground' />
+            </button>
+
+            <label className='relative inline-flex items-center cursor-pointer' title='Enable or disable email notifications for this holiday'>
+              <input
+                type='checkbox'
+                className='sr-only peer'
+                checked={holiday.enabled}
+                onChange={handleToggle}
+              />
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 dark:peer-focus:ring-primary/40 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+            </label>
           {holiday.description &&
           holiday.description.trim() !== holiday.name.trim() ? (
             <p className='text-sm text-muted-foreground'>

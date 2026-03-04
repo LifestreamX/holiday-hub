@@ -102,10 +102,10 @@ export default function HolidaySettingsModal({
           <div className='flex items-center justify-between'>
             <div>
               <h3 className='font-medium text-foreground'>
-                Enable Notifications
+                Enable Email Notifications
               </h3>
               <p className='text-sm text-muted-foreground'>
-                Receive reminders for this holiday
+                Receive email reminders for this holiday
               </p>
             </div>
             <label className='relative inline-flex items-center cursor-pointer'>
