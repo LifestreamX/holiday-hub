@@ -76,13 +76,15 @@ export default function HolidayCard({
     } else {
       dateObj = new Date(holiday.date);
     }
-
-    return dateObj.toLocaleDateString('en-US', {
+    // Use the user's timezone explicitly for formatting
+    const userTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return new Intl.DateTimeFormat('en-US', {
+      timeZone: userTz,
       weekday: 'long',
       year: 'numeric',
       month: 'long',
       day: 'numeric',
-    });
+    }).format(dateObj);
   };
 
   return (
