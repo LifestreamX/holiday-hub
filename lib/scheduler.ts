@@ -1,8 +1,8 @@
-import { PrismaClient } from '@prisma/client';
-import { calculateHolidayDate } from './holidayEngine';
-import { getDaysBetween, getStartOfDayInTimezone } from './dateUtils';
-import { utcToZonedTime } from 'date-fns-tz';
-import { sendEmail, generateHolidayEmailHTML } from './emailService';
+import { PrismaClient } from "@prisma/client";
+import { calculateHolidayDate } from "./holidayEngine";
+import { getDaysBetween, getStartOfDayInTimezone } from "./dateUtils";
+import { utcToZonedTime } from "date-fns-tz";
+import { sendEmail, generateHolidayEmailHTML } from "./emailService";
 
 const prisma = new PrismaClient();
 
@@ -22,8 +22,11 @@ export async function processUserNotifications(userId: string): Promise<void> {
     return;
   }
 
-  const tz = user.timezone || 'UTC';
+  const tz = user.timezone || "UTC";
   const now = new Date();
+  const today = getStartOfDayInTimezone(now, tz);
+  const currentYear = today.getFullYear();
+
   for (const pref of user.holidayPreferences) {
     const holiday = pref.holiday;
     try {
@@ -31,7 +34,7 @@ export async function processUserNotifications(userId: string): Promise<void> {
         {
           id: holiday.id,
           name: holiday.name,
-          ruleType: holiday.ruleType as 'fixed' | 'nth_weekday' | 'calculated',
+          ruleType: holiday.ruleType as "fixed" | "nth_weekday" | "calculated",
           month: holiday.month || undefined,
           day: holiday.day || undefined,
           weekday: holiday.weekday || undefined,
@@ -39,11 +42,13 @@ export async function processUserNotifications(userId: string): Promise<void> {
         },
         currentYear,
       );
+
       if (!holidayDate) {
         console.log(`[scheduler] Skipping holiday: ${holiday.name} (no date calculated)`);
         continue;
       }
-      // Normalize holidayDate to the user's timezone start-of-day so comparisons are consistent
+
+      // Normalize holidayDate to the user''s timezone start-of-day so comparisons are consistent
       holidayDate = getStartOfDayInTimezone(holidayDate, tz);
 
       if (holidayDate < today) {
@@ -52,9 +57,9 @@ export async function processUserNotifications(userId: string): Promise<void> {
             id: holiday.id,
             name: holiday.name,
             ruleType: holiday.ruleType as
-              | 'fixed'
-              | 'nth_weekday'
-              | 'calculated',
+              | "fixed"
+              | "nth_weekday"
+              | "calculated",
             month: holiday.month || undefined,
             day: holiday.day || undefined,
             weekday: holiday.weekday || undefined,
@@ -73,7 +78,7 @@ export async function processUserNotifications(userId: string): Promise<void> {
 
       const reminderOffsets = Array.isArray(pref.reminderOffsets)
         ? pref.reminderOffsets
-        : JSON.parse((pref.reminderOffsets as string) || '[]');
+        : JSON.parse((pref.reminderOffsets as string) || "[]");
 
       if (!reminderOffsets.includes(daysUntil)) {
         console.log(`[scheduler] Skipping holiday: ${holiday.name} (daysUntil: ${daysUntil} not in reminderOffsets)`);
@@ -82,11 +87,11 @@ export async function processUserNotifications(userId: string): Promise<void> {
 
       // Time-window check: send only when current local time is within window of reminderTime
       const windowMinutes = Number(process.env.SCHEDULER_WINDOW_MINUTES) || 15;
-      const reminderTime = (pref.reminderTime as string) || '08:00';
+      const reminderTime = (pref.reminderTime as string) || "08:00";
 
       try {
         const nowZoned = utcToZonedTime(now, tz);
-        const [h, m] = reminderTime.split(':').map(Number);
+        const [h, m] = reminderTime.split(":").map(Number);
         const target = new Date(nowZoned);
         target.setHours(h, m, 0, 0);
 
@@ -103,7 +108,7 @@ export async function processUserNotifications(userId: string): Promise<void> {
         // If timezone parsing fails, fall back to sending (avoid silent failure)
       }
 
-      // Use the holiday date (start of day in user's timezone) as the scheduledFor
+      // Use the holiday date (start of day in user''s timezone) as the scheduledFor
       const scheduledFor = getStartOfDayInTimezone(holidayDate, user.timezone);
 
       const existing = await prisma.notification.findFirst({
@@ -130,7 +135,7 @@ export async function processUserNotifications(userId: string): Promise<void> {
       console.log(`[scheduler] Sending email for holiday: ${holiday.name} to ${user.email}`);
       const emailSent = await sendEmail({
         to: user.email,
-        subject: `Reminder: ${holiday.name} ${daysUntil === 0 ? 'is today!' : `in ${daysUntil} days`}`,
+        subject: `Reminder: ${holiday.name} ${daysUntil === 0 ? "is today!" : `in ${daysUntil} days`}`,
         html: emailHTML,
       });
 
@@ -143,7 +148,7 @@ export async function processUserNotifications(userId: string): Promise<void> {
             scheduledFor: scheduledFor,
             sent: true,
             sentAt: new Date(),
-            deliveryType: 'email',
+            deliveryType: "email",
           },
         });
       } else {
@@ -151,17 +156,6 @@ export async function processUserNotifications(userId: string): Promise<void> {
       }
     } catch (err) {
       console.error(`[scheduler] Error processing holiday: ${holiday.name} for user ${user.email}:`, err);
-    }
-  }
-            scheduledFor: scheduledFor,
-            sent: true,
-            sentAt: new Date(),
-            deliveryType: 'email',
-          },
-        });
-      }
-    } catch (err) {
-      // ...removed noisy error log...
     }
   }
 }
@@ -186,22 +180,4 @@ export async function processAllUsers(pageSize = 100): Promise<number> {
   }
 
   return processed;
-}
-
-export async function processUsersPage(
-  page = 0,
-  pageSize = 100,
-): Promise<number> {
-  const users = await prisma.user.findMany({
-    skip: page * pageSize,
-    take: pageSize,
-    where: { holidayPreferences: { some: { enabled: true } } },
-    select: { id: true },
-  });
-
-  if (users.length === 0) return 0;
-
-  const promises = users.map((u) => processUserNotifications(u.id));
-  await Promise.allSettled(promises);
-  return users.length;
 }

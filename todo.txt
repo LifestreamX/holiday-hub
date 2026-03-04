@@ -1,6 +1,14 @@
 
 
 
+
+
+
+
+
+TODO: Google / github sign in fail erro message first time
+
+
 TODO: live url qstash  needs to work (sync all holidays once resolved and change qstash back to 5 min)
 
 
