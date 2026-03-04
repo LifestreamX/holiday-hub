@@ -420,6 +420,11 @@ export default function DashboardPage() {
           )}
         </div>
 
+        {/* Info banner for 2026 holidays only */}
+        <div className="mb-4 p-3 rounded border border-blue-200 bg-blue-50 text-blue-800 text-center text-sm">
+          <strong>Note:</strong> Currently showing holidays for <b>2026</b> only.
+        </div>
+
         {/* Search and Filters */}
         <div className='mb-6 space-y-4'>
           {/* Search Bar + Country Selector */}
