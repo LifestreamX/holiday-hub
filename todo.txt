@@ -1,7 +1,4 @@
 
-TODO: Modal background prevent scrolling hh
-
-TODO: Country filter dropdwon  reset 
 
 
 TODO: live url qstash  needs to work

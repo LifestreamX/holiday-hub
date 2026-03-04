@@ -6,6 +6,19 @@ async function main() {
   console.log('Seeding database (non-destructive)...');
 
   const holidays = [
+    // Test Holiday for today (March 4, 2026)
+    {
+      name: 'Test Holiday (Today)',
+      description:
+        'A test holiday for verifying email sending on the current date.',
+      category: 'test',
+      ruleType: 'fixed',
+      month: 3,
+      day: 4,
+      weekday: null,
+      nth: null,
+      countryCode: 'US',
+    },
     // US Federal Holidays
     {
       name: "New Year's Day",
