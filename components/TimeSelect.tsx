@@ -116,7 +116,7 @@ export default function TimeSelect({ value, onChange, options }: Props) {
                     onChange(opt.value);
                     setOpen(false);
                   }}
-                  className={`w-full text-left px-3 py-2 hover:bg-purple-50 transition-colors ${opt.value === value ? 'bg-primary/10 text-primary font-semibold' : ''}`}
+                  className={`w-full text-left px-3 py-2 hover:bg-primary/10 hover:text-primary transition-colors ${opt.value === value ? 'bg-primary/10 text-primary font-semibold' : ''}`}
                 >
                   {opt.label}
                 </button>

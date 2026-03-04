@@ -98,7 +98,7 @@ export default function CountrySelect({ value, onChange, options }: Props) {
                 onChange('ALL');
                 setOpen(false);
               }}
-              className='w-full text-left px-3 py-2 hover:bg-purple-50 transition-colors rounded-md'
+              className='w-full text-left px-3 py-2 hover:bg-primary/10 hover:text-primary transition-colors rounded-md'
             >
               All countries
             </button>
@@ -109,7 +109,7 @@ export default function CountrySelect({ value, onChange, options }: Props) {
                   onChange(c.countryCode);
                   setOpen(false);
                 }}
-                className='w-full text-left px-3 py-2 hover:bg-purple-50 transition-colors flex items-center justify-between rounded-md'
+                className='w-full text-left px-3 py-2 hover:bg-primary/10 hover:text-primary transition-colors flex items-center justify-between rounded-md'
               >
                 <span>{c.name}</span>
                 <span className='text-xs text-muted-foreground'>
