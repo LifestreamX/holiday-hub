@@ -1,13 +1,8 @@
 
 
 
-TODO: Mobiel
-
-
-TODO: Use icon in dahsbaord for favi and login singup hom epage
-
 
 TODO: live url qstash  needs to work
 
 
-TODO: Any other source of ntoificaitons besides emails 
+TODO: Any other source of ntoificaitons besides emails or mvoe on to next prj 
