@@ -18,14 +18,7 @@ async function verifyQstashSignature(req: NextRequest): Promise<boolean> {
 
   const body = await req.text();
 
-  // Debug: log signature and body
-  console.log('QStash Debug: Received signature:', signature);
-  console.log('QStash Debug: Received body:', body);
-  // Log all headers
-  console.log('QStash Debug: Headers:');
-  for (const [key, value] of req.headers.entries()) {
-    console.log(`  ${key}: ${value}`);
-  }
+  // ...removed noisy debug logs...
 
   // QStash now uses JWT for signatures
   const checkJwt = (key?: string) => {
@@ -47,7 +40,7 @@ export async function POST(req: NextRequest) {
   // Require QStash-signed requests only
   const ok = await verifyQstashSignature(req);
   if (!ok) {
-    console.log('QStash Debug: Signature verification failed.');
+    // ...removed noisy debug log...
     return NextResponse.json(
       { error: 'Unauthorized - signature required' },
       { status: 401 },
@@ -75,7 +68,7 @@ export async function POST(req: NextRequest) {
     const processed = await processAllUsers(100);
     return NextResponse.json({ ok: true, usersProcessed: processed });
   } catch (err) {
-    console.error('Cron notify error', err);
+    // ...removed noisy error log...
     return NextResponse.json({ error: 'Server error' }, { status: 500 });
   }
 }

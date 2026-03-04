@@ -54,6 +54,11 @@ export function generateHolidayEmailHTML(
         ? `Tomorrow is ${holidayName}!`
         : `${holidayName} is coming up in ${daysUntil} days!`;
 
+  // Provide a default informative description if missing or not meaningful
+  let desc = holidayDescription && holidayDescription.trim();
+  if (!desc || desc === holidayName || desc.length < 10) {
+    desc = `Learn more about ${holidayName} and its traditions. This holiday is celebrated in many places around the world. Enjoy your day!`;
+  }
   return `
     <!DOCTYPE html>
     <html>
@@ -116,7 +121,7 @@ export function generateHolidayEmailHTML(
         <div class="message">${message}</div>
         <div class="date">📅 ${dateString}</div>
         <div class="description">
-          ${holidayDescription}
+          ${desc}
         </div>
         <div class="footer">
           This is a reminder from Holiday Hub. Manage your notifications at your dashboard.

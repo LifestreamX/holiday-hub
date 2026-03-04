@@ -24,9 +24,7 @@ export async function processUserNotifications(userId: string): Promise<void> {
   const today = getStartOfDayInTimezone(now, tz);
   const currentYear = today.getFullYear();
 
-  console.log(
-    `[Scheduler] Processing user ${user.email} (${tz}). Today is ${today.toDateString()}`,
-  );
+  // ...removed noisy log...
 
   for (const pref of user.holidayPreferences) {
     const holiday = pref.holiday;
@@ -72,7 +70,7 @@ export async function processUserNotifications(userId: string): Promise<void> {
         : JSON.parse((pref.reminderOffsets as string) || '[]');
 
       if (!reminderOffsets.includes(daysUntil)) {
-        // console.log(`[Scheduler] Skipping ${holiday.name}: daysUntil ${daysUntil} not in offsets [${reminderOffsets}]`);
+        // ...removed noisy log...
         continue;
       }
 
@@ -90,16 +88,14 @@ export async function processUserNotifications(userId: string): Promise<void> {
           (nowZoned.getTime() - target.getTime()) / 60000,
         );
 
-        console.log(
-          `[Scheduler] ${holiday.name} match! User Time: ${nowZoned.toLocaleTimeString()} Target: ${reminderTime} Diff: ${diffMinutes.toFixed(1)}m`,
-        );
+        // ...removed noisy log...
 
         if (diffMinutes > windowMinutes) {
           // Not the right time for this user yet
           continue;
         }
       } catch (err) {
-        console.error('Timezone parse error for user', user.id, err);
+        // ...removed noisy error log...
         // If timezone parsing fails, fall back to sending (avoid silent failure)
       }
 
@@ -116,15 +112,10 @@ export async function processUserNotifications(userId: string): Promise<void> {
       });
 
       if (existing) {
-        console.log(
-          `[Scheduler] Already sent ${holiday.name} for ${scheduledFor.toDateString()}`,
-        );
+        // ...removed noisy log...
         continue;
       }
 
-      console.log(
-        `[Scheduler] SENDING EMAIL for ${holiday.name} to ${user.email}...`,
-      );
       const emailHTML = generateHolidayEmailHTML(
         holiday.name,
         holiday.description,
@@ -139,9 +130,7 @@ export async function processUserNotifications(userId: string): Promise<void> {
       });
 
       if (emailSent) {
-        console.log(
-          `[Scheduler] SUCCESS: Email sent to ${user.email} for ${holiday.name}`,
-        );
+        // ...removed noisy log...
         await prisma.notification.create({
           data: {
             userId: user.id,
@@ -154,11 +143,7 @@ export async function processUserNotifications(userId: string): Promise<void> {
         });
       }
     } catch (err) {
-      console.error(
-        'Error processing holiday preference for user',
-        user.email,
-        err,
-      );
+      // ...removed noisy error log...
     }
   }
 }

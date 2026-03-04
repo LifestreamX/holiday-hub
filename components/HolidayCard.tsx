@@ -98,7 +98,12 @@ export default function HolidayCard({
               </span>
             ) : null}
           </div>
-          <p className='text-sm text-muted-foreground'>{holiday.description}</p>
+          {holiday.description &&
+          holiday.description.trim() !== holiday.name.trim() ? (
+            <p className='text-sm text-muted-foreground'>
+              {holiday.description}
+            </p>
+          ) : null}
         </div>
       </div>
 
