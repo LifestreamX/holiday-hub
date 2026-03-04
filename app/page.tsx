@@ -4,22 +4,22 @@ import { Bell, Users, Sparkles, Calendar } from 'lucide-react';
 export default function Home() {
   return (
     <div className='min-h-screen flex flex-col bg-background'>
-      <nav className='container mx-auto px-4 py-6'>
-        <div className='flex items-center justify-between'>
+      <nav className='container mx-auto px-4 py-4 md:py-6'>
+        <div className='flex flex-col sm:flex-row items-center justify-between gap-4'>
           <div className='flex items-center gap-2'>
             <Calendar className='w-8 h-8 text-primary' />
             <span className='text-2xl font-bold text-primary'>Holiday Hub</span>
           </div>
-          <div className='flex items-center gap-4'>
+          <div className='flex items-center gap-3 w-full sm:w-auto'>
             <Link
               href='/register'
-              className='px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors shadow'
+              className='flex-1 sm:flex-none text-center px-4 sm:px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors shadow'
             >
               Sign up
             </Link>
             <Link
               href='/login'
-              className='px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors'
+              className='flex-1 sm:flex-none text-center px-4 sm:px-6 py-2 border border-primary text-primary hover:bg-primary/10 rounded-lg font-medium transition-colors'
             >
               Sign in
             </Link>
