@@ -190,7 +190,7 @@ export default function LoginPage() {
                   setError(null);
                 }}
                 required
-                className='w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'
+                className='w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-black'
                 placeholder='your@email.com'
                 disabled={loading !== null}
               />
@@ -211,7 +211,7 @@ export default function LoginPage() {
                   setError(null);
                 }}
                 required
-                className='w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'
+                className='w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-black'
                 placeholder='••••••••'
                 disabled={loading !== null}
               />
