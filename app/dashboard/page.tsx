@@ -9,26 +9,29 @@ import {
   LogOut,
   Settings,
   Loader2,
-  Search,
-  Filter,
-} from 'lucide-react';
-import HolidayCard from '@/components/HolidayCard';
-import HolidaySettingsModal from '@/components/HolidaySettingsModal';
-import CountrySelect from '@/components/CountrySelect';
-
-interface Holiday {
-  id: string;
-  name: string;
-  description: string;
-  category: string;
-  date: string | null;
-  daysUntil: number | null;
-  enabled: boolean;
-  reminderOffsets: number[];
-  reminderTime: string;
-  hasPreference: boolean;
-}
-
+                    try {
+                      setIsLoading(true);
+                      const countryParam =
+                        viewCountry === 'ALL'
+                          ? 'ALL'
+                          : viewCountry || (session?.user as any)?.countryCode || 'US';
+                      const url = `/api/preferences/enable-all${countryParam ? `?country=${encodeURIComponent(countryParam)}` : ''}`;
+                      const res = await fetch(url, { method: 'POST' });
+                      if (res.ok) {
+                        // Optimistically mark currently displayed holidays as enabled
+                        setHolidays((prev) =>
+                          prev.map((hd) => ({ ...hd, enabled: true, hasPreference: true })),
+                        );
+                        // Immediately re-fetch for the specific country to get server state
+                        await fetchHolidays(countryParam === 'ALL' ? 'ALL' : countryParam);
+                        // In some DB setups the changes may not be visible immediately; retry once after a short delay
+                        setTimeout(() => fetchHolidays(countryParam === 'ALL' ? 'ALL' : countryParam), 1000);
+                      } else {
+                        console.error('Failed to enable all preferences');
+                      }
+                    } finally {
+                      setIsLoading(false);
+                    }
 const CATEGORY_LABELS: Record<string, string> = {
   federal: '🏛️ Federal Holidays',
   state: '🏛️ State Holidays',
@@ -419,7 +422,11 @@ export default function DashboardPage() {
                       if (res.ok) {
                         // Optimistically mark currently displayed holidays as enabled
                         setHolidays((prev) =>
-                          prev.map((hd) => ({ ...hd, enabled: true, hasPreference: true })),
+                          prev.map((hd) => ({
+                            ...hd,
+                            enabled: true,
+                            hasPreference: true,
+                          })),
                         );
                         // Refresh from server to ensure consistency
                         await fetchHolidays();
