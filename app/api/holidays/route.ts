@@ -135,7 +135,7 @@ async function buildHolidaysForSession(
             );
           }
 
-        if (date) {
+          if (date) {
             // Encode as YYYY-MM-DD to avoid any UTC timezone shifts in the browser
             const y = date.getFullYear();
             const m = String(date.getMonth() + 1).padStart(2, '0');
