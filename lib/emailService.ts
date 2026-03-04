@@ -124,7 +124,7 @@ export function generateHolidayEmailHTML(
           ${desc}
         </div>
         <div class="footer">
-          This is a reminder from Holiday Hub. Manage your notifications at your dashboard.
+          This is a reminder from Holiday Hub. Manage your notifications at your <a href="https://holiday-hub.tyler-allen.com/dashboard" style="color: #667eea; text-decoration: underline;">dashboard</a>.
         </div>
       </div>
     </body>
