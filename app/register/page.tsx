@@ -187,6 +187,9 @@ export default function RegisterPage() {
                   {error}
                 </div>
               )}
+              <p className='text-xs text-gray-500 mb-2 text-center'>
+                By creating an account, you agree to receive holiday notifications via email. You can manage your preferences anytime.
+              </p>
               <button
                 type='submit'
                 disabled={loading !== null}
