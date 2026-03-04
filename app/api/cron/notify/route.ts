@@ -10,13 +10,21 @@ async function verifyQstashSignature(req: NextRequest): Promise<boolean> {
   const isLocalDebug =
     process.env.NODE_ENV === 'development' &&
     req.headers.get('x-local-test') === 'true';
-  if (isLocalDebug) return true;
+  if (isLocalDebug) {
+    console.log('[notify] Local debug mode, skipping signature check');
+    return true;
+  }
 
   const signature =
     req.headers.get('Upstash-Signature') || req.headers.get('Qstash-Signature');
-  if (!signature) return false;
+  if (!signature) {
+    console.warn('[notify] No QStash signature header found');
+    return false;
+  }
 
   const body = await req.text();
+  // Optionally log body for debugging (be careful with sensitive data)
+  // console.log('[notify] Raw body:', body);
 
   // ...removed noisy debug logs...
 
@@ -27,20 +35,25 @@ async function verifyQstashSignature(req: NextRequest): Promise<boolean> {
       jwt.verify(signature, key, { algorithms: ['HS256'] });
       return true;
     } catch (err) {
+      console.warn('[notify] JWT signature verification failed:', err);
       return false;
     }
   };
 
-  return (
-    checkJwt(QSTASH_CURRENT_SIGNING_KEY) || checkJwt(QSTASH_NEXT_SIGNING_KEY)
-  );
+  const valid =
+    checkJwt(QSTASH_CURRENT_SIGNING_KEY) || checkJwt(QSTASH_NEXT_SIGNING_KEY);
+  if (!valid) {
+    console.warn('[notify] Signature present but invalid');
+  }
+  return valid;
 }
 
 export async function POST(req: NextRequest) {
+  console.log('[notify] POST /api/cron/notify called');
   // Require QStash-signed requests only
   const ok = await verifyQstashSignature(req);
   if (!ok) {
-    // ...removed noisy debug log...
+    console.warn('[notify] Request failed signature verification');
     return NextResponse.json(
       { error: 'Unauthorized - signature required' },
       { status: 401 },
@@ -56,7 +69,9 @@ export async function POST(req: NextRequest) {
     if (pageParam !== null) {
       const page = Number(pageParam) || 0;
       const size = Number(sizeParam) || 100;
+      console.log(`[notify] Processing users page: page=${page}, size=${size}`);
       const processed = await processUsersPage(page, size);
+      console.log(`[notify] Users processed (paged):`, processed);
       return NextResponse.json({
         ok: true,
         page,
@@ -65,10 +80,12 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    console.log('[notify] Processing all users (default 100)');
     const processed = await processAllUsers(100);
+    console.log('[notify] Users processed (all):', processed);
     return NextResponse.json({ ok: true, usersProcessed: processed });
   } catch (err) {
-    // ...removed noisy error log...
+    console.error('[notify] Error in handler:', err);
     return NextResponse.json({ error: 'Server error' }, { status: 500 });
   }
 }
