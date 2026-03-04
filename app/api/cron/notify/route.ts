@@ -22,17 +22,16 @@ async function verifyQstashSignature(req: NextRequest): Promise<boolean> {
     return false;
   }
 
-  const body = await req.text();
-  // Optionally log body for debugging (be careful with sensitive data)
-  // console.log('[notify] Raw body:', body);
-
-  // ...removed noisy debug logs...
-
-  // QStash now uses JWT for signatures
+  // QStash uses JWT signatures - no need to read the body
+  // The JWT in the header is self-contained and verified against the signing key
   const checkJwt = (key?: string) => {
-    if (!key) return false;
+    if (!key) {
+      console.warn('[notify] Signing key is undefined');
+      return false;
+    }
     try {
       jwt.verify(signature, key, { algorithms: ['HS256'] });
+      console.log('[notify] JWT signature verified successfully');
       return true;
     } catch (err) {
       console.warn('[notify] JWT signature verification failed:', err);
