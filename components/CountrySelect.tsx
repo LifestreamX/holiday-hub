@@ -48,7 +48,7 @@ export default function CountrySelect({ value, onChange, options }: Props) {
       <button
         type='button'
         onClick={() => setOpen((s) => !s)}
-        className='flex items-center gap-2 px-4 py-2 rounded-2xl bg-card border border-border text-sm font-semibold shadow-sm hover:shadow-md transition-shadow'
+        className='flex items-center gap-2 px-4 py-2 rounded-md bg-card border border-border text-sm font-semibold shadow-sm hover:shadow-md transition-shadow'
         aria-haspopup
         aria-expanded={open}
       >
@@ -68,7 +68,7 @@ export default function CountrySelect({ value, onChange, options }: Props) {
       </button>
 
       {open && (
-        <div className='absolute z-50 mt-2 w-72 bg-card border border-border rounded-2xl shadow-xl ring-1 ring-purple-50'>
+        <div className='absolute z-50 mt-2 w-72 bg-card rounded-md shadow-lg'>
           <div className='p-2'>
             <input
               autoFocus
