@@ -48,7 +48,14 @@ async function verifyQstashSignature(req: NextRequest): Promise<boolean> {
 }
 
 export async function POST(req: NextRequest) {
-  console.log('[notify] POST /api/cron/notify called');
+  const now = new Date().toISOString();
+  const headersObj = Object.fromEntries(req.headers.entries());
+  console.log('[notify] POST /api/cron/notify called', {
+    timestamp: now,
+    method: req.method,
+    url: req.url,
+    headers: headersObj,
+  });
   // Require QStash-signed requests only
   const ok = await verifyQstashSignature(req);
   if (!ok) {
