@@ -82,8 +82,10 @@ export default function DashboardPage() {
   useEffect(() => {
     if (status === 'authenticated') {
       console.log('[Dashboard] User authenticated, fetching holidays');
-      // initialize view country from session or default and fetch list of countries
-      const defaultCountry = (session?.user as any)?.countryCode || 'US';
+      // initialize view country from localStorage, then session, then default
+      const savedCountry = localStorage.getItem('viewCountry');
+      const defaultCountry =
+        savedCountry || (session?.user as any)?.countryCode || 'US';
       setViewCountry(defaultCountry);
 
       // Inline fetching to avoid stale/missing-hook dependency warnings
@@ -448,9 +450,11 @@ export default function DashboardPage() {
                 value={viewCountry || 'US'}
                 onChange={(e) => {
                   const v = e.target.value;
-                  setViewCountry(v === 'ALL' ? 'ALL' : v);
+                  const target = v === 'ALL' ? 'ALL' : v;
+                  setViewCountry(target);
+                  localStorage.setItem('viewCountry', target);
                   setIsLoading(true);
-                  fetchHolidays(v === 'ALL' ? 'ALL' : v);
+                  fetchHolidays(target);
                 }}
                 className='px-4 py-2 rounded-xl bg-card border border-border text-sm font-semibold'
                 title='Select country to view holidays'
