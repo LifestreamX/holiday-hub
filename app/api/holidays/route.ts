@@ -135,8 +135,12 @@ async function buildHolidaysForSession(
             );
           }
 
-          if (date) {
-            holidayDate = date;
+        if (date) {
+            // Encode as YYYY-MM-DD to avoid any UTC timezone shifts in the browser
+            const y = date.getFullYear();
+            const m = String(date.getMonth() + 1).padStart(2, '0');
+            const d = String(date.getDate()).padStart(2, '0');
+            holidayDate = `${y}-${m}-${d}` as any;
             daysUntil = getDaysBetween(today, date);
           } else {
             logger.warn(
@@ -159,7 +163,7 @@ async function buildHolidaysForSession(
         category: holiday.category,
         countryCode: holiday.countryCode,
         countryName: countryNameMap[holiday.countryCode] || holiday.countryCode,
-        date: holidayDate?.toISOString(),
+        date: holidayDate as any,
         daysUntil,
         enabled: preference?.enabled ?? false,
         reminderOffsets: preference?.reminderOffsets ?? [],
