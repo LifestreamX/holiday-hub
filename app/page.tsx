@@ -3,7 +3,7 @@ import { Bell, Users, Sparkles } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className='min-h-screen flex flex-col bg-gradient-to-br from-slate-900 via-blue-900 to-slate-700'>
+    <div className='min-h-screen flex flex-col bg-background'>
       <nav className='container mx-auto px-4 py-6'>
         <div className='flex items-center justify-between'>
           <div className='flex items-center gap-2'>
@@ -12,18 +12,18 @@ export default function Home() {
               alt='Trone LTS logo'
               className='w-8 h-8'
             />
-            <span className='text-2xl font-bold text-white'>Holiday Hub</span>
+            <span className='text-2xl font-bold text-primary'>Holiday Hub</span>
           </div>
           <div className='flex items-center gap-4'>
             <Link
               href='/register'
-              className='px-6 py-2 bg-white text-blue-900 rounded-lg font-medium hover:bg-gray-100 transition-colors shadow'
+              className='px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors shadow'
             >
               Sign up
             </Link>
             <Link
               href='/login'
-              className='px-6 py-2 bg-white text-blue-900 rounded-lg font-medium hover:bg-gray-100 transition-colors'
+              className='px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors'
             >
               Sign in
             </Link>
@@ -35,10 +35,10 @@ export default function Home() {
       <div className='flex-1 flex flex-col'>
         <main className='flex-1 container mx-auto px-4 py-20'>
           <div className='max-w-4xl mx-auto text-center'>
-            <h1 className='text-5xl md:text-6xl font-bold text-white mb-6'>
+            <h1 className='text-5xl md:text-6xl font-bold text-primary mb-6'>
               Never Miss a Holiday Again
             </h1>
-            <p className='text-xl text-gray-200 mb-12'>
+            <p className='text-xl text-muted-foreground mb-12'>
               Get customizable email reminders for all your favorite holidays.
               Choose when you want to be notified. Sign up with Google or GitHub
               in seconds.
@@ -47,37 +47,41 @@ export default function Home() {
             <div className='flex flex-wrap items-center justify-center gap-4 mb-20'>
               <Link
                 href='/register'
-                className='px-8 py-4 bg-white text-blue-900 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg'
+                className='px-8 py-4 bg-primary text-primary-foreground rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-lg'
               >
                 Get Started Free
               </Link>
             </div>
 
             <div className='grid md:grid-cols-3 gap-8 mt-20'>
-              <div className='bg-white/10 backdrop-blur-lg rounded-lg p-8 text-white'>
+              <div className='bg-card rounded-lg p-8 text-foreground shadow'>
                 <Bell className='w-12 h-12 mb-4 mx-auto' />
-                <h3 className='text-xl font-semibold mb-3'>Smart Reminders</h3>
-                <p className='text-gray-200'>
+                <h3 className='text-xl font-semibold mb-3 text-primary'>
+                  Smart Reminders
+                </h3>
+                <p className='text-muted-foreground'>
                   Set multiple reminders for each holiday. Get notified days,
                   weeks, or even a month in advance.
                 </p>
               </div>
 
-              <div className='bg-white/10 backdrop-blur-lg rounded-lg p-8 text-white'>
+              <div className='bg-card rounded-lg p-8 text-foreground shadow'>
                 <Users className='w-12 h-12 mb-4 mx-auto' />
-                <h3 className='text-xl font-semibold mb-3'>Customizable</h3>
-                <p className='text-gray-200'>
+                <h3 className='text-xl font-semibold mb-3 text-primary'>
+                  Customizable
+                </h3>
+                <p className='text-muted-foreground'>
                   Choose exactly when to be reminded - from the day of, to a
                   month in advance. Personalize every holiday.
                 </p>
               </div>
 
-              <div className='bg-white/10 backdrop-blur-lg rounded-lg p-8 text-white'>
+              <div className='bg-card rounded-lg p-8 text-foreground shadow'>
                 <Sparkles className='w-12 h-12 mb-4 mx-auto' />
-                <h3 className='text-xl font-semibold mb-3'>
+                <h3 className='text-xl font-semibold mb-3 text-primary'>
                   All Major Holidays
                 </h3>
-                <p className='text-gray-200'>
+                <p className='text-muted-foreground'>
                   From federal holidays to cultural celebrations. We track them
                   all automatically.
                 </p>
@@ -87,8 +91,8 @@ export default function Home() {
         </main>
       </div>
       {/* Footer moved outside main content wrapper for true sticky bottom */}
-      <footer className='container mx-auto px-4 py-8 border-t border-white/20 mt-auto'>
-        <div className='text-center text-gray-300'>
+      <footer className='container mx-auto px-4 py-8 border-t border-border mt-auto'>
+        <div className='text-center text-muted-foreground'>
           <p>&copy; 2026 Holiday Hub. Never miss a celebration.</p>
         </div>
       </footer>

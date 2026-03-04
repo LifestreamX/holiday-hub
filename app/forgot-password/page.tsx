@@ -49,7 +49,7 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-700 flex items-center justify-center p-4'>
+    <div className='min-h-screen bg-background flex items-center justify-center p-4'>
       <div className='w-full max-w-md'>
         <div className='text-center mb-8'>
           <Link href='/' className='inline-flex items-center gap-2 mb-4'>
@@ -64,17 +64,17 @@ export default function ForgotPasswordPage() {
                 d='M3 6a1 1 0 011-1h3a1 1 0 011 1v1h8V6a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1v8h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1H8v1a1 1 0 01-1 1H4a1 1 0 01-1-1v-3a1 1 0 011-1h1V11H4a1 1 0 01-1-1V6z'
               />
             </svg>
-            <span className='text-3xl font-bold text-white'>Holiday Hub</span>
+            <span className='text-3xl font-bold text-primary'>Holiday Hub</span>
           </Link>
-          <h1 className='text-2xl font-semibold text-white'>
+          <h1 className='text-2xl font-semibold text-foreground'>
             Forgot Password?
           </h1>
-          <p className='text-gray-200 mt-2'>
+          <p className='text-muted-foreground mt-2'>
             Enter your email and we&apos;ll send you a reset link
           </p>
         </div>
 
-        <div className='bg-white rounded-lg shadow-xl p-8 text-gray-900'>
+        <div className='bg-card rounded-lg shadow-xl p-8 text-foreground'>
           {message ? (
             <div>
               <div className='p-4 rounded border border-green-300 bg-green-50 text-green-700 mb-6'>
@@ -92,7 +92,7 @@ export default function ForgotPasswordPage() {
               <div>
                 <label
                   htmlFor='email'
-                  className='block text-sm font-medium text-gray-700 mb-1'
+                  className='block text-sm font-medium text-foreground mb-1'
                 >
                   Email
                 </label>
@@ -102,7 +102,7 @@ export default function ForgotPasswordPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+                  className='w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'
                   placeholder='your@email.com'
                   disabled={loading}
                 />
@@ -117,7 +117,7 @@ export default function ForgotPasswordPage() {
               <button
                 type='submit'
                 disabled={loading}
-                className='w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center'
+                className='w-full py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center'
               >
                 {loading ? (
                   <div className='flex items-center gap-3'>
@@ -149,10 +149,10 @@ export default function ForgotPasswordPage() {
                 )}
               </button>
 
-              <div className='text-center text-sm text-gray-500 mt-4'>
+              <div className='text-center text-sm text-muted-foreground mt-4'>
                 <Link
                   href='/login'
-                  className='text-blue-600 hover:underline font-medium'
+                  className='text-primary hover:underline font-medium'
                 >
                   ← Back to login
                 </Link>

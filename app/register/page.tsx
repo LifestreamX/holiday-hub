@@ -95,7 +95,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-700 flex items-center justify-center p-4'>
+    <div className='min-h-screen bg-background flex items-center justify-center p-4'>
       <div className='w-full max-w-md'>
         <div className='text-center mb-8'>
           <Link href='/' className='inline-flex items-center gap-2 mb-4'>
@@ -106,12 +106,16 @@ export default function RegisterPage() {
               height={40}
               className='w-10 h-10'
             />
-            <span className='text-3xl font-bold text-white'>Holiday Hub</span>
+            <span className='text-3xl font-bold text-primary'>Holiday Hub</span>
           </Link>
-          <h1 className='text-2xl font-semibold text-white'>Create Account</h1>
-          <p className='text-gray-200 mt-2'>Get started with Holiday Hub</p>
+          <h1 className='text-2xl font-semibold text-foreground'>
+            Create Account
+          </h1>
+          <p className='text-muted-foreground mt-2'>
+            Get started with Holiday Hub
+          </p>
         </div>
-        <div className='bg-white rounded-lg shadow-xl p-8 text-gray-900'>
+        <div className='bg-card rounded-lg shadow-xl p-8 text-foreground border-2 border-primary/60'>
           {success ? (
             <div className='p-4 mb-6 rounded border border-green-300 bg-green-50 text-green-700 text-center'>
               {success}
@@ -128,7 +132,7 @@ export default function RegisterPage() {
               <div>
                 <label
                   htmlFor='email'
-                  className='block text-sm font-medium text-gray-700 mb-1'
+                  className='block text-sm font-medium text-foreground mb-1'
                 >
                   Email
                 </label>
@@ -138,7 +142,7 @@ export default function RegisterPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+                  className='w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'
                   placeholder='your@email.com'
                   disabled={loading !== null}
                 />
@@ -146,7 +150,7 @@ export default function RegisterPage() {
               <div>
                 <label
                   htmlFor='password'
-                  className='block text-sm font-medium text-gray-700 mb-1'
+                  className='block text-sm font-medium text-foreground mb-1'
                 >
                   Password
                 </label>
@@ -157,7 +161,7 @@ export default function RegisterPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   minLength={6}
-                  className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+                  className='w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'
                   placeholder='••••••••'
                   disabled={loading !== null}
                 />
@@ -177,7 +181,7 @@ export default function RegisterPage() {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                   minLength={6}
-                  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${error?.toLowerCase().includes('match') ? 'border-red-500' : 'border-gray-300'}`}
+                  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${error?.toLowerCase().includes('match') ? 'border-red-500' : 'border-border'}`}
                   placeholder='••••••••'
                   disabled={loading !== null}
                 />
@@ -190,7 +194,7 @@ export default function RegisterPage() {
               <button
                 type='submit'
                 disabled={loading !== null}
-                className='w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center'
+                className='w-full py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center'
               >
                 {loading === 'credentials' ? (
                   <div className='flex items-center gap-3'>
@@ -231,10 +235,10 @@ export default function RegisterPage() {
           )}
           <div className='relative mb-6'>
             <div className='absolute inset-0 flex items-center'>
-              <div className='w-full border-t border-gray-300'></div>
+              <div className='w-full border-t border-border'></div>
             </div>
             <div className='relative flex justify-center text-sm'>
-              <span className='px-2 bg-white text-gray-500'>
+              <span className='px-2 bg-card text-muted-foreground'>
                 Or continue with
               </span>
             </div>
@@ -244,7 +248,7 @@ export default function RegisterPage() {
               type='button'
               onClick={() => handleSignIn('google')}
               disabled={loading !== null}
-              className='w-full flex items-center justify-center gap-3 py-3 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition font-medium text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed'
+              className='w-full flex items-center justify-center gap-3 py-3 bg-background border-2 border-border rounded-lg hover:bg-accent transition font-medium text-foreground disabled:opacity-50 disabled:cursor-not-allowed'
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -282,11 +286,11 @@ export default function RegisterPage() {
               {loading === 'github' ? 'Signing up...' : 'Continue with GitHub'}
             </button>
           </div>
-          <div className='text-center text-sm text-gray-500 mt-6'>
+          <div className='text-center text-sm text-muted-foreground mt-6'>
             <span>Already have an account? </span>
             <Link
               href='/login'
-              className='text-blue-600 hover:underline font-medium'
+              className='text-primary hover:underline font-medium'
             >
               Sign in
             </Link>
