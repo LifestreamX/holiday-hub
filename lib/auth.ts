@@ -96,7 +96,7 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
       authorization: {
         params: {
-          prompt: 'consent',
+          prompt: 'select_account',
           access_type: 'offline',
           response_type: 'code',
         },
@@ -105,11 +105,6 @@ export const authOptions: NextAuthOptions = {
     GitHubProvider({
       clientId: process.env.GITHUB_ID || '',
       clientSecret: process.env.GITHUB_SECRET || '',
-      authorization: {
-        params: {
-          prompt: 'consent',
-        },
-      },
     }),
   ],
   // Enable debug logging in non-production to help diagnose provider issues
