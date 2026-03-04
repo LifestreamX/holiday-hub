@@ -139,7 +139,9 @@ async function buildHolidaysForSession(
             holidayDate = date;
             daysUntil = getDaysBetween(today, date);
           } else {
-            logger.warn(`Unable to calculate date for holiday (next year) : ${holiday.name}`);
+            logger.warn(
+              `Unable to calculate date for holiday (next year) : ${holiday.name}`,
+            );
           }
         }
       } catch (error) {

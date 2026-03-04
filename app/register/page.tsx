@@ -109,7 +109,7 @@ export default function RegisterPage() {
             Get started with Holiday Hub
           </p>
         </div>
-        <div className='bg-card rounded-lg shadow-xl p-8 text-foreground border-2 border-primary/60'>
+        <div className='bg-card rounded-lg shadow-xl p-8 text-foreground md:border-2 md:border-primary/60'>
           {success ? (
             <div className='p-4 mb-6 rounded border border-green-300 bg-green-50 text-green-700 text-center'>
               {success}
@@ -242,7 +242,7 @@ export default function RegisterPage() {
               type='button'
               onClick={() => handleSignIn('google')}
               disabled={loading !== null}
-              className='w-full flex items-center justify-center gap-3 py-3 bg-background border-2 border-border rounded-lg hover:bg-accent transition font-medium text-foreground disabled:opacity-50 disabled:cursor-not-allowed'
+              className='w-full flex items-center justify-center gap-3 py-3 bg-background md:border-2 md:border-border rounded-lg hover:bg-accent transition font-medium text-foreground disabled:opacity-50 disabled:cursor-not-allowed'
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'

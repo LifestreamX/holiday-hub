@@ -20,6 +20,7 @@ export default function LoginPage() {
   const handleCredentialsSubmit = async (e?: FormEvent) => {
     e?.preventDefault?.();
     setError(null);
+    setErrorMessage(null);
     setLoading('credentials');
 
     try {
@@ -88,7 +89,18 @@ export default function LoginPage() {
     try {
       setLoading(provider);
       setError(null);
+      setErrorMessage(null);
       console.log(`[Login] Starting ${provider} OAuth flow`);
+
+      // Clear error parameters from URL to prevent old errors from re-appearing
+      if (window.history && window.history.replaceState) {
+        const params = new URLSearchParams(window.location.search);
+        params.delete('error');
+        params.delete('registered');
+        params.delete('reset');
+        const newUrl = params.toString() ? `?${params.toString()}` : window.location.pathname;
+        window.history.replaceState({}, '', newUrl);
+      }
 
       // For OAuth providers, use redirect: true to let NextAuth handle the redirect
       const result = await signIn(provider, {
@@ -173,7 +185,7 @@ export default function LoginPage() {
           <p className='text-muted-foreground mt-2'>Welcome back!</p>
         </div>
 
-        <div className='bg-card rounded-lg shadow-xl p-8 text-foreground border-2 border-primary/60'>
+        <div className='bg-card rounded-lg shadow-xl p-8 text-foreground md:border-2 md:border-primary/60'>
           <form onSubmit={handleCredentialsSubmit} className='space-y-4 mb-6'>
             <div>
               <label
@@ -297,7 +309,7 @@ export default function LoginPage() {
             <button
               onClick={() => handleSignIn('google')}
               disabled={loading !== null}
-              className='w-full flex items-center justify-center gap-3 py-3 bg-background border-2 border-border rounded-lg hover:bg-accent transition font-medium text-foreground disabled:opacity-50 disabled:cursor-not-allowed'
+              className='w-full flex items-center justify-center gap-3 py-3 bg-background md:border-2 md:border-border rounded-lg hover:bg-accent transition font-medium text-foreground disabled:opacity-50 disabled:cursor-not-allowed'
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'

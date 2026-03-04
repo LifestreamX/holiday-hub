@@ -1,8 +1,8 @@
-import { PrismaClient } from "@prisma/client";
-import { calculateHolidayDate } from "./holidayEngine";
-import { getDaysBetween, getStartOfDayInTimezone } from "./dateUtils";
-import { utcToZonedTime } from "date-fns-tz";
-import { sendEmail, generateHolidayEmailHTML } from "./emailService";
+import { PrismaClient } from '@prisma/client';
+import { calculateHolidayDate } from './holidayEngine';
+import { getDaysBetween, getStartOfDayInTimezone } from './dateUtils';
+import { utcToZonedTime } from 'date-fns-tz';
+import { sendEmail, generateHolidayEmailHTML } from './emailService';
 
 const prisma = new PrismaClient();
 
@@ -22,7 +22,7 @@ export async function processUserNotifications(userId: string): Promise<void> {
     return;
   }
 
-  const tz = user.timezone || "UTC";
+  const tz = user.timezone || 'UTC';
   const now = new Date();
   const today = getStartOfDayInTimezone(now, tz);
   const currentYear = today.getFullYear();
@@ -34,7 +34,7 @@ export async function processUserNotifications(userId: string): Promise<void> {
         {
           id: holiday.id,
           name: holiday.name,
-          ruleType: holiday.ruleType as "fixed" | "nth_weekday" | "calculated",
+          ruleType: holiday.ruleType as 'fixed' | 'nth_weekday' | 'calculated',
           month: holiday.month || undefined,
           day: holiday.day || undefined,
           weekday: holiday.weekday || undefined,
@@ -44,7 +44,9 @@ export async function processUserNotifications(userId: string): Promise<void> {
       );
 
       if (!holidayDate) {
-        console.log(`[scheduler] Skipping holiday: ${holiday.name} (no date calculated)`);
+        console.log(
+          `[scheduler] Skipping holiday: ${holiday.name} (no date calculated)`,
+        );
         continue;
       }
 
@@ -57,9 +59,9 @@ export async function processUserNotifications(userId: string): Promise<void> {
             id: holiday.id,
             name: holiday.name,
             ruleType: holiday.ruleType as
-              | "fixed"
-              | "nth_weekday"
-              | "calculated",
+              | 'fixed'
+              | 'nth_weekday'
+              | 'calculated',
             month: holiday.month || undefined,
             day: holiday.day || undefined,
             weekday: holiday.weekday || undefined,
@@ -68,7 +70,9 @@ export async function processUserNotifications(userId: string): Promise<void> {
           currentYear + 1,
         );
         if (!holidayDate) {
-          console.log(`[scheduler] Skipping holiday (next year): ${holiday.name} (no date calculated)`);
+          console.log(
+            `[scheduler] Skipping holiday (next year): ${holiday.name} (no date calculated)`,
+          );
           continue;
         }
         holidayDate = getStartOfDayInTimezone(holidayDate, tz);
@@ -78,20 +82,22 @@ export async function processUserNotifications(userId: string): Promise<void> {
 
       const reminderOffsets = Array.isArray(pref.reminderOffsets)
         ? pref.reminderOffsets
-        : JSON.parse((pref.reminderOffsets as string) || "[]");
+        : JSON.parse((pref.reminderOffsets as string) || '[]');
 
       if (!reminderOffsets.includes(daysUntil)) {
-        console.log(`[scheduler] Skipping holiday: ${holiday.name} (daysUntil: ${daysUntil} not in reminderOffsets)`);
+        console.log(
+          `[scheduler] Skipping holiday: ${holiday.name} (daysUntil: ${daysUntil} not in reminderOffsets)`,
+        );
         continue;
       }
 
       // Time-window check: send only when current local time is within window of reminderTime
       const windowMinutes = Number(process.env.SCHEDULER_WINDOW_MINUTES) || 15;
-      const reminderTime = (pref.reminderTime as string) || "08:00";
+      const reminderTime = (pref.reminderTime as string) || '08:00';
 
       try {
         const nowZoned = utcToZonedTime(now, tz);
-        const [h, m] = reminderTime.split(":").map(Number);
+        const [h, m] = reminderTime.split(':').map(Number);
         const target = new Date(nowZoned);
         target.setHours(h, m, 0, 0);
 
@@ -100,11 +106,16 @@ export async function processUserNotifications(userId: string): Promise<void> {
         );
 
         if (diffMinutes > windowMinutes) {
-          console.log(`[scheduler] Skipping holiday: ${holiday.name} (outside reminder time window)`);
+          console.log(
+            `[scheduler] Skipping holiday: ${holiday.name} (outside reminder time window)`,
+          );
           continue;
         }
       } catch (err) {
-        console.warn(`[scheduler] Timezone parse error for user ${user.email}:`, err);
+        console.warn(
+          `[scheduler] Timezone parse error for user ${user.email}:`,
+          err,
+        );
         // If timezone parsing fails, fall back to sending (avoid silent failure)
       }
 
@@ -121,7 +132,9 @@ export async function processUserNotifications(userId: string): Promise<void> {
       });
 
       if (existing) {
-        console.log(`[scheduler] Skipping holiday: ${holiday.name} (already sent)`);
+        console.log(
+          `[scheduler] Skipping holiday: ${holiday.name} (already sent)`,
+        );
         continue;
       }
 
@@ -132,15 +145,19 @@ export async function processUserNotifications(userId: string): Promise<void> {
         daysUntil,
       );
 
-      console.log(`[scheduler] Sending email for holiday: ${holiday.name} to ${user.email}`);
+      console.log(
+        `[scheduler] Sending email for holiday: ${holiday.name} to ${user.email}`,
+      );
       const emailSent = await sendEmail({
         to: user.email,
-        subject: `Reminder: ${holiday.name} ${daysUntil === 0 ? "is today!" : `in ${daysUntil} days`}`,
+        subject: `Reminder: ${holiday.name} ${daysUntil === 0 ? 'is today!' : `in ${daysUntil} days`}`,
         html: emailHTML,
       });
 
       if (emailSent) {
-        console.log(`[scheduler] Email sent and notification recorded for ${holiday.name} (${user.email})`);
+        console.log(
+          `[scheduler] Email sent and notification recorded for ${holiday.name} (${user.email})`,
+        );
         await prisma.notification.create({
           data: {
             userId: user.id,
@@ -148,14 +165,19 @@ export async function processUserNotifications(userId: string): Promise<void> {
             scheduledFor: scheduledFor,
             sent: true,
             sentAt: new Date(),
-            deliveryType: "email",
+            deliveryType: 'email',
           },
         });
       } else {
-        console.warn(`[scheduler] Email send failed for ${holiday.name} (${user.email})`);
+        console.warn(
+          `[scheduler] Email send failed for ${holiday.name} (${user.email})`,
+        );
       }
     } catch (err) {
-      console.error(`[scheduler] Error processing holiday: ${holiday.name} for user ${user.email}:`, err);
+      console.error(
+        `[scheduler] Error processing holiday: ${holiday.name} for user ${user.email}:`,
+        err,
+      );
     }
   }
 }
@@ -199,4 +221,3 @@ export async function processUsersPage(
   await Promise.allSettled(promises);
   return users.length;
 }
-

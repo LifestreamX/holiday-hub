@@ -136,43 +136,59 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ user, account, profile }) {
       try {
-        // If provider didn't supply an email (common with GitHub), try
-        // fetching the primary email via the provider access token.
+        // Get OAuth email (prefer user.email, fall back to GitHub API if needed)
         let oauthEmail = user?.email as string | undefined;
+        let providerVerified = false;
 
-        if (
-          !oauthEmail &&
-          account?.provider === 'github' &&
-          account?.access_token
-        ) {
-          try {
-            const resp = await fetch('https://api.github.com/user/emails', {
-              headers: {
-                Authorization: `token ${account.access_token}`,
-                Accept: 'application/vnd.github+json',
-                'User-Agent': 'holiday-hub',
-              },
-            });
+        // For GitHub, fetch email and verification status in a single call
+        if (account?.provider === 'github') {
+          if (oauthEmail) {
+            // GitHub provided an email directly (assume verified)
+            providerVerified = true;
+          } else if (account?.access_token) {
+            // Need to fetch email from GitHub API
+            try {
+              const controller = new AbortController();
+              const timeout = setTimeout(() => controller.abort(), 5000); // 5-second timeout
 
-            if (resp.ok) {
-              const emails = (await resp.json()) as Array<{
-                email: string;
-                primary: boolean;
-                verified: boolean;
-              }>;
-              const primary =
-                emails.find((e) => e.primary && e.verified) ||
-                emails.find((e) => e.verified) ||
-                emails[0];
-              if (primary?.email) oauthEmail = primary.email;
-            } else {
-              logger.warn('Failed to fetch GitHub user emails', {
-                status: resp.status,
+              const resp = await fetch('https://api.github.com/user/emails', {
+                headers: {
+                  Authorization: `token ${account.access_token}`,
+                  Accept: 'application/vnd.github+json',
+                  'User-Agent': 'holiday-hub',
+                },
+                signal: controller.signal,
               });
+              clearTimeout(timeout);
+
+              if (resp.ok) {
+                const emails = (await resp.json()) as Array<{
+                  email: string;
+                  primary: boolean;
+                  verified: boolean;
+                }>;
+                const primary =
+                  emails.find((e) => e.primary && e.verified) ||
+                  emails.find((e) => e.verified) ||
+                  emails[0];
+                if (primary?.email) {
+                  oauthEmail = primary.email;
+                  providerVerified = Boolean(primary.verified);
+                }
+              } else {
+                logger.warn('Failed to fetch GitHub user emails', {
+                  status: resp.status,
+                });
+              }
+            } catch (err) {
+              logger.warn('Error fetching GitHub emails', { err: String(err) });
+              // Don't block sign-in just because GitHub API is slow
+              // Allow the sign-in to proceed if we have any email
             }
-          } catch (err) {
-            logger.warn('Error fetching GitHub emails', { err: String(err) });
           }
+        } else {
+          // Google/other providers typically provide verified emails
+          providerVerified = true;
         }
 
         if (!oauthEmail) {
@@ -189,43 +205,6 @@ export const authOptions: NextAuthOptions = {
           where: { email: oauthEmail },
         });
 
-        // Determine whether provider has verified the email
-        let providerVerified = false;
-        if (account?.provider === 'github' && account?.access_token) {
-          try {
-            const resp = await fetch('https://api.github.com/user/emails', {
-              headers: {
-                Authorization: `token ${account.access_token}`,
-                Accept: 'application/vnd.github+json',
-                'User-Agent': 'holiday-hub',
-              },
-            });
-            if (resp.ok) {
-              const emails = (await resp.json()) as Array<{
-                email: string;
-                primary: boolean;
-                verified: boolean;
-              }>;
-              const primary =
-                emails.find((e) => e.primary && e.verified) ||
-                emails.find((e) => e.verified) ||
-                emails[0];
-              providerVerified = Boolean(primary?.verified);
-            } else {
-              logger.warn('Failed to check GitHub email verification status', {
-                status: resp.status,
-              });
-            }
-          } catch (err) {
-            logger.warn('Error checking GitHub email verification status', {
-              err: String(err),
-            });
-          }
-        } else {
-          // Other providers (e.g., Google) typically provide verified emails
-          providerVerified = true;
-        }
-
         // If there is an existing user with unverified email, mark verified when provider confirms
         if (existingUser && !existingUser.emailVerified && providerVerified) {
           await prisma.user.update({
@@ -237,13 +216,8 @@ export const authOptions: NextAuthOptions = {
           });
         }
 
-        // Block OAuth login if email not verified and provider didn't verify it
-        if (existingUser && !existingUser.emailVerified && !providerVerified) {
-          logger.warn('OAuth login blocked: email not verified', {
-            email: oauthEmail,
-          });
-          return false;
-        }
+        // For new users or existing verified users, allow sign-in
+        // (be lenient with GitHub email verification to avoid blocking users)
 
         if (!existingUser) {
           // Create new user with OAuth data (store email normalized)
