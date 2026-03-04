@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 
 interface Holiday {
@@ -31,6 +31,15 @@ export default function HolidaySettingsModal({
   onClose,
   onSave,
 }: HolidaySettingsModalProps) {
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, []);
+
   const [enabled, setEnabled] = useState(holiday.enabled);
   const [reminderOffsets, setReminderOffsets] = useState<number[]>(
     holiday.reminderOffsets.length > 0 ? holiday.reminderOffsets : [0],
