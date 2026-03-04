@@ -112,28 +112,36 @@ async function buildHolidaysForSession(
           },
           currentYear,
         );
+        // If we couldn't calculate for the current year, skip trying next year
+        if (!date) {
+          logger.warn(`Unable to calculate date for holiday: ${holiday.name}`);
+        } else {
+          // If holiday has passed, calculate for next year
+          if (date < today) {
+            date = calculateHolidayDate(
+              {
+                id: holiday.id,
+                name: holiday.name,
+                ruleType: holiday.ruleType as
+                  | 'fixed'
+                  | 'nth_weekday'
+                  | 'calculated',
+                month: holiday.month ?? undefined,
+                day: holiday.day ?? undefined,
+                weekday: holiday.weekday ?? undefined,
+                nth: holiday.nth ?? undefined,
+              },
+              currentYear + 1,
+            );
+          }
 
-        // If holiday has passed, calculate for next year
-        if (date < today) {
-          date = calculateHolidayDate(
-            {
-              id: holiday.id,
-              name: holiday.name,
-              ruleType: holiday.ruleType as
-                | 'fixed'
-                | 'nth_weekday'
-                | 'calculated',
-              month: holiday.month ?? undefined,
-              day: holiday.day ?? undefined,
-              weekday: holiday.weekday ?? undefined,
-              nth: holiday.nth ?? undefined,
-            },
-            currentYear + 1,
-          );
+          if (date) {
+            holidayDate = date;
+            daysUntil = getDaysBetween(today, date);
+          } else {
+            logger.warn(`Unable to calculate date for holiday (next year) : ${holiday.name}`);
+          }
         }
-
-        holidayDate = date;
-        daysUntil = getDaysBetween(today, date);
       } catch (error) {
         logger.error(`Error calculating date for ${holiday.name}`, {
           message: error instanceof Error ? error.message : String(error),
