@@ -13,16 +13,24 @@ export async function POST(request: Request) {
 
     const userId = session.user.id;
 
-    // Use user's primary country for notifications
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-      select: { countryCode: true },
-    });
-    const country = user?.countryCode || 'US';
+    // Allow an optional query param to control which country to enable.
+    // - ?country=ALL => enable all holidays (no country filter)
+    // - ?country=XX  => enable holidays for that specific country
+    // - otherwise use the user's primary country
+    const url = new URL(request.url);
+    const countryParam = url.searchParams.get('country');
 
-    const holidays = await prisma.holiday.findMany({
-      where: { countryCode: country },
-    });
+    let holidays;
+    if (countryParam === 'ALL') {
+      holidays = await prisma.holiday.findMany({});
+    } else {
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { countryCode: true },
+      });
+      const country = countryParam || user?.countryCode || 'US';
+      holidays = await prisma.holiday.findMany({ where: { countryCode: country } });
+    }
 
     for (const h of holidays) {
       await prisma.userHolidayPreference.upsert({
