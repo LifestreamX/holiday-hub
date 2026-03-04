@@ -181,3 +181,22 @@ export async function processAllUsers(pageSize = 100): Promise<number> {
 
   return processed;
 }
+
+export async function processUsersPage(
+  page: number,
+  pageSize: number,
+): Promise<number> {
+  const users = await prisma.user.findMany({
+    skip: page * pageSize,
+    take: pageSize,
+    where: { holidayPreferences: { some: { enabled: true } } },
+    select: { id: true },
+  });
+
+  if (users.length === 0) return 0;
+
+  const promises = users.map((u) => processUserNotifications(u.id));
+  await Promise.allSettled(promises);
+  return users.length;
+}
+
