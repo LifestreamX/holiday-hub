@@ -7,8 +7,7 @@
 
 
 
-TODO: are email notificaitons working
+TODO: live url qstash  needs to work
 
-TODO: DO holidays emaisl need more desirptions
 
 TODO: Any other source of ntoificaitons besides emails 
