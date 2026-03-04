@@ -478,7 +478,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Category Filter */}
-          <div className='flex items-center gap-3 overflow-x-auto pb-2 category-scrollbar'>
+          <div className='flex items-center gap-3 overflow-x-auto pb-4 category-scrollbar'>
             <Filter className='w-5 h-5 text-primary flex-shrink-0' />
             <button
               onClick={() => setSelectedCategory('all')}
