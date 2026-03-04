@@ -88,6 +88,13 @@ export default function DashboardPage() {
         savedCountry || (session?.user as any)?.countryCode || 'US';
       setViewCountry(defaultCountry);
 
+      // Build params matching `fetchHolidays` so `ALL` explicitly requests all countries
+      const params = defaultCountry
+        ? defaultCountry === 'ALL'
+          ? `?country=ALL`
+          : `?country=${encodeURIComponent(defaultCountry)}`
+        : '';
+
       // Inline fetching to avoid stale/missing-hook dependency warnings
       (async () => {
         try {
@@ -102,11 +109,7 @@ export default function DashboardPage() {
         }
 
         try {
-          // fetch holidays for default country
-          const params =
-            defaultCountry && defaultCountry !== 'ALL'
-              ? `?country=${encodeURIComponent(defaultCountry)}`
-              : '';
+          // fetch holidays for default country (or ALL)
           const response = await fetch(`/api/holidays${params}`);
           if (response.ok) {
             const data = await response.json();
