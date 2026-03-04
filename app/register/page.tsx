@@ -79,14 +79,9 @@ export default function RegisterPage() {
   async function handleSignIn(provider: 'google' | 'github') {
     try {
       setLoading(provider);
-      const result = await signIn(provider, {
-        callbackUrl: '/dashboard',
-        redirect: false,
-      });
-      const callback = encodeURIComponent('/dashboard');
-      const fallbackUrl = `/api/auth/signin/${provider}?callbackUrl=${callback}`;
-      const target = (result && (result as any).url) || fallbackUrl;
-      window.location.assign(target);
+      setError(null);
+      // Use redirect:true so NextAuth handles the full OAuth redirect flow
+      await signIn(provider, { callbackUrl: '/dashboard', redirect: true });
     } catch (error) {
       console.error(`${provider} sign-in error:`, error);
       setError(`Failed to connect with ${provider}.`);
