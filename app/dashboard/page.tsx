@@ -377,47 +377,51 @@ export default function DashboardPage() {
               {errorMessage}
             </div>
           )}
-          <h1 className='text-3xl font-bold text-foreground mb-2'>
-            Your Holidays
-          </h1>
-          <p className='text-muted-foreground'>
-            Showing {upcomingHolidays.length} holidays for{' '}
-            <strong>
-              {viewCountry === 'ALL'
-                ? 'All countries'
-                : availableCountries.find((c) => c.countryCode === viewCountry)
-                    ?.name ||
-                  viewCountry ||
-                  'US'}
-            </strong>{' '}
-            • {enabledHolidays.length} active notifications
-          </p>
-          {enabledHolidays.length === 0 && (
-            <div className='mt-3'>
-              <button
-                onClick={async () => {
-                  try {
-                    setIsLoading(true);
-                    const res = await fetch('/api/preferences/enable-all', {
-                      method: 'POST',
-                    });
-                    if (res.ok) {
-                      await fetchHolidays();
-                    } else {
-                      console.error('Failed to enable all preferences');
+          <div className='flex flex-col items-start text-left gap-2
+            sm:items-center sm:text-center
+            md:items-start md:text-left'>
+            <h1 className='text-3xl font-bold text-foreground mb-2'>
+              Your Holidays
+            </h1>
+            <p className='text-muted-foreground'>
+              Showing {upcomingHolidays.length} holidays for{' '}
+              <strong>
+                {viewCountry === 'ALL'
+                  ? 'All countries'
+                  : availableCountries.find((c) => c.countryCode === viewCountry)
+                      ?.name ||
+                    viewCountry ||
+                    'US'}
+              </strong>{' '}
+              • {enabledHolidays.length} active notifications
+            </p>
+            {enabledHolidays.length === 0 && (
+              <div className='mt-3 flex justify-center w-full'>
+                <button
+                  onClick={async () => {
+                    try {
+                      setIsLoading(true);
+                      const res = await fetch('/api/preferences/enable-all', {
+                        method: 'POST',
+                      });
+                      if (res.ok) {
+                        await fetchHolidays();
+                      } else {
+                        console.error('Failed to enable all preferences');
+                      }
+                    } finally {
+                      setIsLoading(false);
                     }
-                  } finally {
-                    setIsLoading(false);
-                  }
-                }}
-                className='mt-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors'
-              >
-                Enable notifications for all{' '}
-                {availableCountries.find((c) => c.countryCode === viewCountry)
-                  ?.name || viewCountry}
-              </button>
-            </div>
-          )}
+                  }}
+                  className='mt-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors'
+                >
+                  Enable notifications for all{' '}
+                  {availableCountries.find((c) => c.countryCode === viewCountry)
+                    ?.name || viewCountry}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Info banner for 2026 holidays only */}
