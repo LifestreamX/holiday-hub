@@ -4,12 +4,6 @@
 
 
 
-
-
-TODO: Google / github sign in fail erro message first time "Google sign-in failed — check your Google credentials and redirect URI." ned to clic kagain after for it to work sometimes same with github sing in "Sign-in failed. Please try again.
-" ned to click again after that erro mesage to sing in how do we fix this 
-
-
 TODO: live url qstash  needs to work (sync all holidays once resolved and change qstash back to 5 min)
 
 

@@ -64,8 +64,20 @@ export default function HolidayCard({
 
   const formatDate = () => {
     if (!holiday.date) return '';
-    const date = new Date(holiday.date);
-    return date.toLocaleDateString('en-US', {
+    // Avoid timezone shifts when the date is stored as a "YYYY-MM-DD" string.
+    // Parsing that with `new Date(string)` can produce an off-by-one day depending
+    // on the user's timezone. If the value looks like a date-only string, parse
+    // the components and build a local Date.
+    const isoDateOnly = /^\d{4}-\d{2}-\d{2}$/.test(holiday.date);
+    let dateObj: Date;
+    if (isoDateOnly) {
+      const [y, m, d] = holiday.date.split('-').map(Number);
+      dateObj = new Date(y, m - 1, d);
+    } else {
+      dateObj = new Date(holiday.date);
+    }
+
+    return dateObj.toLocaleDateString('en-US', {
       weekday: 'long',
       year: 'numeric',
       month: 'long',

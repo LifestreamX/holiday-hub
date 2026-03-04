@@ -1,6 +1,7 @@
 /**
  * Date utility functions for holiday calculations
  */
+import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
 
 /**
  * Calculate the date of Easter Sunday for a given year
@@ -125,10 +126,13 @@ export function getDateWithTimeInTimezone(
 
   const [month, day, year] = dateString.split('/');
 
-  // Create the date in UTC
-  const localDate = new Date(`${year}-${month}-${day}T${timeString}:00`);
-
-  return localDate;
+  // Build a Date representing midnight in the user's timezone then set time
+  const zonedMidnight = new Date(`${year}-${month}-${day}T00:00:00`);
+  // Interpret that midnight as being in the provided timezone and convert to UTC
+  const utcDate = zonedTimeToUtc(zonedMidnight, timezone);
+  // Set hours/minutes in UTC equivalent
+  utcDate.setUTCHours(hours, minutes, 0, 0);
+  return utcDate;
 }
 
 /**
@@ -142,13 +146,10 @@ export function isDateInPast(date: Date): boolean {
  * Get the start of day in a specific timezone
  */
 export function getStartOfDayInTimezone(date: Date, timezone: string): Date {
-  const dateString = date.toLocaleDateString('en-US', {
-    timeZone: timezone,
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
-
-  const [month, day, year] = dateString.split('/');
-  return new Date(`${year}-${month}-${day}T00:00:00`);
+  // Convert the incoming date to the target timezone, then take its local
+  // date components and convert that midnight back to a UTC Date so the
+  // returned Date represents the start of day in the user's timezone.
+  const zoned = utcToZonedTime(date, timezone);
+  zoned.setHours(0, 0, 0, 0);
+  return zonedTimeToUtc(zoned, timezone);
 }
