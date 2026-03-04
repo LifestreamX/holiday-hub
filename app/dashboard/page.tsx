@@ -421,8 +421,9 @@ export default function DashboardPage() {
         </div>
 
         {/* Info banner for 2026 holidays only */}
-        <div className="mb-4 p-3 rounded border border-primary/30 bg-primary/10 text-primary text-center text-sm">
-          <strong>Note:</strong> Currently showing holidays for <b>2026</b> only.
+        <div className='mb-4 p-3 rounded border border-primary/30 bg-primary/10 text-primary text-center text-sm'>
+          <strong>Note:</strong> Currently showing holidays for <b>2026</b>{' '}
+          only.
         </div>
 
         {/* Search and Filters */}
