@@ -13,6 +13,7 @@ export interface EmailOptions {
 }
 
 export async function sendEmail(options: EmailOptions): Promise<boolean> {
+  console.log(`[emailService] Attempting to send email to: ${options.to}`);
   try {
     const { data, error } = await resend.emails.send({
       from: process.env.EMAIL_FROM || 'Holiday Hub <notifications@example.com>',
@@ -22,14 +23,14 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
     });
 
     if (error) {
-      console.error('Email send error:', error);
+      console.error('[emailService] Resend Error:', error);
       return false;
     }
 
-    console.log('Email sent successfully:', data);
+    console.log('[emailService] Resend Success. ID:', data?.id);
     return true;
   } catch (error) {
-    console.error('Failed to send email:', error);
+    console.error('[emailService] Unexpected Exception:', error);
     return false;
   }
 }

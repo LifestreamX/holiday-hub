@@ -1,7 +1,7 @@
 
 
 
-TODO: live url qstash  needs to work
+TODO: live url qstash  needs to work (sync all holidays once resolved and change qstash back to 5 min)
 
 
 TODO: Any other source of ntoificaitons besides emails or mvoe on to next prj 
