@@ -20,8 +20,13 @@ export async function processUserNotifications(userId: string): Promise<void> {
   if (!user) return;
 
   const tz = user.timezone || 'UTC';
-  const today = getStartOfDayInTimezone(new Date(), tz);
+  const now = new Date();
+  const today = getStartOfDayInTimezone(now, tz);
   const currentYear = today.getFullYear();
+
+  console.log(
+    `[Scheduler] Processing user ${user.email} (${tz}). Today is ${today.toDateString()}`,
+  );
 
   for (const pref of user.holidayPreferences) {
     const holiday = pref.holiday;
@@ -66,14 +71,17 @@ export async function processUserNotifications(userId: string): Promise<void> {
         ? pref.reminderOffsets
         : JSON.parse((pref.reminderOffsets as string) || '[]');
 
-      if (!reminderOffsets.includes(daysUntil)) continue;
+      if (!reminderOffsets.includes(daysUntil)) {
+        // console.log(`[Scheduler] Skipping ${holiday.name}: daysUntil ${daysUntil} not in offsets [${reminderOffsets}]`);
+        continue;
+      }
 
       // Time-window check: send only when current local time is within window of reminderTime
       const windowMinutes = Number(process.env.SCHEDULER_WINDOW_MINUTES) || 15;
       const reminderTime = (pref.reminderTime as string) || '08:00';
 
       try {
-        const nowZoned = utcToZonedTime(new Date(), tz);
+        const nowZoned = utcToZonedTime(now, tz);
         const [h, m] = reminderTime.split(':').map(Number);
         const target = new Date(nowZoned);
         target.setHours(h, m, 0, 0);
@@ -81,6 +89,11 @@ export async function processUserNotifications(userId: string): Promise<void> {
         const diffMinutes = Math.abs(
           (nowZoned.getTime() - target.getTime()) / 60000,
         );
+
+        console.log(
+          `[Scheduler] ${holiday.name} match! User Time: ${nowZoned.toLocaleTimeString()} Target: ${reminderTime} Diff: ${diffMinutes.toFixed(1)}m`,
+        );
+
         if (diffMinutes > windowMinutes) {
           // Not the right time for this user yet
           continue;
@@ -102,8 +115,16 @@ export async function processUserNotifications(userId: string): Promise<void> {
         },
       });
 
-      if (existing) continue;
+      if (existing) {
+        console.log(
+          `[Scheduler] Already sent ${holiday.name} for ${scheduledFor.toDateString()}`,
+        );
+        continue;
+      }
 
+      console.log(
+        `[Scheduler] SENDING EMAIL for ${holiday.name} to ${user.email}...`,
+      );
       const emailHTML = generateHolidayEmailHTML(
         holiday.name,
         holiday.description,
@@ -118,6 +139,9 @@ export async function processUserNotifications(userId: string): Promise<void> {
       });
 
       if (emailSent) {
+        console.log(
+          `[Scheduler] SUCCESS: Email sent to ${user.email} for ${holiday.name}`,
+        );
         await prisma.notification.create({
           data: {
             userId: user.id,
