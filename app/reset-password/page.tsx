@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { Calendar } from 'lucide-react';
 import { useState, FormEvent, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -75,17 +76,7 @@ function ResetPasswordForm() {
       <div className='w-full max-w-md'>
         <div className='text-center mb-8'>
           <Link href='/' className='inline-flex items-center gap-2 mb-4'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              viewBox='0 0 24 24'
-              className='w-10 h-10 text-white'
-              aria-hidden
-            >
-              <path
-                fill='currentColor'
-                d='M3 6a1 1 0 011-1h3a1 1 0 011 1v1h8V6a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1v8h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1H8v1a1 1 0 01-1 1H4a1 1 0 01-1-1v-3a1 1 0 011-1h1V11H4a1 1 0 01-1-1V6z'
-              />
-            </svg>
+            <Calendar className='w-10 h-10 text-primary' />
             <span className='text-3xl font-bold text-primary'>Holiday Hub</span>
           </Link>
           <h1 className='text-2xl font-semibold text-foreground'>
@@ -94,19 +85,19 @@ function ResetPasswordForm() {
           <p className='text-muted-foreground mt-2'>Enter your new password</p>
         </div>
 
-        <div className='bg-card rounded-lg shadow-xl p-8 text-foreground'>
+        <div className='bg-card rounded-2xl shadow-xl p-8 text-foreground border border-primary/60'>
           {success ? (
-            <div>
-              <div className='p-4 rounded border border-green-300 bg-green-50 text-green-700 mb-6'>
+            <div className='text-center'>
+              <div className='p-4 rounded-xl border border-primary/20 bg-primary/10 text-primary mb-6'>
                 Password reset successful! Redirecting to login...
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className='space-y-4'>
+            <form onSubmit={handleSubmit} className='space-y-4 text-left'>
               <div>
                 <label
                   htmlFor='password'
-                  className='block text-sm font-medium text-gray-700 mb-1'
+                  className='block text-sm font-medium text-foreground mb-1'
                 >
                   New Password
                 </label>
@@ -117,7 +108,7 @@ function ResetPasswordForm() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   minLength={6}
-                  className='w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'
+                  className='w-full px-4 py-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary text-black'
                   placeholder='••••••••'
                   disabled={loading || !token}
                 />
@@ -126,7 +117,7 @@ function ResetPasswordForm() {
               <div>
                 <label
                   htmlFor='confirmPassword'
-                  className='block text-sm font-medium text-gray-700 mb-1'
+                  className='block text-sm font-medium text-foreground mb-1'
                 >
                   Confirm New Password
                 </label>
@@ -137,14 +128,14 @@ function ResetPasswordForm() {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                   minLength={6}
-                  className='w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'
+                  className='w-full px-4 py-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary text-black'
                   placeholder='••••••••'
                   disabled={loading || !token}
                 />
               </div>
 
               {error && (
-                <div className='p-3 rounded border border-red-300 bg-red-50 text-red-700'>
+                <div className='p-3 rounded-xl border border-red-300 bg-red-50 text-red-700 text-sm'>
                   {error}
                 </div>
               )}
@@ -152,12 +143,12 @@ function ResetPasswordForm() {
               <button
                 type='submit'
                 disabled={loading || !token}
-                className='w-full py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center'
+                className='w-full py-3 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-sm mt-6'
               >
                 {loading ? (
                   <div className='flex items-center gap-3'>
                     <svg
-                      className='animate-spin h-5 w-5 text-white'
+                      className='animate-spin h-5 w-5 text-primary-foreground'
                       xmlns='http://www.w3.org/2000/svg'
                       viewBox='0 0 24 24'
                       aria-hidden
@@ -184,7 +175,7 @@ function ResetPasswordForm() {
                 )}
               </button>
 
-              <div className='text-center text-sm text-muted-foreground mt-4'>
+              <div className='text-center text-sm text-muted-foreground pt-2'>
                 <Link
                   href='/login'
                   className='text-primary hover:underline font-medium'

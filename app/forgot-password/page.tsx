@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { Calendar } from 'lucide-react';
 import { useState, FormEvent } from 'react';
 
 export default function ForgotPasswordPage() {
@@ -53,17 +54,7 @@ export default function ForgotPasswordPage() {
       <div className='w-full max-w-md'>
         <div className='text-center mb-8'>
           <Link href='/' className='inline-flex items-center gap-2 mb-4'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              viewBox='0 0 24 24'
-              className='w-10 h-10 text-white'
-              aria-hidden
-            >
-              <path
-                fill='currentColor'
-                d='M3 6a1 1 0 011-1h3a1 1 0 011 1v1h8V6a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1v8h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1H8v1a1 1 0 01-1 1H4a1 1 0 01-1-1v-3a1 1 0 011-1h1V11H4a1 1 0 01-1-1V6z'
-              />
-            </svg>
+            <Calendar className='w-10 h-10 text-primary' />
             <span className='text-3xl font-bold text-primary'>Holiday Hub</span>
           </Link>
           <h1 className='text-2xl font-semibold text-foreground'>
@@ -74,27 +65,27 @@ export default function ForgotPasswordPage() {
           </p>
         </div>
 
-        <div className='bg-card rounded-lg shadow-xl p-8 text-foreground'>
+        <div className='bg-card rounded-2xl shadow-xl p-8 text-foreground border border-primary/60'>
           {message ? (
-            <div>
-              <div className='p-4 rounded border border-green-300 bg-green-50 text-green-700 mb-6'>
+            <div className='text-center'>
+              <div className='p-4 rounded-xl border border-primary/20 bg-primary/10 text-primary mb-6'>
                 {message}
               </div>
               <Link
                 href='/login'
-                className='text-blue-600 hover:underline font-medium'
+                className='text-primary hover:underline font-medium flex items-center justify-center gap-2'
               >
                 ← Back to login
               </Link>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className='space-y-4'>
+            <form onSubmit={handleSubmit} className='space-y-4 text-left'>
               <div>
                 <label
                   htmlFor='email'
                   className='block text-sm font-medium text-foreground mb-1'
                 >
-                  Email
+                  Email Address
                 </label>
                 <input
                   id='email'
@@ -102,14 +93,14 @@ export default function ForgotPasswordPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className='w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'
+                  className='w-full px-4 py-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary text-black'
                   placeholder='your@email.com'
                   disabled={loading}
                 />
               </div>
 
               {error && (
-                <div className='p-3 rounded border border-red-300 bg-red-50 text-red-700'>
+                <div className='p-3 rounded-xl border border-red-300 bg-red-50 text-red-700 text-sm'>
                   {error}
                 </div>
               )}
@@ -117,12 +108,12 @@ export default function ForgotPasswordPage() {
               <button
                 type='submit'
                 disabled={loading}
-                className='w-full py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center'
+                className='w-full py-3 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-sm mt-6'
               >
                 {loading ? (
                   <div className='flex items-center gap-3'>
                     <svg
-                      className='animate-spin h-5 w-5 text-white'
+                      className='animate-spin h-5 w-5 text-primary-foreground'
                       xmlns='http://www.w3.org/2000/svg'
                       viewBox='0 0 24 24'
                       aria-hidden
@@ -149,7 +140,7 @@ export default function ForgotPasswordPage() {
                 )}
               </button>
 
-              <div className='text-center text-sm text-muted-foreground mt-4'>
+              <div className='text-center text-sm text-muted-foreground pt-2'>
                 <Link
                   href='/login'
                   className='text-primary hover:underline font-medium'

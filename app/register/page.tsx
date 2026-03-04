@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
+import { Calendar } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import { useState, FormEvent, useRef } from 'react';
 import { useRouter } from 'next/navigation';
@@ -99,13 +99,7 @@ export default function RegisterPage() {
       <div className='w-full max-w-md'>
         <div className='text-center mb-8'>
           <Link href='/' className='inline-flex items-center gap-2 mb-4'>
-            <Image
-              src='/trone-lts.svg'
-              alt='Holiday Hub'
-              width={40}
-              height={40}
-              className='w-10 h-10'
-            />
+            <Calendar className='w-10 h-10 text-primary' />
             <span className='text-3xl font-bold text-primary'>Holiday Hub</span>
           </Link>
           <h1 className='text-2xl font-semibold text-foreground'>

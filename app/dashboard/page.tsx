@@ -377,9 +377,7 @@ export default function DashboardPage() {
               {errorMessage}
             </div>
           )}
-          <div className='flex flex-col items-start text-left gap-2
-            sm:items-center sm:text-center
-            md:items-start md:text-left'>
+          <div className='flex flex-col items-center text-center gap-2 md:items-start md:text-left'>
             <h1 className='text-3xl font-bold text-foreground mb-2'>
               Your Holidays
             </h1>
@@ -388,15 +386,16 @@ export default function DashboardPage() {
               <strong>
                 {viewCountry === 'ALL'
                   ? 'All countries'
-                  : availableCountries.find((c) => c.countryCode === viewCountry)
-                      ?.name ||
+                  : availableCountries.find(
+                      (c) => c.countryCode === viewCountry,
+                    )?.name ||
                     viewCountry ||
                     'US'}
               </strong>{' '}
               • {enabledHolidays.length} active notifications
             </p>
             {enabledHolidays.length === 0 && (
-              <div className='mt-3 flex justify-center w-full'>
+              <div className='mt-3 flex justify-center w-full md:justify-start'>
                 <button
                   onClick={async () => {
                     try {

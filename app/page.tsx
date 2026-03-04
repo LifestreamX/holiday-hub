@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Bell, Users, Sparkles } from 'lucide-react';
+import { Bell, Users, Sparkles, Calendar } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -7,11 +7,7 @@ export default function Home() {
       <nav className='container mx-auto px-4 py-6'>
         <div className='flex items-center justify-between'>
           <div className='flex items-center gap-2'>
-            <img
-              src='/trone-lts.svg'
-              alt='Trone LTS logo'
-              className='w-8 h-8'
-            />
+            <Calendar className='w-8 h-8 text-primary' />
             <span className='text-2xl font-bold text-primary'>Holiday Hub</span>
           </div>
           <div className='flex items-center gap-4'>

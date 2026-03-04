@@ -10,12 +10,9 @@ export const metadata: Metadata = {
   title: 'Holiday Hub - Never Miss a Holiday',
   description: 'Customizable holiday notifications delivered via email',
   icons: {
-    icon: [
-      { url: '/trone-lts.svg' },
-      { url: '/trone-lts.png', sizes: '192x192', type: 'image/png' },
-    ],
-    shortcut: '/trone-lts.svg',
-    apple: '/trone-lts.png',
+    icon: [{ url: '/icon.svg' }, { url: '/favicon.ico' }],
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
   },
 };
 

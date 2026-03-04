@@ -1,10 +1,10 @@
 
 
 
+TODO: Mobiel
 
 
-
-
+TODO: Use icon in dahsbaord for favi and login singup hom epage
 
 
 TODO: live url qstash  needs to work

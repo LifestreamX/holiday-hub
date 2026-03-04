@@ -116,13 +116,13 @@ export default function SettingsPage() {
           </p>
         </div>
 
-        <div className='bg-card border border-border rounded-lg p-6'>
+        <div className='bg-card border border-primary/20 rounded-xl p-6 shadow-sm'>
           <form onSubmit={handleSubmit} className='space-y-6'>
             {message && (
               <div
                 className={`rounded-lg p-4 text-sm ${
                   message.includes('success')
-                    ? 'bg-green-50 border border-green-200 text-green-800'
+                    ? 'bg-primary/10 border border-primary/20 text-primary'
                     : 'bg-red-50 border border-red-200 text-red-800'
                 }`}
               >
@@ -142,7 +142,7 @@ export default function SettingsPage() {
                 type='email'
                 value={session?.user?.email || ''}
                 disabled
-                className='w-full px-4 py-3 bg-muted border border-border rounded-lg text-muted-foreground'
+                className='w-full px-4 py-3 bg-muted/30 border border-border rounded-lg text-muted-foreground'
               />
               <p className='text-xs text-muted-foreground mt-1'>
                 Email cannot be changed
@@ -162,7 +162,7 @@ export default function SettingsPage() {
                   id='timezone'
                   value={timezone}
                   onChange={(e) => setTimezone(e.target.value)}
-                  className='w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary appearance-none text-foreground hover:text-primary'
+                  className='w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary appearance-none text-foreground'
                 >
                   {timezones.map((tz) => (
                     <option key={tz} value={tz}>
@@ -196,17 +196,17 @@ export default function SettingsPage() {
               </p>
             </div>
 
-            <div className='flex items-center gap-4 pt-4'>
+            <div className='flex flex-col sm:flex-row items-center gap-4 pt-4'>
               <button
                 type='submit'
                 disabled={isSaving}
-                className='px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+                className='w-full sm:w-auto px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm'
               >
                 {isSaving ? 'Saving...' : 'Save Changes'}
               </button>
               <Link
                 href='/dashboard'
-                className='px-6 py-3 bg-secondary text-secondary-foreground rounded-lg font-medium hover:bg-secondary/80 transition-colors'
+                className='w-full sm:w-auto px-6 py-3 bg-secondary text-secondary-foreground rounded-lg font-medium hover:bg-secondary/80 transition-center text-center'
               >
                 Cancel
               </Link>
@@ -214,7 +214,7 @@ export default function SettingsPage() {
           </form>
         </div>
 
-        <div className='mt-8 bg-card border border-border rounded-lg p-6'>
+        <div className='mt-8 bg-card border border-primary/20 rounded-xl p-6 shadow-sm'>
           <h2 className='text-lg font-semibold text-foreground mb-4'>
             About Holiday Hub
           </h2>
