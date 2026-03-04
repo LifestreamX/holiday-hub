@@ -153,3 +153,23 @@ export function getStartOfDayInTimezone(date: Date, timezone: string): Date {
   zoned.setHours(0, 0, 0, 0);
   return zonedTimeToUtc(zoned, timezone);
 }
+
+/**
+ * Create a date from year/month/day components in a specific timezone
+ * This ensures the date is interpreted as being in the user's timezone,
+ * not the server's local timezone.
+ */
+export function createDateInTimezone(
+  year: number,
+  month: number,
+  day: number,
+  timezone: string,
+): Date {
+  // Create a "naive" date with the components, but we'll interpret it as being
+  // in the target timezone by passing it through zonedTimeToUtc
+  // Create Date in a way that doesn't use server's local timezone
+  const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T00:00:00`;
+  
+  // Parse as if this time string represents time in the target timezone
+  return zonedTimeToUtc(dateStr, timezone);
+}
