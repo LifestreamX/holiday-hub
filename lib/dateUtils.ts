@@ -165,11 +165,14 @@ export function createDateInTimezone(
   day: number,
   timezone: string,
 ): Date {
-  // Create a "naive" date with the components, but we'll interpret it as being
-  // in the target timezone by passing it through zonedTimeToUtc
-  // Create Date in a way that doesn't use server's local timezone
-  const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T00:00:00`;
+  // Create a date string representing midnight in YYYY-MM-DD format
+  const paddedMonth = String(month).padStart(2, '0');
+  const paddedDay = String(day).padStart(2, '0');
+  const dateStr = `${year}-${paddedMonth}-${paddedDay}T00:00:00`;
   
-  // Parse as if this time string represents time in the target timezone
-  return zonedTimeToUtc(dateStr, timezone);
+  // Create a Date object (will be in server's local time, but we only care about components)
+  const localDate = new Date(dateStr);
+  
+  // Interpret those date components as being in the target timezone and get UTC equivalent
+  return zonedTimeToUtc(localDate, timezone);
 }
