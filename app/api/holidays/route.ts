@@ -172,13 +172,17 @@ async function buildHolidaysForSession(
       };
     });
 
+    // Filter out test holidays from user-facing UI
+    const filteredHolidays = holidaysWithDates.filter(
+      (h) => h.category !== 'test' && !h.name.toLowerCase().includes('test'),
+    );
     // Sort by days until
-    holidaysWithDates.sort((a, b) => {
+    filteredHolidays.sort((a, b) => {
       if (a.daysUntil === null) return 1;
       if (b.daysUntil === null) return -1;
       return a.daysUntil - b.daysUntil;
     });
-    return holidaysWithDates;
+    return filteredHolidays;
   } catch (error) {
     logger.error('Error fetching holidays', {
       message: error instanceof Error ? error.message : String(error),
