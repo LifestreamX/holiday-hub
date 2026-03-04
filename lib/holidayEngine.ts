@@ -79,15 +79,24 @@ export function calculateHolidayDate(holiday: HolidayRule, year: number): Date {
         return mardiGras;
       }
 
-      // For other calculated holidays, we can't recalculate them
-      // Log a warning and throw error
+      if (holidayNameLower.includes('corpus christi')) {
+        // Corpus Christi is 60 days after Easter
+        const easter = calculateEaster(year);
+        const corpusChristi = new Date(easter);
+        corpusChristi.setDate(easter.getDate() + 60);
+        return corpusChristi;
+      }
+
+      // For other calculated holidays, return null instead of throwing
+      // This prevents the entire scheduler from crashing if a calculation is missing
       console.warn(
-        `Calculated holiday "${holiday.name}" is not supported for recalculation`,
+        `[holidayEngine] Unsupported calculation for holiday: ${holiday.name}`,
       );
-      throw new Error(`Unknown calculated holiday: ${holiday.name}`);
+      return null;
 
     default:
-      throw new Error(`Unknown rule type: ${holiday.ruleType}`);
+      console.warn(`[holidayEngine] Unknown rule type: ${holiday.ruleType}`);
+      return null;
   }
 }
 
@@ -103,7 +112,9 @@ export function getHolidayDatesForYear(
   for (const holiday of holidays) {
     try {
       const date = calculateHolidayDate(holiday, year);
-      holidayDates.set(holiday.id, date);
+      if (date) {
+        holidayDates.set(holiday.id, date);
+      }
     } catch (error) {
       console.error(`Error calculating date for ${holiday.name}:`, error);
     }

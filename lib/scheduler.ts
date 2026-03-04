@@ -17,15 +17,13 @@ export async function processUserNotifications(userId: string): Promise<void> {
     },
   });
 
-  if (!user) return;
+  if (!user) {
+    console.warn(`[scheduler] No user found for ID: ${userId}`);
+    return;
+  }
 
   const tz = user.timezone || 'UTC';
   const now = new Date();
-  const today = getStartOfDayInTimezone(now, tz);
-  const currentYear = today.getFullYear();
-
-  // ...removed noisy log...
-
   for (const pref of user.holidayPreferences) {
     const holiday = pref.holiday;
     try {
@@ -41,6 +39,10 @@ export async function processUserNotifications(userId: string): Promise<void> {
         },
         currentYear,
       );
+      if (!holidayDate) {
+        console.log(`[scheduler] Skipping holiday: ${holiday.name} (no date calculated)`);
+        continue;
+      }
       // Normalize holidayDate to the user's timezone start-of-day so comparisons are consistent
       holidayDate = getStartOfDayInTimezone(holidayDate, tz);
 
@@ -60,6 +62,10 @@ export async function processUserNotifications(userId: string): Promise<void> {
           },
           currentYear + 1,
         );
+        if (!holidayDate) {
+          console.log(`[scheduler] Skipping holiday (next year): ${holiday.name} (no date calculated)`);
+          continue;
+        }
         holidayDate = getStartOfDayInTimezone(holidayDate, tz);
       }
 
@@ -70,7 +76,7 @@ export async function processUserNotifications(userId: string): Promise<void> {
         : JSON.parse((pref.reminderOffsets as string) || '[]');
 
       if (!reminderOffsets.includes(daysUntil)) {
-        // ...removed noisy log...
+        console.log(`[scheduler] Skipping holiday: ${holiday.name} (daysUntil: ${daysUntil} not in reminderOffsets)`);
         continue;
       }
 
@@ -88,14 +94,12 @@ export async function processUserNotifications(userId: string): Promise<void> {
           (nowZoned.getTime() - target.getTime()) / 60000,
         );
 
-        // ...removed noisy log...
-
         if (diffMinutes > windowMinutes) {
-          // Not the right time for this user yet
+          console.log(`[scheduler] Skipping holiday: ${holiday.name} (outside reminder time window)`);
           continue;
         }
       } catch (err) {
-        // ...removed noisy error log...
+        console.warn(`[scheduler] Timezone parse error for user ${user.email}:`, err);
         // If timezone parsing fails, fall back to sending (avoid silent failure)
       }
 
@@ -112,7 +116,7 @@ export async function processUserNotifications(userId: string): Promise<void> {
       });
 
       if (existing) {
-        // ...removed noisy log...
+        console.log(`[scheduler] Skipping holiday: ${holiday.name} (already sent)`);
         continue;
       }
 
@@ -123,6 +127,7 @@ export async function processUserNotifications(userId: string): Promise<void> {
         daysUntil,
       );
 
+      console.log(`[scheduler] Sending email for holiday: ${holiday.name} to ${user.email}`);
       const emailSent = await sendEmail({
         to: user.email,
         subject: `Reminder: ${holiday.name} ${daysUntil === 0 ? 'is today!' : `in ${daysUntil} days`}`,
@@ -130,11 +135,24 @@ export async function processUserNotifications(userId: string): Promise<void> {
       });
 
       if (emailSent) {
-        // ...removed noisy log...
+        console.log(`[scheduler] Email sent and notification recorded for ${holiday.name} (${user.email})`);
         await prisma.notification.create({
           data: {
             userId: user.id,
             holidayId: holiday.id,
+            scheduledFor: scheduledFor,
+            sent: true,
+            sentAt: new Date(),
+            deliveryType: 'email',
+          },
+        });
+      } else {
+        console.warn(`[scheduler] Email send failed for ${holiday.name} (${user.email})`);
+      }
+    } catch (err) {
+      console.error(`[scheduler] Error processing holiday: ${holiday.name} for user ${user.email}:`, err);
+    }
+  }
             scheduledFor: scheduledFor,
             sent: true,
             sentAt: new Date(),
