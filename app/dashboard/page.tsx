@@ -449,34 +449,27 @@ export default function DashboardPage() {
               />
             </div>
             <div>
-              <select
-                value={viewCountry || 'US'}
-                onChange={(e) => {
-                  const v = e.target.value;
-                  const target = v === 'ALL' ? 'ALL' : v;
-                  setViewCountry(target);
-                  localStorage.setItem('viewCountry', target);
-                  setIsLoading(true);
-                  fetchHolidays(target);
-                }}
-                className='px-4 py-2 rounded-xl bg-card border border-border text-sm font-semibold'
-                title='Select country to view holidays'
-              >
-                {availableCountries.length === 0 ? (
-                  <option value=''>Loading…</option>
-                ) : (
-                  <>
-                    <option value='ALL'>
-                      All countries ({totalCountryHolidays})
-                    </option>
-                    {availableCountries.map((c) => (
-                      <option key={c.countryCode} value={c.countryCode}>
-                        {c.name} ({c.countryCode})
-                      </option>
-                    ))}
-                  </>
-                )}
-              </select>
+              {/* prettier-ignore */}
+              {/* Replace native select with a themed searchable CountrySelect */}
+              {
+                /* lazy-load options into CountrySelect */
+              }
+              {typeof window !== 'undefined' && (
+                // import dynamically to avoid SSR mismatch
+                (require('@/components/CountrySelect').default ? (
+                  React.createElement(require('@/components/CountrySelect').default, {
+                    value: viewCountry || 'US',
+                    onChange: (v: string) => {
+                      const target = v === 'ALL' ? 'ALL' : v;
+                      setViewCountry(target);
+                      localStorage.setItem('viewCountry', target);
+                      setIsLoading(true);
+                      fetchHolidays(target);
+                    },
+                    options: availableCountries,
+                  })
+                ) : null)
+              }
             </div>
           </div>
 
