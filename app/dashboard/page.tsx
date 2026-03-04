@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import HolidayCard from '@/components/HolidayCard';
 import HolidaySettingsModal from '@/components/HolidaySettingsModal';
+import CountrySelect from '@/components/CountrySelect';
 
 interface Holiday {
   id: string;
@@ -454,22 +455,17 @@ export default function DashboardPage() {
               {
                 /* lazy-load options into CountrySelect */
               }
-              {typeof window !== 'undefined' && (
-                // import dynamically to avoid SSR mismatch
-                (require('@/components/CountrySelect').default ? (
-                  React.createElement(require('@/components/CountrySelect').default, {
-                    value: viewCountry || 'US',
-                    onChange: (v: string) => {
-                      const target = v === 'ALL' ? 'ALL' : v;
-                      setViewCountry(target);
-                      localStorage.setItem('viewCountry', target);
-                      setIsLoading(true);
-                      fetchHolidays(target);
-                    },
-                    options: availableCountries,
-                  })
-                ) : null)
-              }
+              <CountrySelect
+                value={viewCountry || 'US'}
+                onChange={(v: string) => {
+                  const target = v === 'ALL' ? 'ALL' : v;
+                  setViewCountry(target);
+                  localStorage.setItem('viewCountry', target);
+                  setIsLoading(true);
+                  fetchHolidays(target);
+                }}
+                options={availableCountries}
+              />
             </div>
           </div>
 
