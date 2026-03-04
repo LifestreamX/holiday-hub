@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 interface Country {
   countryCode: string;
@@ -18,6 +18,8 @@ export default function CountrySelect({ value, onChange, options }: Props) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
 
+  const rootRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     function onEsc(e: KeyboardEvent) {
       if (e.key === 'Escape') setOpen(false);
@@ -25,6 +27,18 @@ export default function CountrySelect({ value, onChange, options }: Props) {
     window.addEventListener('keydown', onEsc);
     return () => window.removeEventListener('keydown', onEsc);
   }, []);
+
+  // Close when clicking outside the component
+  useEffect(() => {
+    function onClickOutside(e: MouseEvent) {
+      if (!open) return;
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', onClickOutside);
+    return () => document.removeEventListener('mousedown', onClickOutside);
+  }, [open]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -44,7 +58,7 @@ export default function CountrySelect({ value, onChange, options }: Props) {
   }, [value, options]);
 
   return (
-    <div className='relative inline-block text-left'>
+    <div ref={rootRef} className='relative inline-block text-left'>
       <button
         type='button'
         onClick={() => setOpen((s) => !s)}
