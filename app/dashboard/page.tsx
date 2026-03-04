@@ -406,7 +406,9 @@ export default function DashboardPage() {
                   onClick={async () => {
                     try {
                       setIsLoading(true);
-                      const res = await fetch('/api/preferences/enable-all', {
+                      const countryParam = viewCountry === 'ALL' ? 'ALL' : viewCountry || (session?.user as any)?.countryCode || 'US';
+                      const url = `/api/preferences/enable-all${countryParam ? `?country=${encodeURIComponent(countryParam)}` : ''}`;
+                      const res = await fetch(url, {
                         method: 'POST',
                       });
                       if (res.ok) {
