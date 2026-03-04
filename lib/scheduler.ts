@@ -1,6 +1,10 @@
 import { PrismaClient } from '@prisma/client';
 import { calculateHolidayDate } from './holidayEngine';
-import { getDaysBetween, getStartOfDayInTimezone, createDateInTimezone } from './dateUtils';
+import {
+  getDaysBetween,
+  getStartOfDayInTimezone,
+  createDateInTimezone,
+} from './dateUtils';
 import { utcToZonedTime } from 'date-fns-tz';
 import { sendEmail, generateHolidayEmailHTML } from './emailService';
 
@@ -27,25 +31,37 @@ export async function processUserNotifications(userId: string): Promise<void> {
   const today = getStartOfDayInTimezone(now, tz);
   const currentYear = today.getFullYear();
 
-  console.log(`[scheduler] Processing user ${user.email} (timezone: ${tz}, today: ${today.toISOString()}, now: ${now.toISOString()})`);
+  console.log(
+    `[scheduler] Processing user ${user.email} (timezone: ${tz}, today: ${today.toISOString()}, now: ${now.toISOString()})`,
+  );
 
   for (const pref of user.holidayPreferences) {
     const holiday = pref.holiday;
     try {
       let holidayDate: Date | null;
-      
+
       // For fixed holidays, create the date directly in the user's timezone
       // to avoid timezone conversion issues
       if (holiday.ruleType === 'fixed' && holiday.month && holiday.day) {
-        holidayDate = createDateInTimezone(currentYear, holiday.month, holiday.day, tz);
-        console.log(`[scheduler] ${holiday.name}: Created fixed date in timezone ${tz}: ${holidayDate.toISOString()}`);
+        holidayDate = createDateInTimezone(
+          currentYear,
+          holiday.month,
+          holiday.day,
+          tz,
+        );
+        console.log(
+          `[scheduler] ${holiday.name}: Created fixed date in timezone ${tz}: ${holidayDate.toISOString()}`,
+        );
       } else {
         // For other rule types, use the holiday engine then normalize
         holidayDate = calculateHolidayDate(
           {
             id: holiday.id,
             name: holiday.name,
-            ruleType: holiday.ruleType as 'fixed' | 'nth_weekday' | 'calculated',
+            ruleType: holiday.ruleType as
+              | 'fixed'
+              | 'nth_weekday'
+              | 'calculated',
             month: holiday.month || undefined,
             day: holiday.day || undefined,
             weekday: holiday.weekday || undefined,
@@ -55,10 +71,14 @@ export async function processUserNotifications(userId: string): Promise<void> {
         );
 
         if (holidayDate) {
-          console.log(`[scheduler] ${holiday.name}: Raw calculated date (server TZ): ${holidayDate.toISOString()}`);
+          console.log(
+            `[scheduler] ${holiday.name}: Raw calculated date (server TZ): ${holidayDate.toISOString()}`,
+          );
           // Normalize to user's timezone start-of-day
           holidayDate = getStartOfDayInTimezone(holidayDate, tz);
-          console.log(`[scheduler] ${holiday.name}: After timezone normalization: ${holidayDate.toISOString()}`);
+          console.log(
+            `[scheduler] ${holiday.name}: After timezone normalization: ${holidayDate.toISOString()}`,
+          );
         }
       }
 
@@ -69,12 +89,19 @@ export async function processUserNotifications(userId: string): Promise<void> {
         continue;
       }
 
-      console.log(`[scheduler] ${holiday.name}: Final date: ${holidayDate.toISOString()}, today: ${today.toISOString()}, comparison: holidayDate < today = ${holidayDate < today}`);
+      console.log(
+        `[scheduler] ${holiday.name}: Final date: ${holidayDate.toISOString()}, today: ${today.toISOString()}, comparison: holidayDate < today = ${holidayDate < today}`,
+      );
 
       if (holidayDate < today) {
         // Recalculate for next year
         if (holiday.ruleType === 'fixed' && holiday.month && holiday.day) {
-          holidayDate = createDateInTimezone(currentYear + 1, holiday.month, holiday.day, tz);
+          holidayDate = createDateInTimezone(
+            currentYear + 1,
+            holiday.month,
+            holiday.day,
+            tz,
+          );
         } else {
           holidayDate = calculateHolidayDate(
             {
@@ -107,7 +134,9 @@ export async function processUserNotifications(userId: string): Promise<void> {
         ? pref.reminderOffsets
         : JSON.parse((pref.reminderOffsets as string) || '[]');
 
-      console.log(`[scheduler] ${holiday.name}: daysUntil=${daysUntil}, reminderOffsets=${JSON.stringify(reminderOffsets)}`);
+      console.log(
+        `[scheduler] ${holiday.name}: daysUntil=${daysUntil}, reminderOffsets=${JSON.stringify(reminderOffsets)}`,
+      );
 
       if (!reminderOffsets.includes(daysUntil)) {
         console.log(

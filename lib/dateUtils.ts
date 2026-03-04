@@ -169,10 +169,10 @@ export function createDateInTimezone(
   const paddedMonth = String(month).padStart(2, '0');
   const paddedDay = String(day).padStart(2, '0');
   const dateStr = `${year}-${paddedMonth}-${paddedDay}T00:00:00`;
-  
+
   // Create a Date object (will be in server's local time, but we only care about components)
   const localDate = new Date(dateStr);
-  
+
   // Interpret those date components as being in the target timezone and get UTC equivalent
   return zonedTimeToUtc(localDate, timezone);
 }

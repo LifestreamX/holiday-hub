@@ -452,9 +452,7 @@ export default function DashboardPage() {
             <div>
               {/* prettier-ignore */}
               {/* Replace native select with a themed searchable CountrySelect */}
-              {
-                /* lazy-load options into CountrySelect */
-              }
+              {/* lazy-load options into CountrySelect */}
               <CountrySelect
                 value={viewCountry || 'US'}
                 onChange={(v: string) => {
