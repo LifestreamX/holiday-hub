@@ -406,12 +406,22 @@ export default function DashboardPage() {
                   onClick={async () => {
                     try {
                       setIsLoading(true);
-                      const countryParam = viewCountry === 'ALL' ? 'ALL' : viewCountry || (session?.user as any)?.countryCode || 'US';
+                      const countryParam =
+                        viewCountry === 'ALL'
+                          ? 'ALL'
+                          : viewCountry ||
+                            (session?.user as any)?.countryCode ||
+                            'US';
                       const url = `/api/preferences/enable-all${countryParam ? `?country=${encodeURIComponent(countryParam)}` : ''}`;
                       const res = await fetch(url, {
                         method: 'POST',
                       });
                       if (res.ok) {
+                        // Optimistically mark currently displayed holidays as enabled
+                        setHolidays((prev) =>
+                          prev.map((hd) => ({ ...hd, enabled: true, hasPreference: true })),
+                        );
+                        // Refresh from server to ensure consistency
                         await fetchHolidays();
                       } else {
                         console.error('Failed to enable all preferences');
