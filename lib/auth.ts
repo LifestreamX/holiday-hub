@@ -135,18 +135,34 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async signIn({ user, account, profile }) {
+      const startTime = Date.now();
+      logger.info('[OAuth] signIn callback started', {
+        provider: account?.provider,
+        hasEmail: !!user?.email,
+        timestamp: new Date().toISOString(),
+      });
+
       try {
         // Get OAuth email (prefer user.email, fall back to GitHub API if needed)
         let oauthEmail = user?.email as string | undefined;
         let providerVerified = false;
+
+        logger.debug('[OAuth] Initial email check', {
+          provider: account?.provider,
+          emailProvided: !!oauthEmail,
+        });
 
         // For GitHub, fetch email and verification status in a single call
         if (account?.provider === 'github') {
           if (oauthEmail) {
             // GitHub provided an email directly (assume verified)
             providerVerified = true;
+            logger.debug('[OAuth] GitHub email provided directly', {
+              email: oauthEmail,
+            });
           } else if (account?.access_token) {
             // Need to fetch email from GitHub API
+            logger.debug('[OAuth] Fetching GitHub email from API');
             try {
               const controller = new AbortController();
               const timeout = setTimeout(() => controller.abort(), 5000); // 5-second timeout
@@ -174,74 +190,154 @@ export const authOptions: NextAuthOptions = {
                 if (primary?.email) {
                   oauthEmail = primary.email;
                   providerVerified = Boolean(primary.verified);
+                  logger.debug('[OAuth] GitHub email fetched successfully', {
+                    email: oauthEmail,
+                    verified: providerVerified,
+                  });
                 }
               } else {
-                logger.warn('Failed to fetch GitHub user emails', {
+                logger.warn('[OAuth] Failed to fetch GitHub user emails', {
                   status: resp.status,
                 });
               }
             } catch (err) {
-              logger.warn('Error fetching GitHub emails', { err: String(err) });
+              logger.warn('[OAuth] Error fetching GitHub emails', {
+                err: String(err),
+              });
               // Don't block sign-in just because GitHub API is slow
-              // Allow the sign-in to proceed if we have any email
             }
           }
         } else {
           // Google/other providers typically provide verified emails
           providerVerified = true;
+          logger.debug('[OAuth] Non-GitHub provider, assuming verified', {
+            provider: account?.provider,
+          });
         }
 
         if (!oauthEmail) {
-          logger.warn('OAuth login blocked: no email provided', {
+          logger.error('[OAuth] BLOCKING: No email provided', {
             provider: account?.provider,
+            duration: Date.now() - startTime,
           });
           return false;
         }
 
         oauthEmail = oauthEmail.toLowerCase();
+        logger.debug('[OAuth] Email normalized', { email: oauthEmail });
 
         // Normalize incoming OAuth email and check if user exists
+        logger.debug('[OAuth] Checking for existing user');
         const existingUser = await prisma.user.findUnique({
           where: { email: oauthEmail },
+        });
+        logger.debug('[OAuth] User lookup complete', {
+          exists: !!existingUser,
+          email: oauthEmail,
         });
 
         // If there is an existing user with unverified email, mark verified when provider confirms
         if (existingUser && !existingUser.emailVerified && providerVerified) {
-          await prisma.user.update({
-            where: { email: oauthEmail },
-            data: { emailVerified: true },
-          });
-          logger.info('Marked existing user email as verified via OAuth', {
+          logger.info('[OAuth] Updating existing user email verification', {
             email: oauthEmail,
           });
+          try {
+            await prisma.user.update({
+              where: { email: oauthEmail },
+              data: { emailVerified: true },
+            });
+          } catch (updateError) {
+            logger.warn('[OAuth] Failed to update email verification', {
+              error: String(updateError),
+            });
+            // Don't block sign-in if update fails
+          }
         }
 
         // For new users or existing verified users, allow sign-in
-        // (be lenient with GitHub email verification to avoid blocking users)
-
         if (!existingUser) {
-          // Create new user with OAuth data (store email normalized)
-          await prisma.user.create({
-            data: {
+          logger.info('[OAuth] Creating new user', {
+            email: oauthEmail,
+            provider: account?.provider,
+          });
+          try {
+            await prisma.user.create({
+              data: {
+                email: oauthEmail,
+                name: user.name,
+                image: user.image,
+                timezone: 'America/New_York',
+                countryCode: 'US',
+                emailVerified: providerVerified,
+              },
+            });
+            logger.info('[OAuth] New user created successfully', {
               email: oauthEmail,
-              name: user.name,
-              image: user.image,
-              timezone: 'America/New_York',
-              countryCode: 'US',
-              emailVerified: providerVerified,
-            },
-          });
+            });
+          } catch (createError) {
+            logger.error('[OAuth] Failed to create new user', {
+              error: String(createError),
+              email: oauthEmail,
+            });
+            // Retry once after a brief delay
+            logger.info('[OAuth] Retrying user creation after delay');
+            await new Promise((resolve) => setTimeout(resolve, 500));
+            try {
+              await prisma.user.create({
+                data: {
+                  email: oauthEmail,
+                  name: user.name,
+                  image: user.image,
+                  timezone: 'America/New_York',
+                  countryCode: 'US',
+                  emailVerified: providerVerified,
+                },
+              });
+              logger.info('[OAuth] New user created successfully on retry', {
+                email: oauthEmail,
+              });
+            } catch (retryError) {
+              logger.error(
+                '[OAuth] BLOCKING: Failed to create user after retry',
+                {
+                  error: String(retryError),
+                  email: oauthEmail,
+                },
+              );
+              return false; // Block sign-in if we can't create the user
+            }
+          }
         } else if (!existingUser.name && user.name) {
-          // Update existing user with OAuth profile data if missing
-          await prisma.user.update({
-            where: { email: oauthEmail },
-            data: { name: user.name, image: user.image },
+          logger.info('[OAuth] Updating existing user profile', {
+            email: oauthEmail,
           });
+          try {
+            await prisma.user.update({
+              where: { email: oauthEmail },
+              data: { name: user.name, image: user.image },
+            });
+          } catch (updateError) {
+            logger.warn('[OAuth] Failed to update user profile', {
+              error: String(updateError),
+            });
+            // Don't block sign-in if profile update fails
+          }
         }
 
+        logger.info('[OAuth] signIn callback SUCCESS', {
+          provider: account?.provider,
+          email: oauthEmail,
+          duration: Date.now() - startTime,
+        });
         return true;
       } catch (error) {
-        logger.error('Error in signIn callback', { error: String(error) });
+        logger.error('[OAuth] signIn callback FAILED with unexpected error', {
+          error: String(error),
+          stack: error instanceof Error ? error.stack : undefined,
+          provider: account?.provider,
+          duration: Date.now() - startTime,
+        });
+        // For unexpected errors (not user creation), block to be safe
         return false;
       }
     },

@@ -98,7 +98,9 @@ export default function LoginPage() {
         params.delete('error');
         params.delete('registered');
         params.delete('reset');
-        const newUrl = params.toString() ? `?${params.toString()}` : window.location.pathname;
+        const newUrl = params.toString()
+          ? `?${params.toString()}`
+          : window.location.pathname;
         window.history.replaceState({}, '', newUrl);
       }
 
@@ -136,9 +138,10 @@ export default function LoginPage() {
         );
       }
       if (error) {
-        if (error === 'google') {
+        console.log('[Login] Error param detected:', error);
+        if (error === 'google' || error === 'github') {
           setErrorMessage(
-            'Google sign-in failed — check your Google credentials and redirect URI.',
+            'There was an error with the OAuth provider. Please try again.',
           );
         } else if (error === 'OAuthAccountNotLinked') {
           setErrorMessage(
@@ -146,7 +149,21 @@ export default function LoginPage() {
           );
         } else if (error === 'CredentialsSignin') {
           setErrorMessage('Invalid email or password.');
+        } else if (error === 'AccessDenied') {
+          setErrorMessage(
+            'Access was denied. Please try again or contact support.',
+          );
+        } else if (error === 'Configuration' || error === 'OAuthSignin') {
+          setErrorMessage(
+            'There was a configuration error. Please try again in a moment.',
+          );
+        } else if (error === 'OAuthCallback') {
+          setErrorMessage(
+            'There was an error during sign-in. Please try again.',
+          );
         } else {
+          // For any other error, show a generic message but log the actual error
+          console.error('[Login] Unknown error type:', error);
           setErrorMessage('Sign-in failed. Please try again.');
         }
       }
