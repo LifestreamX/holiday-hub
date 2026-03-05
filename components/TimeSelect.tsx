@@ -123,7 +123,8 @@ export default function TimeSelect({ value, onChange, options }: Props) {
         </svg>
       </button>
 
-      {open && portalEl &&
+      {open &&
+        portalEl &&
         createPortal(
           isMobileSheet ? (
             <div
@@ -148,7 +149,11 @@ export default function TimeSelect({ value, onChange, options }: Props) {
               </div>
             </div>
           ) : (
-            <div ref={menuRef} style={menuStyle} className='bg-card rounded-md shadow-lg p-1'>
+            <div
+              ref={menuRef}
+              style={menuStyle}
+              className='bg-card rounded-md shadow-lg p-1'
+            >
               <div className='max-h-[60vh] sm:max-h-80 overflow-auto dropdown-scroll grid grid-cols-1 md:grid-cols-2 gap-0.5'>
                 {options.map((opt) => (
                   <button
