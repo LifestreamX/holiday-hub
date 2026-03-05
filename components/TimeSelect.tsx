@@ -23,6 +23,7 @@ export default function TimeSelect({ value, onChange, options }: Props) {
     typeof document !== 'undefined' ? document.createElement('div') : null,
   );
   const [menuStyle, setMenuStyle] = useState<React.CSSProperties>({});
+  const [isMobileSheet, setIsMobileSheet] = useState(false);
 
   useEffect(() => {
     function onClickOutside(e: MouseEvent) {
@@ -58,11 +59,33 @@ export default function TimeSelect({ value, onChange, options }: Props) {
     const update = () => {
       const rect = buttonRef.current?.getBoundingClientRect();
       if (!rect) return;
+      const vw = window.innerWidth;
+      // use bottom-sheet style for very small screens
+      if (vw < 480) {
+        setIsMobileSheet(true);
+        setMenuStyle({
+          position: 'fixed',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: '60vh',
+          zIndex: 100000,
+        });
+        return;
+      }
+      setIsMobileSheet(false);
+
+      const desiredWidth = Math.max(rect.width, 320);
+      const maxWidth = Math.min(desiredWidth, vw - 16);
+      let left = rect.left;
+      if (left + maxWidth > vw - 8) {
+        left = Math.max(8, vw - maxWidth - 8);
+      }
       setMenuStyle({
         position: 'fixed',
-        left: rect.left,
-        top: rect.bottom,
-        width: Math.max(rect.width, 320),
+        left,
+        top: rect.bottom + 4,
+        width: maxWidth,
         zIndex: 100000,
       });
     };
@@ -100,29 +123,48 @@ export default function TimeSelect({ value, onChange, options }: Props) {
         </svg>
       </button>
 
-      {open &&
-        portalEl &&
+      {open && portalEl &&
         createPortal(
-          <div
-            ref={menuRef}
-            style={menuStyle}
-            className='bg-card rounded-md shadow-lg p-1'
-          >
-            <div className='max-h-[60vh] sm:max-h-80 overflow-auto dropdown-scroll grid grid-cols-1 md:grid-cols-2 gap-0.5'>
-              {options.map((opt) => (
-                <button
-                  key={opt.value}
-                  onClick={() => {
-                    onChange(opt.value);
-                    setOpen(false);
-                  }}
-                  className={`w-full text-left px-3 py-2 hover:bg-primary/10 hover:text-primary transition-colors rounded-md ${opt.value === value ? 'bg-primary/10 text-primary font-semibold' : ''}`}
-                >
-                  {opt.label}
-                </button>
-              ))}
+          isMobileSheet ? (
+            <div
+              ref={menuRef}
+              style={menuStyle}
+              className='fixed left-0 right-0 bottom-0 z-[100000] bg-card rounded-t-xl shadow-lg p-3'
+            >
+              <div className='mx-auto w-12 h-1.5 rounded-full bg-muted mb-3' />
+              <div className='overflow-auto h-[52vh] grid grid-cols-1 gap-1'>
+                {options.map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => {
+                      onChange(opt.value);
+                      setOpen(false);
+                    }}
+                    className={`w-full text-left px-3 py-3 hover:bg-primary/10 hover:text-primary transition-colors rounded-md ${opt.value === value ? 'bg-primary/10 text-primary font-semibold' : ''}`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>,
+          ) : (
+            <div ref={menuRef} style={menuStyle} className='bg-card rounded-md shadow-lg p-1'>
+              <div className='max-h-[60vh] sm:max-h-80 overflow-auto dropdown-scroll grid grid-cols-1 md:grid-cols-2 gap-0.5'>
+                {options.map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => {
+                      onChange(opt.value);
+                      setOpen(false);
+                    }}
+                    className={`w-full text-left px-3 py-2 hover:bg-primary/10 hover:text-primary transition-colors rounded-md ${opt.value === value ? 'bg-primary/10 text-primary font-semibold' : ''}`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ),
           portalEl,
         )}
     </div>
