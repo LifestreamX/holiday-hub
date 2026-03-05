@@ -237,7 +237,7 @@ export default function RegisterPage() {
               type='button'
               onClick={() => handleSignIn('google')}
               disabled={loading !== null}
-              className='w-full flex items-center justify-center gap-3 py-3 bg-white border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 transition font-medium text-black dark:text-black disabled:opacity-50 disabled:cursor-not-allowed shadow-sm'
+              className='w-full flex items-center justify-center gap-3 py-3 bg-white border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-200 transition font-medium text-black dark:text-black disabled:opacity-50 disabled:cursor-not-allowed shadow-sm'
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
