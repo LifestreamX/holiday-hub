@@ -82,7 +82,7 @@ export default function CountrySelect({ value, onChange, options }: Props) {
       </button>
 
       {open && (
-        <div className='absolute z-50 mt-2 left-0 sm:left-0 sm:w-72 w-screen sm:max-w-none mx-2 sm:mx-0 bg-card rounded-md shadow-lg'>
+        <div className='absolute z-50 mt-2 left-0 sm:left-0 sm:w-72 w-auto max-w-[calc(100vw-1rem)] bg-card rounded-md shadow-lg'>
           <div className='p-2'>
             <input
               autoFocus
