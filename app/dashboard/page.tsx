@@ -15,6 +15,7 @@ import {
 import CountrySelect from '../../components/CountrySelect';
 import HolidayCard from '../../components/HolidayCard';
 import HolidaySettingsModal from '../../components/HolidaySettingsModal';
+import type { Holiday } from '../../types/holiday';
 
 const CATEGORY_LABELS: Record<string, string> = {
   federal: '🏛️ Federal Holidays',

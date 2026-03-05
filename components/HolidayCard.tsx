@@ -3,20 +3,7 @@
 import { useState } from 'react';
 import { Calendar, Bell, Settings as SettingsIcon } from 'lucide-react';
 
-interface Holiday {
-  id: string;
-  name: string;
-  description: string;
-  category: string;
-  countryCode?: string;
-  countryName?: string;
-  date: string | null;
-  daysUntil: number | null;
-  enabled: boolean;
-  reminderOffsets: number[];
-  reminderTime: string;
-  hasPreference: boolean;
-}
+import type { Holiday } from '../types/holiday';
 
 interface HolidayCardProps {
   holiday: Holiday;

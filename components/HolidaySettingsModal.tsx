@@ -4,18 +4,7 @@ import { useState, useEffect } from 'react';
 import TimeSelect from '@/components/TimeSelect';
 import { X } from 'lucide-react';
 
-interface Holiday {
-  id: string;
-  name: string;
-  description: string;
-  category: string;
-  date: string | null;
-  daysUntil: number | null;
-  enabled: boolean;
-  reminderOffsets: number[];
-  reminderTime: string;
-  hasPreference: boolean;
-}
+import type { Holiday } from '../types/holiday';
 
 interface HolidaySettingsModalProps {
   holiday: Holiday;
