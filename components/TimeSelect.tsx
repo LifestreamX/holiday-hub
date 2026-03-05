@@ -58,36 +58,13 @@ export default function TimeSelect({ value, onChange, options }: Props) {
     const update = () => {
       const rect = buttonRef.current?.getBoundingClientRect();
       if (!rect) return;
-      const vw = window.innerWidth;
-      const desiredWidth = Math.max(rect.width, 320);
-      const maxWidth = Math.min(desiredWidth, vw - 16); // keep 8px margin each side
-
-      // Default left position
-      let left = rect.left;
-
-      // If the menu would overflow the right edge, shift it left
-      if (left + maxWidth > vw - 8) {
-        left = Math.max(8, vw - maxWidth - 8);
-      }
-
-      // On very small screens, make the menu full-width minus horizontal padding
-      if (vw < 480) {
-        setMenuStyle({
-          position: 'fixed',
-          left: 8,
-          top: rect.bottom + 4,
-          width: vw - 16,
-          zIndex: 100000,
-        });
-      } else {
-        setMenuStyle({
-          position: 'fixed',
-          left,
-          top: rect.bottom + 4,
-          width: maxWidth,
-          zIndex: 100000,
-        });
-      }
+      setMenuStyle({
+        position: 'fixed',
+        left: rect.left,
+        top: rect.bottom,
+        width: Math.max(rect.width, 320),
+        zIndex: 100000,
+      });
     };
     update();
     window.addEventListener('resize', update);
@@ -129,9 +106,9 @@ export default function TimeSelect({ value, onChange, options }: Props) {
           <div
             ref={menuRef}
             style={menuStyle}
-            className='bg-card rounded-md shadow-lg'
+            className='bg-card rounded-md shadow-lg p-1'
           >
-            <div className='max-h-80 overflow-auto dropdown-scroll'>
+            <div className='max-h-[60vh] sm:max-h-80 overflow-auto dropdown-scroll grid grid-cols-1 md:grid-cols-2 gap-0.5'>
               {options.map((opt) => (
                 <button
                   key={opt.value}
@@ -139,7 +116,7 @@ export default function TimeSelect({ value, onChange, options }: Props) {
                     onChange(opt.value);
                     setOpen(false);
                   }}
-                  className={`w-full text-left px-3 py-2 hover:bg-primary/10 hover:text-primary transition-colors ${opt.value === value ? 'bg-primary/10 text-primary font-semibold' : ''}`}
+                  className={`w-full text-left px-3 py-2 hover:bg-primary/10 hover:text-primary transition-colors rounded-md ${opt.value === value ? 'bg-primary/10 text-primary font-semibold' : ''}`}
                 >
                   {opt.label}
                 </button>
