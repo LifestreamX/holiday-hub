@@ -45,6 +45,10 @@ async function run() {
   const now = new Date();
   const today = getStartOfDayInTimezone(now, tz);
 
+  console.log(`[dry-run] now (UTC): ${now.toISOString()}`);
+  console.log(`[dry-run] today (start of day in ${tz}): ${today.toISOString()}`);
+  console.log();
+
   for (const pref of user.holidayPreferences) {
     const holiday = pref.holiday;
     console.log('---');

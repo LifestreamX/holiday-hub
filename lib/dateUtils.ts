@@ -98,11 +98,18 @@ export function formatDate(date: Date): string {
 
 /**
  * Get the number of days between two dates
+ * Handles DST transitions correctly by counting calendar days
  */
 export function getDaysBetween(date1: Date, date2: Date): number {
+  // Normalize both dates to UTC midnight to avoid DST issues
+  const d1 = new Date(Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate()));
+  const d2 = new Date(Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate()));
+  
   const oneDay = 24 * 60 * 60 * 1000; // milliseconds in a day
-  const diffTime = date2.getTime() - date1.getTime();
-  return Math.floor(diffTime / oneDay);
+  const diffTime = d2.getTime() - d1.getTime();
+  
+  // Use Math.round to handle any floating point precision issues
+  return Math.round(diffTime / oneDay);
 }
 
 /**
