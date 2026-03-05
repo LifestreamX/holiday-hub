@@ -181,13 +181,14 @@ export async function processUserNotifications(userId: string): Promise<void> {
           userId: user.id,
           holidayId: holiday.id,
           scheduledFor: scheduledFor,
+          offset: daysUntil,
           sent: true,
         },
       });
 
       if (existing) {
         console.log(
-          `[scheduler] Skipping holiday: ${holiday.name} (already sent)`,
+          `[scheduler] Skipping holiday: ${holiday.name} (already sent for offset ${daysUntil})`,
         );
         continue;
       }
@@ -210,13 +211,14 @@ export async function processUserNotifications(userId: string): Promise<void> {
 
       if (emailSent) {
         console.log(
-          `[scheduler] Email sent and notification recorded for ${holiday.name} (${user.email})`,
+          `[scheduler] Email sent and notification recorded for ${holiday.name} (${user.email}) at offset ${daysUntil}`,
         );
         await prisma.notification.create({
           data: {
             userId: user.id,
             holidayId: holiday.id,
             scheduledFor: scheduledFor,
+            offset: daysUntil,
             sent: true,
             sentAt: new Date(),
             deliveryType: 'email',

@@ -9,29 +9,13 @@ import {
   LogOut,
   Settings,
   Loader2,
-                    try {
-                      setIsLoading(true);
-                      const countryParam =
-                        viewCountry === 'ALL'
-                          ? 'ALL'
-                          : viewCountry || (session?.user as any)?.countryCode || 'US';
-                      const url = `/api/preferences/enable-all${countryParam ? `?country=${encodeURIComponent(countryParam)}` : ''}`;
-                      const res = await fetch(url, { method: 'POST' });
-                      if (res.ok) {
-                        // Optimistically mark currently displayed holidays as enabled
-                        setHolidays((prev) =>
-                          prev.map((hd) => ({ ...hd, enabled: true, hasPreference: true })),
-                        );
-                        // Immediately re-fetch for the specific country to get server state
-                        await fetchHolidays(countryParam === 'ALL' ? 'ALL' : countryParam);
-                        // In some DB setups the changes may not be visible immediately; retry once after a short delay
-                        setTimeout(() => fetchHolidays(countryParam === 'ALL' ? 'ALL' : countryParam), 1000);
-                      } else {
-                        console.error('Failed to enable all preferences');
-                      }
-                    } finally {
-                      setIsLoading(false);
-                    }
+  Search,
+  Filter,
+} from 'lucide-react';
+import CountrySelect from '../../components/CountrySelect';
+import HolidayCard from '../../components/HolidayCard';
+import HolidaySettingsModal from '../../components/HolidaySettingsModal';
+
 const CATEGORY_LABELS: Record<string, string> = {
   federal: '🏛️ Federal Holidays',
   state: '🏛️ State Holidays',
@@ -426,10 +410,14 @@ export default function DashboardPage() {
                             ...hd,
                             enabled: true,
                             hasPreference: true,
+                            reminderOffsets: [30, 7, 1],
+                            reminderTime: '08:00',
                           })),
                         );
-                        // Refresh from server to ensure consistency
-                        await fetchHolidays();
+                        // Refresh from server with the specific country to get accurate state
+                        await fetchHolidays(countryParam);
+                        // In case of DB replication lag, retry after a short delay
+                        setTimeout(() => fetchHolidays(countryParam), 500);
                       } else {
                         console.error('Failed to enable all preferences');
                       }
@@ -439,9 +427,13 @@ export default function DashboardPage() {
                   }}
                   className='mt-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors'
                 >
-                  Enable notifications for all{' '}
-                  {availableCountries.find((c) => c.countryCode === viewCountry)
-                    ?.name || viewCountry}
+                  {viewCountry === 'ALL'
+                    ? `Enable notifications for all ${totalCountryHolidays} holidays`
+                    : `Enable notifications for all ${
+                        availableCountries.find(
+                          (c) => c.countryCode === viewCountry,
+                        )?.name || viewCountry
+                      } holidays`}
                 </button>
               </div>
             )}

@@ -21,15 +21,19 @@ export async function POST(request: Request) {
     const countryParam = url.searchParams.get('country');
 
     let holidays;
+    let country: string;
     if (countryParam === 'ALL') {
       holidays = await prisma.holiday.findMany({});
+      country = 'ALL';
     } else {
       const user = await prisma.user.findUnique({
         where: { id: userId },
         select: { countryCode: true },
       });
-      const country = countryParam || user?.countryCode || 'US';
-      holidays = await prisma.holiday.findMany({ where: { countryCode: country } });
+      country = countryParam || user?.countryCode || 'US';
+      holidays = await prisma.holiday.findMany({
+        where: { countryCode: country },
+      });
     }
 
     for (const h of holidays) {

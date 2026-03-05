@@ -69,6 +69,7 @@ model Notification {
   userId       String
   holidayId    String
   scheduledFor DateTime
+  offset       Int       @default(0)
   sent         Boolean   @default(false)
   sentAt       DateTime?
   deliveryType String
