@@ -122,6 +122,10 @@ async function run() {
       }
     }
 
+    if (!holidayDate) {
+      console.log('[dry-run] No date for holiday, skipping');
+      continue;
+    }
     const daysUntil = getDaysBetween(today, holidayDate);
     console.log(
       '[dry-run] holidayDate:',
