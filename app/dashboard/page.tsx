@@ -246,8 +246,14 @@ export default function DashboardPage() {
   };
 
   // Filter and group holidays - MUST be before any early returns
+  // Exclude test holidays from display
   const upcomingHolidays = useMemo(() => {
-    return holidays.filter((h) => h.daysUntil !== null && h.daysUntil >= 0);
+    return holidays.filter(
+      (h) =>
+        h.daysUntil !== null &&
+        h.daysUntil >= 0 &&
+        !/test holiday/i.test(h.name)
+    );
   }, [holidays]);
 
   const enabledHolidays = useMemo(() => {
